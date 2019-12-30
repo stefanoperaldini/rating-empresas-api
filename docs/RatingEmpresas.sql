@@ -14,7 +14,8 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
 -- -----------------------------------------------------
 -- Schema EnterpriseRanking
 -- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `EnterpriseRanking` DEFAULT CHARACTER SET latin1 ;
+CREATE SCHEMA IF NOT EXISTS `EnterpriseRanking` DEFAULT CHARACTER SET utf8 ;
+
 USE `EnterpriseRanking` ;
 
 -- -----------------------------------------------------
@@ -24,7 +25,7 @@ CREATE TABLE IF NOT EXISTS `EnterpriseRanking`.`regions` (
   `id` CHAR(2) NOT NULL,
   `name` VARCHAR(30) NOT NULL,
   PRIMARY KEY (`id`))
-ENGINE = InnoDB;
+ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 
 -- -----------------------------------------------------
@@ -34,7 +35,7 @@ CREATE TABLE IF NOT EXISTS `EnterpriseRanking`.`provinces` (
   `id` CHAR(2) NOT NULL,
   `name` VARCHAR(30) NOT NULL,
   PRIMARY KEY (`id`))
-ENGINE = InnoDB;
+ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 
 -- -----------------------------------------------------
@@ -58,7 +59,7 @@ CREATE TABLE IF NOT EXISTS `EnterpriseRanking`.`cities` (
     REFERENCES `EnterpriseRanking`.`provinces` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 
 -- -----------------------------------------------------
@@ -68,8 +69,7 @@ CREATE TABLE IF NOT EXISTS `EnterpriseRanking`.`sectors` (
   `id` CHAR(36) NOT NULL,
   `sector` VARCHAR(45) NULL DEFAULT NULL,
   PRIMARY KEY (`id`))
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = latin1;
+ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 
 -- -----------------------------------------------------
@@ -98,9 +98,7 @@ CREATE TABLE IF NOT EXISTS `EnterpriseRanking`.`companies` (
     REFERENCES `EnterpriseRanking`.`cities` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = latin1;
-
+ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- -----------------------------------------------------
 -- Table `EnterpriseRanking`.`companies_cities`
@@ -120,8 +118,7 @@ CREATE TABLE IF NOT EXISTS `EnterpriseRanking`.`companies_cities` (
     REFERENCES `EnterpriseRanking`.`companies` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = latin1;
+ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 
 -- -----------------------------------------------------
@@ -138,9 +135,7 @@ CREATE TABLE IF NOT EXISTS `EnterpriseRanking`.`users` (
   `modified_at` TIMESTAMP NULL,
   `deleted_at` TIMESTAMP NULL,
   PRIMARY KEY (`id`))
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = latin1;
-
+ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- -----------------------------------------------------
 -- Table `EnterpriseRanking`.`positions`
@@ -149,7 +144,7 @@ CREATE TABLE IF NOT EXISTS `EnterpriseRanking`.`positions` (
   `id` CHAR(36) NOT NULL,
   `name` VARCHAR(60) NOT NULL,
   PRIMARY KEY (`id`))
-ENGINE = InnoDB;
+ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 
 -- -----------------------------------------------------
@@ -198,8 +193,7 @@ CREATE TABLE IF NOT EXISTS `EnterpriseRanking`.`reviews` (
     REFERENCES `EnterpriseRanking`.`companies_cities` (`company_id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = latin1;
+ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 
 SET SQL_MODE=@OLD_SQL_MODE;
