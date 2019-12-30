@@ -1,0 +1,213 @@
+{
+	"info": {
+		"_postman_id": "2f614259-c0f3-40e3-a168-1907fa989d04",
+		"name": "RatingEmpresas",
+		"description": "Proyecto RatingEmpresas",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "API Rest",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "MunicipiosQuery",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/v1/municipios?row4page=12&page=3",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"v1",
+						"municipios"
+					],
+					"query": [
+						{
+							"key": "row4page",
+							"value": "12"
+						},
+						{
+							"key": "page",
+							"value": "3"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Municipios",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/v1/municipios",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"v1",
+						"municipios"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Ccaas",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/v1/ccaa",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"v1",
+						"ccaa"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ProvinciasCcaa",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/v1/ccaa/12/provincias",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"v1",
+						"ccaa",
+						"12",
+						"provincias"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "MunicipiosProvincia",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/v1/ccaa/12/provincias/15/municipios",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"v1",
+						"ccaa",
+						"12",
+						"provincias",
+						"15",
+						"municipios"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Municipio",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/v1/ccaa/12/provincias/15/municipios/30",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"v1",
+						"ccaa",
+						"12",
+						"provincias",
+						"15",
+						"municipios",
+						"30"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Provincias",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/v1/provincias",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"v1",
+						"provincias"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ccaa",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/v1/ccaa/12",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"v1",
+						"ccaa",
+						"12"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "provincia",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/v1/provincias/15",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"v1",
+						"provincias",
+						"15"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}

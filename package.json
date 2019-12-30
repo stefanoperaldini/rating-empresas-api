@@ -16,5 +16,11 @@
   "bugs": {
     "url": "https://github.com/stefanoperaldini/rating-empresas-api/issues"
   },
-  "homepage": "https://github.com/stefanoperaldini/rating-empresas-api#readme"
+  "homepage": "https://github.com/stefanoperaldini/rating-empresas-api#readme",
+  "dependencies": {
+    "@hapi/joi": "^16.1.8",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "mysql2": "^2.1.0"
+  }
 }
