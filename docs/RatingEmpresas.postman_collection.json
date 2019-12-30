@@ -1,41 +1,24 @@
 {
 	"info": {
-		"_postman_id": "2f614259-c0f3-40e3-a168-1907fa989d04",
+		"_postman_id": "24db7006-29fc-400c-bd3c-4fa860ea1a86",
 		"name": "RatingEmpresas",
 		"description": "Proyecto RatingEmpresas",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
 		{
-			"name": "API Rest",
+			"name": "CitiesQuery",
 			"request": {
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{baseUrl}}/",
-					"host": [
-						"{{baseUrl}}"
-					],
-					"path": [
-						""
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "MunicipiosQuery",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "{{baseUrl}}/v1/municipios?row4page=12&page=3",
+					"raw": "{{baseUrl}}/v1/cities?row4page=12&page=3",
 					"host": [
 						"{{baseUrl}}"
 					],
 					"path": [
 						"v1",
-						"municipios"
+						"cities"
 					],
 					"query": [
 						{
@@ -52,157 +35,63 @@
 			"response": []
 		},
 		{
-			"name": "Municipios",
+			"name": "Cities",
 			"request": {
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{baseUrl}}/v1/municipios",
+					"raw": "{{baseUrl}}/v1/cities",
 					"host": [
 						"{{baseUrl}}"
 					],
 					"path": [
 						"v1",
-						"municipios"
+						"cities"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "Ccaas",
+			"name": "City",
 			"request": {
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{baseUrl}}/v1/ccaa",
+					"raw": "{{baseUrl}}/v1/regions/12/provinces/15/cities/79daa7a8-bd2f-408a-9fa8-e7c2d177bbc7",
 					"host": [
 						"{{baseUrl}}"
 					],
 					"path": [
 						"v1",
-						"ccaa"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "ProvinciasCcaa",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "{{baseUrl}}/v1/ccaa/12/provincias",
-					"host": [
-						"{{baseUrl}}"
-					],
-					"path": [
-						"v1",
-						"ccaa",
+						"regions",
 						"12",
-						"provincias"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "MunicipiosProvincia",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "{{baseUrl}}/v1/ccaa/12/provincias/15/municipios",
-					"host": [
-						"{{baseUrl}}"
-					],
-					"path": [
-						"v1",
-						"ccaa",
-						"12",
-						"provincias",
+						"provinces",
 						"15",
-						"municipios"
+						"cities",
+						"79daa7a8-bd2f-408a-9fa8-e7c2d177bbc7"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "Municipio",
+			"name": "CitiesRegionsProvinces",
 			"request": {
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{baseUrl}}/v1/ccaa/12/provincias/15/municipios/30",
+					"raw": "{{baseUrl}}/v1/regions/12/provinces/15/cities",
 					"host": [
 						"{{baseUrl}}"
 					],
 					"path": [
 						"v1",
-						"ccaa",
+						"regions",
 						"12",
-						"provincias",
+						"provinces",
 						"15",
-						"municipios",
-						"30"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Provincias",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "{{baseUrl}}/v1/provincias",
-					"host": [
-						"{{baseUrl}}"
-					],
-					"path": [
-						"v1",
-						"provincias"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "ccaa",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "{{baseUrl}}/v1/ccaa/12",
-					"host": [
-						"{{baseUrl}}"
-					],
-					"path": [
-						"v1",
-						"ccaa",
-						"12"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "provincia",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "{{baseUrl}}/v1/provincias/15",
-					"host": [
-						"{{baseUrl}}"
-					],
-					"path": [
-						"v1",
-						"provincias",
-						"15"
+						"cities"
 					]
 				}
 			},

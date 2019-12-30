@@ -17,7 +17,7 @@ async function getCities(req, res) {
     try {
         await validateCities({ row4page, page });
     } catch (e) {
-        res.status(400).send(e);
+        return res.status(400).send(e);
     }
 
     let numsRows = 0;
@@ -56,6 +56,4 @@ async function getCities(req, res) {
     }
 }
 
-module.exports = {
-    getCities,
-};
+module.exports = getCities;
