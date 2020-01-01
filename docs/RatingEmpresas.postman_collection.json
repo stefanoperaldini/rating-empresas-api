@@ -76,6 +76,100 @@
 			"response": []
 		},
 		{
+			"name": "Regions",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/v1/regions",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"v1",
+						"regions"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Provinces",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/v1/provinces",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"v1",
+						"provinces"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Province",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/v1/provinces/15",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"v1",
+						"provinces",
+						"15"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Region",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/v1/regions/12",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"v1",
+						"regions",
+						"12"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ProvincesRegion",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/v1/regions/12/provinces",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"v1",
+						"regions",
+						"12",
+						"provinces"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "CitiesRegionsProvinces",
 			"request": {
 				"method": "GET",

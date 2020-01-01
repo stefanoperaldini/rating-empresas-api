@@ -1,18 +1,18 @@
 "use strict";
 
-const joi = require("@hapi/joi");
+const Joi = require("@hapi/joi");
 const mysqlPool = require("../../../database/mysql-pool");
 
 
-async function validateCity(payload) {
-    const schema = joi.object({
-        regionId: joi.number().required(),
-        provinceId: joi.number().required(),
-        cityId: joi.string().guid({
+async function validate(payload) {
+    const schema = Joi.object({
+        regionId: Joi.number().required(),
+        provinceId: Joi.number().required(),
+        cityId: Joi.string().guid({
             version: ['uuidv4'],
         }).required(),
     });
-    joi.assert(payload, schema);
+    Joi.assert(payload, schema);
 }
 
 async function getCity(req, res) {
@@ -21,7 +21,7 @@ async function getCity(req, res) {
     const cityId = req.params.cityId;
 
     try {
-        await validateCity({ regionId, provinceId, cityId });
+        await validate({ regionId, provinceId, cityId });
     } catch (e) {
         return res.status(400).send(e);
     }

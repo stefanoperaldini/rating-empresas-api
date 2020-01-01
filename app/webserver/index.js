@@ -2,13 +2,13 @@
 const express = require("express");
 
 const {
-  citiesRouter,
+  cityRouter,
 } = require("./routes");
 
 const app = express();
 
 app.use(express.json());
-app.use("/", citiesRouter);
+app.use("/", cityRouter);
 
 
 let server = null;
