@@ -1,7 +1,7 @@
 "use strict";
 
-const citiesRouter = require("./cities-router");
+const cityRouter = require("./city-router");
 
 module.exports = {
-  citiesRouter,
+  cityRouter,
 };

@@ -1,21 +1,21 @@
 "use strict";
 
-const joi = require("@hapi/joi");
+const Joi = require("@hapi/joi");
 const mysqlPool = require("../../../database/mysql-pool");
 
-async function validateCities(payload) {
-    const schema = joi.object({
-        row4page: joi.number(),
-        page: joi.number()
+async function validate(payload) {
+    const schema = Joi.object({
+        row4page: Joi.number(),
+        page: Joi.number()
     });
-    joi.assert(payload, schema);
+    Joi.assert(payload, schema);
 }
 
 async function getCities(req, res) {
     let { row4page, page } = req.query;
 
     try {
-        await validateCities({ row4page, page });
+        await validate({ row4page, page });
     } catch (e) {
         return res.status(400).send(e);
     }

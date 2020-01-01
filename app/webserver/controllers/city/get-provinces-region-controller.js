@@ -5,29 +5,29 @@ const mysqlPool = require("../../../database/mysql-pool");
 
 async function validate(payload) {
     const schema = Joi.object({
-        regionId: Joi.number().required(),
-        provinceId: Joi.number().required(),
+        regionId: Joi.number().required()
     });
     Joi.assert(payload, schema);
 }
 
-async function getCitiesProvinceRegion(req, res) {
+async function getProvincesRegion(req, res) {
     const regionId = req.params.regionId;
-    const provinceId = req.params.provinceId;
+
     try {
-        await validate({ regionId, provinceId });
+        await validate({ regionId });
     } catch (e) {
-        return res.status(400).send(e);
+        res.status(400).send(e);
     }
+
     let connection;
     try {
         connection = await mysqlPool.getConnection();
         const sqlQuery =
-            "SELECT c.id, c.name FROM cities AS c WHERE c.region_id =? AND c.province_id =? ORDER BY c.name;";
-        const [rows] = await connection.execute(sqlQuery, [regionId, provinceId]);
+            "SELECT DISTINCT c.province_id, p.name FROM cities AS c INNER JOIN provinces AS p ON c.province_id = p.id WHERE c.region_id =? ORDER BY p.name; ";
+        const [rows] = await connection.execute(sqlQuery, [regionId]);
         connection.release();
         if (rows.length === 0) {
-            return res.status(404).send("Cities not founded");
+            return res.status(404).send("Provinces not founded");
         }
         res.send(rows);
     } catch (e) {
@@ -39,4 +39,4 @@ async function getCitiesProvinceRegion(req, res) {
     }
 }
 
-module.exports = getCitiesProvinceRegion;
+module.exports = getProvincesRegion;
