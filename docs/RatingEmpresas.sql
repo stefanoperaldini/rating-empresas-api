@@ -128,13 +128,14 @@ CREATE TABLE IF NOT EXISTS `EnterpriseRanking`.`users` (
   `id` CHAR(36) NOT NULL,
   `name` VARCHAR(45) NOT NULL,
   `email` VARCHAR(45) NOT NULL,
-  `password_hash` VARCHAR(45) NOT NULL,
+  `password` VARCHAR(255) NOT NULL,
   `linkedin` VARCHAR(255) NULL,
-  `is_admin` TINYINT(1) NOT NULL,
+  `role` CHAR(1) NOT NULL,
   `created_at` TIMESTAMP NOT NULL,
   `modified_at` TIMESTAMP NULL,
   `deleted_at` TIMESTAMP NULL,
-  PRIMARY KEY (`id`))
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `email_unique` (`email`))
 ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- -----------------------------------------------------

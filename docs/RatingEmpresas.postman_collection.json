@@ -7,189 +7,361 @@
 	},
 	"item": [
 		{
-			"name": "CitiesQuery",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "{{baseUrl}}/v1/cities?row4page=12&page=3",
-					"host": [
-						"{{baseUrl}}"
-					],
-					"path": [
-						"v1",
-						"cities"
-					],
-					"query": [
-						{
-							"key": "row4page",
-							"value": "12"
-						},
-						{
-							"key": "page",
-							"value": "3"
+			"name": "city",
+			"item": [
+				{
+					"name": "CitiesQuery",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/v1/cities?row4page=12&page=3",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"cities"
+							],
+							"query": [
+								{
+									"key": "row4page",
+									"value": "12"
+								},
+								{
+									"key": "page",
+									"value": "3"
+								}
+							]
 						}
-					]
+					},
+					"response": []
+				},
+				{
+					"name": "Cities",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/v1/cities",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"cities"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "City",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/v1/regions/12/provinces/15/cities/79daa7a8-bd2f-408a-9fa8-e7c2d177bbc7",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"regions",
+								"12",
+								"provinces",
+								"15",
+								"cities",
+								"79daa7a8-bd2f-408a-9fa8-e7c2d177bbc7"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Regions",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/v1/regions",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"regions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Provinces",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/v1/provinces",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"provinces"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Province",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/v1/provinces/15",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"provinces",
+								"15"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Region",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/v1/regions/12",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"regions",
+								"12"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ProvincesRegion",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/v1/regions/12/provinces",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"regions",
+								"12",
+								"provinces"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CitiesRegionsProvinces",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/v1/regions/12/provinces/15/cities",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"regions",
+								"12",
+								"provinces",
+								"15",
+								"cities"
+							]
+						}
+					},
+					"response": []
 				}
-			},
-			"response": []
+			],
+			"protocolProfileBehavior": {}
 		},
 		{
-			"name": "Cities",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "{{baseUrl}}/v1/cities",
-					"host": [
-						"{{baseUrl}}"
+			"name": "Account",
+			"item": [
+				{
+					"name": "create",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\":\"Stefano\",\n\t\"email\": \"stefano.peraldini@gmail.com\",\n\t\"password\": \"myPwd123456\",\n\t\"linkedin\": \"https://www.linkedin.com/in/stefano-peraldini-software-developer/\",\n\t\"role\": \"1\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/v1/accounts",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"accounts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "auth",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "177caea2-8093-463b-945c-72d6b55bdfca",
+								"exec": [
+									"",
+									"pm.environment.set(\"accessToken\", pm.response.json().accessToken);"
+								],
+								"type": "text/javascript"
+							}
+						}
 					],
-					"path": [
-						"v1",
-						"cities"
-					]
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"email\": \"stefano.peraldini@gmail.com\",\n\t\"password\": \"myPwd123456\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/v1/accounts/login",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"accounts",
+								"login"
+							]
+						}
+					},
+					"response": []
 				}
-			},
-			"response": []
+			],
+			"protocolProfileBehavior": {}
 		},
 		{
-			"name": "City",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "{{baseUrl}}/v1/regions/12/provinces/15/cities/79daa7a8-bd2f-408a-9fa8-e7c2d177bbc7",
-					"host": [
-						"{{baseUrl}}"
-					],
-					"path": [
-						"v1",
-						"regions",
-						"12",
-						"provinces",
-						"15",
-						"cities",
-						"79daa7a8-bd2f-408a-9fa8-e7c2d177bbc7"
-					]
+			"name": "Users",
+			"item": [
+				{
+					"name": "update",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{accessToken}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"password\": \"1234567\",\n\t\"linkedin\": \"https://www.linkedin.com/in/stefano-peraldini-software-developerssss\",\n\t\"role\": \"2\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/v1/users",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer {{accessToken}}"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/v1/users",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer {{accessToken}}"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/v1/users",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"users"
+							]
+						}
+					},
+					"response": []
 				}
-			},
-			"response": []
-		},
-		{
-			"name": "Regions",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "{{baseUrl}}/v1/regions",
-					"host": [
-						"{{baseUrl}}"
-					],
-					"path": [
-						"v1",
-						"regions"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Provinces",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "{{baseUrl}}/v1/provinces",
-					"host": [
-						"{{baseUrl}}"
-					],
-					"path": [
-						"v1",
-						"provinces"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Province",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "{{baseUrl}}/v1/provinces/15",
-					"host": [
-						"{{baseUrl}}"
-					],
-					"path": [
-						"v1",
-						"provinces",
-						"15"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Region",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "{{baseUrl}}/v1/regions/12",
-					"host": [
-						"{{baseUrl}}"
-					],
-					"path": [
-						"v1",
-						"regions",
-						"12"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "ProvincesRegion",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "{{baseUrl}}/v1/regions/12/provinces",
-					"host": [
-						"{{baseUrl}}"
-					],
-					"path": [
-						"v1",
-						"regions",
-						"12",
-						"provinces"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "CitiesRegionsProvinces",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "{{baseUrl}}/v1/regions/12/provinces/15/cities",
-					"host": [
-						"{{baseUrl}}"
-					],
-					"path": [
-						"v1",
-						"regions",
-						"12",
-						"provinces",
-						"15",
-						"cities"
-					]
-				}
-			},
-			"response": []
+			],
+			"protocolProfileBehavior": {}
 		}
 	],
 	"protocolProfileBehavior": {}

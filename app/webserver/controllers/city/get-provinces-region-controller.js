@@ -16,7 +16,7 @@ async function getProvincesRegion(req, res) {
     try {
         await validate({ regionId });
     } catch (e) {
-        res.status(400).send(e);
+        return res.status(400).send(e);
     }
 
     let connection;
