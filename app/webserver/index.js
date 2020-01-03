@@ -1,14 +1,21 @@
 "use strict";
 const express = require("express");
+const initApp = require("./initApp");
 
 const {
+  accountRouter,
   cityRouter,
+  userRouter,
 } = require("./routes");
+
+initApp();  // inicializo app (creo account admin si no existe)
 
 const app = express();
 
 app.use(express.json());
 app.use("/", cityRouter);
+app.use("/", accountRouter);
+app.use("/", userRouter);
 
 
 let server = null;
