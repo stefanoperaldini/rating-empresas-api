@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "24db7006-29fc-400c-bd3c-4fa860ea1a86",
+		"_postman_id": "d2158603-0752-49dd-9215-7ef0da55338b",
 		"name": "RatingEmpresas",
 		"description": "Proyecto RatingEmpresas",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
@@ -271,6 +271,156 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "newActivationEmail",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "177caea2-8093-463b-945c-72d6b55bdfca",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"email\": \"stefano.peraldini@gmail.com\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/v1/accounts/newactivationemail",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"accounts",
+								"newactivationemail"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "auth PasswordRecovered",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "177caea2-8093-463b-945c-72d6b55bdfca",
+								"exec": [
+									"",
+									"pm.environment.set(\"accessToken\", pm.response.json().accessToken);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"email\": \"stefano.peraldini@gmail.com\",\n\t\"password\": \"neW123456\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/v1/accounts/login",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"accounts",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "pwdRecovery",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"email\": \"stefano.peraldini@gmail.com\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/v1/accounts/passwordrecovery",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"accounts",
+								"passwordrecovery"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "changePassword",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{accessToken}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n \"email\": \"stefano.peraldini@gmail.com\",\n \"oldPassword\": \"6578601583b24de0a8bbc16b48f9339f\",\n \"newPassword\": \"neW123456\",\n \"confirmationPassword\": \"neW123456\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/v1/accounts/changepassword",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"accounts",
+								"changepassword"
+							]
+						}
+					},
+					"response": []
 				}
 			],
 			"protocolProfileBehavior": {}
@@ -281,7 +431,7 @@
 				{
 					"name": "update",
 					"request": {
-						"method": "POST",
+						"method": "PUT",
 						"header": [
 							{
 								"key": "Authorization",
@@ -297,7 +447,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"password\": \"1234567\",\n\t\"linkedin\": \"https://www.linkedin.com/in/stefano-peraldini-software-developerssss\",\n\t\"role\": \"2\"\n}"
+							"raw": "{\n\t\"linkedin\": \"https://www.linkedin.com/in/stefano-peraldini-software-developerssss\",\n\t\"role\": \"2\"\n}"
 						},
 						"url": {
 							"raw": "{{baseUrl}}/v1/users",

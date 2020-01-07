@@ -6,7 +6,9 @@ async function getRegions(req, res) {
     let connection;
     try {
         connection = await mysqlPool.getConnection();
-        const sqlQuery = "SELECT * FROM regions ORDER BY name;";
+        const sqlQuery = `SELECT * 
+                          FROM regions 
+                          ORDER BY name;`;
         const [rows] = await connection.query(sqlQuery);
         connection.release();
         res.send(rows);

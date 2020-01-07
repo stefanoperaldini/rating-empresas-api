@@ -23,7 +23,10 @@ async function getCitiesProvinceRegion(req, res) {
     try {
         connection = await mysqlPool.getConnection();
         const sqlQuery =
-            "SELECT c.id, c.name FROM cities AS c WHERE c.region_id =? AND c.province_id =? ORDER BY c.name;";
+            `SELECT c.id, c.name 
+             FROM cities AS c 
+             WHERE c.region_id =? AND c.province_id =? 
+             ORDER BY c.name;`;
         const [rows] = await connection.execute(sqlQuery, [regionId, provinceId]);
         connection.release();
         if (rows.length === 0) {

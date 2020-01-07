@@ -20,7 +20,9 @@ async function getRegion(req, res) {
     let connection;
     try {
         connection = await mysqlPool.getConnection();
-        const sqlQuery = "SELECT * FROM regions WHERE id=?;";
+        const sqlQuery = `SELECT * 
+                          FROM regions 
+                          WHERE id=?;`;
         const [rows] = await connection.execute(sqlQuery, [regionId]);
         connection.release();
         if (rows.length === 0) {

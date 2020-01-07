@@ -3,23 +3,8 @@
 const bcrypt = require("bcrypt");
 const Joi = require("@hapi/joi");
 const mysqlPool = require("../../../database/mysql-pool");
-const sendgridMail = require("@sendgrid/mail");
 const uuidV4 = require("uuid/v4");
-
-sendgridMail.setApiKey(process.env.SENDGRID_API_KEY);
-
-async function sendMail(email) {
-    const [username] = email.split("@");
-    const msg = {
-        to: email,
-        from: "noreply.ratingempresas@mail.com",
-        subject: "Welcome to RatingEmpresas",
-        text: `Welcome ${username} to RatingEmpresas.`,
-        html: `<strong>Welcome ${username} to RatingEmpresas.</strong>`
-    };
-    const data = await sendgridMail.send(msg);
-    return data;
-}
+const { sendEmailRegistration } = require("./utility");
 
 async function validate(payload) {
     const schema = Joi.object({
@@ -41,6 +26,24 @@ async function validate(payload) {
             .max(2).required(),
     });
     Joi.assert(payload, schema);
+}
+
+async function addVerificationCode(uuid) {
+    const verificationCode = uuidV4();
+    const now = new Date();
+    const createdAt = now.toISOString().substring(0, 19).replace('T', ' ');
+    const sqlQuery = 'INSERT INTO users_activation SET ?';
+    const connection = await mysqlPool.getConnection();
+
+    await connection.query(sqlQuery, {
+        id: uuid,
+        verification_code: verificationCode,
+        created_at: createdAt,
+    });
+
+    connection.release();
+
+    return verificationCode;
 }
 
 async function createAccount(req, res, next) {
@@ -77,13 +80,15 @@ async function createAccount(req, res, next) {
             created_at: createdAt
         });
         connection.release();
-        res.status(201).send();
+
+        const verificationCode = await addVerificationCode(userId);
 
         try {
-            await sendMail(accountData.email);
+            await sendEmailRegistration(accountData.email, verificationCode);
         } catch (e) {
             console.log(e);
         }
+        return res.status(201).send();
     } catch (e) {
         if (connection) {
             connection.release();

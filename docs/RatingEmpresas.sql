@@ -122,6 +122,23 @@ ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 
 -- -----------------------------------------------------
+-- Table `EnterpriseRanking`.`users_activation`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `EnterpriseRanking`.`users_activation` (
+  `id` CHAR(36) NOT NULL,
+  `verification_code` CHAR(36) NOT NULL,
+  `created_at` DATETIME NOT NULL,
+  `verified_at` DATETIME NULL,
+  PRIMARY KEY (`id`),
+    CONSTRAINT `fk_user_activation_id_user_id`
+    FOREIGN KEY (`id`)
+    REFERENCES `EnterpriseRanking`.`users` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION )
+ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+
+-- -----------------------------------------------------
 -- Table `EnterpriseRanking`.`users`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `EnterpriseRanking`.`users` (
@@ -132,6 +149,7 @@ CREATE TABLE IF NOT EXISTS `EnterpriseRanking`.`users` (
   `linkedin` VARCHAR(255) NULL,
   `role` CHAR(1) NOT NULL,
   `created_at` TIMESTAMP NOT NULL,
+  `activated_at` DATETIME NULL,
   `modified_at` TIMESTAMP NULL,
   `deleted_at` TIMESTAMP NULL,
   PRIMARY KEY (`id`),

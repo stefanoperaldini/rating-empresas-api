@@ -30,7 +30,11 @@ async function getCity(req, res) {
     try {
         connection = await mysqlPool.getConnection();
         const sqlQuery =
-            "SELECT c.id, c.name, c.region_id, r.name, c.province_id, p.name FROM cities AS c INNER JOIN regions AS r ON c.region_id = r.id INNER JOIN provinces AS p ON c.province_id = p.id WHERE r.id =? AND p.id =? AND c.id =?; ";
+            `SELECT c.id, c.name, c.region_id, r.name, c.province_id, p.name 
+             FROM cities AS c 
+             INNER JOIN regions AS r ON c.region_id = r.id 
+             INNER JOIN provinces AS p ON c.province_id = p.id 
+             WHERE r.id =? AND p.id =? AND c.id =?;`;
         const [rows] = await connection.execute(sqlQuery, [
             regionId, provinceId, cityId,
         ]);

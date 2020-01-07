@@ -6,7 +6,9 @@ async function getProvinces(req, res) {
     let connection;
     try {
         connection = await mysqlPool.getConnection();
-        const sqlQuery = "SELECT * FROM provinces ORDER BY name;";
+        const sqlQuery = `SELECT * 
+                          FROM provinces 
+                          ORDER BY name;`;
         const [rows] = await connection.execute(sqlQuery);
         connection.release();
         res.send(rows);
