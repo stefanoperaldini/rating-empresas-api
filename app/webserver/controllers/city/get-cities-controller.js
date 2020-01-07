@@ -39,7 +39,11 @@ async function getCities(req, res) {
         }
 
         sqlQuery =
-            "SELECT c.region_id, r.name, c.province_id, p.name, c.id, c.name FROM cities AS c INNER JOIN regions AS r ON c.region_id = r.id INNER JOIN provinces AS p ON c.province_id = p.id ORDER BY c.name LIMIT ?,?;";
+            `SELECT c.region_id, r.name, c.province_id, p.name, c.id, c.name 
+             FROM cities AS c 
+             INNER JOIN regions AS r ON c.region_id = r.id 
+             INNER JOIN provinces AS p ON c.province_id = p.id 
+             ORDER BY c.name LIMIT ?,?;`;
         [rows] = await connection.execute(sqlQuery, [offset, row4page]);
         connection.release();
         return res.send({

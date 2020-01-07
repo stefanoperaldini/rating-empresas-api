@@ -22,7 +22,9 @@ async function getProvince(req, res) {
     let connection;
     try {
         connection = await mysqlPool.getConnection();
-        const sqlQuery = "SELECT * FROM provinces WHERE id=?";
+        const sqlQuery = `SELECT * 
+                          FROM provinces 
+                          WHERE id=?`;
         const [rows] = await connection.execute(sqlQuery, [provinceId]);
         connection.release();
         if (rows.length === 0) {

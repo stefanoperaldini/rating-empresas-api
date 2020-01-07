@@ -13,7 +13,7 @@ async function validate(payload) {
             .required(),
         password: Joi
             .string()
-            .regex(/^[a-zA-Z0-9]{3,30}$/)
+            .regex(/^[a-zA-Z0-9]{3,36}$/)
             .required()
     });
 
@@ -30,7 +30,8 @@ async function login(req, res, next) {
     }
 
     const sqlQuery =
-        "SELECT id, email, password, role  FROM users WHERE email = ? AND deleted_at IS NULL";
+        `SELECT id, email, password, activated_at, role  
+         FROM users WHERE email = ? AND deleted_at IS NULL`;
 
     let connection;
     try {
@@ -38,10 +39,14 @@ async function login(req, res, next) {
         const [rows] = await connection.query(sqlQuery, [accountData.email]);
         connection.release();
         if (rows.length !== 1) {
-            return res.status(401).send();
+            return res.status(404).send();
         }
 
         const user = rows[0];
+
+        if (!user.activated_at) {
+            return res.status(403).send("You need to confirm the verification link");
+        }
 
         try {
             const isPasswordOk = await bcrypt.compare(accountData.password, user.password);

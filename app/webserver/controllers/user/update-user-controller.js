@@ -6,10 +6,6 @@ const mysqlPool = require('../../../database/mysql-pool');
 
 async function validate(payload) {
     const schema = Joi.object({
-        password: Joi
-            .string()
-            .regex(/^[a-zA-Z0-9]{3,30}$/)
-            .required(),
         linkedin: Joi.string().allow("").uri(),
         role: Joi.number()
             .integer()
@@ -19,10 +15,9 @@ async function validate(payload) {
     Joi.assert(payload, schema);
 }
 
-async function updateNote(req, res, next) {
+async function updateUser(req, res, next) {
     const { userId } = req.claims;
 
-    // añadir OLD Password control?
     const accountData = { ...req.body };
 
     try {
@@ -36,21 +31,18 @@ async function updateNote(req, res, next) {
         .toISOString()
         .substring(0, 19)
         .replace("T", " ");
-    const securePwd = await bcrypt.hash(accountData.password, 10);
 
     let connection;
     try {
         connection = await mysqlPool.getConnection();
 
         const sqlUpdateUser = `UPDATE users
-                                SET password = ?,
-                                linkedin = ?,
+                                SET linkedin = ?,
                                 role = ?,
                                 modified_at = ?
                                 WHERE id = ? AND deleted_at IS NULL`;
 
         const [updateStatus] = await connection.execute(sqlUpdateUser, [
-            securePwd,
             accountData.linkedin,
             accountData.role,
             now,
@@ -62,7 +54,7 @@ async function updateNote(req, res, next) {
             return res.status(404).send();
         }
 
-        return res.status(204).send();
+        return res.send();
     } catch (e) {
         if (connection) {
             connection.release();
@@ -73,4 +65,4 @@ async function updateNote(req, res, next) {
     }
 }
 
-module.exports = updateNote;
+module.exports = updateUser;

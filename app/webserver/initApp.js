@@ -5,7 +5,7 @@ const bcrypt = require("bcrypt");
 const mysqlPool = require("../database/mysql-pool");
 
 async function initApp() {
-    const createdAt = new Date()
+    const now = new Date()
         .toISOString()
         .substring(0, 19)
         .replace("T", " ");
@@ -21,7 +21,8 @@ async function initApp() {
             password: securePwd,
             linkedin: "",
             role: 0,
-            created_at: createdAt
+            created_at: now,
+            activated_at: now,
         });
         connection.release();
     } catch (e) {

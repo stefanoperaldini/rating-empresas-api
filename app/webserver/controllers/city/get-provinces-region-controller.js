@@ -23,7 +23,11 @@ async function getProvincesRegion(req, res) {
     try {
         connection = await mysqlPool.getConnection();
         const sqlQuery =
-            "SELECT DISTINCT c.province_id, p.name FROM cities AS c INNER JOIN provinces AS p ON c.province_id = p.id WHERE c.region_id =? ORDER BY p.name; ";
+            `SELECT DISTINCT c.province_id, p.name 
+             FROM cities AS c 
+             INNER JOIN provinces AS p ON c.province_id = p.id 
+             WHERE c.region_id =? 
+             ORDER BY p.name;`;
         const [rows] = await connection.execute(sqlQuery, [regionId]);
         connection.release();
         if (rows.length === 0) {
