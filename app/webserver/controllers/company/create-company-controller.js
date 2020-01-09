@@ -8,9 +8,9 @@ const httpServerDomain = process.env.HTTP_SERVER_DOMAIN;
 
 /*
 {
-	  "name": "My company name",
-    "description": "My company description"
-    "sector_id": "My company sector"
+    "name": "My company name",
+    "description": "My company description",
+    "sector_id": "My company sector",
     "url_web": "My company url",
     "linkedin": "My company linkedin",
     "address": "My company address",
@@ -20,7 +20,7 @@ const httpServerDomain = process.env.HTTP_SERVER_DOMAIN;
 async function validate(payload) {
   const schema = Joi.object({
     name: Joi.string()
-      .min(1)
+      .min(3)
       .max(60)
       .required(),
     description: Joi.string()
@@ -50,7 +50,13 @@ async function validate(payload) {
 
 async function createCompany(req, res, next) {
   const companyData = { ...req.body };
-  const { userId } = req.claims;
+  const { userId, role } = req.claims;
+
+  if (parseInt(role) !== 2) {
+    return res.status(401).send({
+      message: "Only an user type 2 can create a company profile"
+    });
+  }
 
   try {
     await validate(companyData);

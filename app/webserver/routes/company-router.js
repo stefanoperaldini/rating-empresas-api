@@ -6,6 +6,7 @@ const checkAccountSession = require("../controllers/account/check-account-sessio
 const createCompany = require("../controllers/company/create-company-controller");
 const getCompany = require("../controllers/company/get-company-controller");
 const getCompanies = require("../controllers/company/get-companies-controller");
+const updateCompanyData = require("../controllers/company/update-company-controller");
 const uploadCompanyLogo = require("../controllers/company/upload-logo-company-controller");
 
 const upload = multer();
@@ -20,5 +21,6 @@ router.post(
   upload.single("logo"),
   uploadCompanyLogo
 );
+router.put("/v1/companies/:companyId", checkAccountSession, updateCompanyData);
 
 module.exports = router;

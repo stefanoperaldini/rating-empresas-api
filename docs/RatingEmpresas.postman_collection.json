@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "d2158603-0752-49dd-9215-7ef0da55338b",
+		"_postman_id": "9cde6d6d-b3f3-425c-8a16-6d217034b0b7",
 		"name": "RatingEmpresas",
 		"description": "Proyecto RatingEmpresas",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
@@ -273,6 +273,49 @@
 					"response": []
 				},
 				{
+					"name": "auth user type 2 sw develop",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "177caea2-8093-463b-945c-72d6b55bdfca",
+								"exec": [
+									"",
+									"pm.environment.set(\"accessToken\", pm.response.json().accessToken);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"email\": \"patorive@gmail.com\",\n\t\"password\": \"myRating2020\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/v1/accounts/login",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"accounts",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "newActivationEmail",
 					"event": [
 						{
@@ -358,6 +401,92 @@
 					"response": []
 				},
 				{
+					"name": "auth user type 2 banca",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "177caea2-8093-463b-945c-72d6b55bdfca",
+								"exec": [
+									"",
+									"pm.environment.set(\"accessToken\", pm.response.json().accessToken);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"email\": \"paorag19@gmail.com\",\n\t\"password\": \"myPassword2020\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/v1/accounts/login",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"accounts",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "auth user type 1 juan",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "177caea2-8093-463b-945c-72d6b55bdfca",
+								"exec": [
+									"",
+									"pm.environment.set(\"accessToken\", pm.response.json().accessToken);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"email\": \"juan.user1@yopmail.com\",\n\t\"password\": \"myRatingmanolo\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/v1/accounts/login",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"accounts",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "pwdRecovery",
 					"request": {
 						"method": "PUT",
@@ -417,6 +546,521 @@
 								"v1",
 								"accounts",
 								"changepassword"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create user type 2 sw develop",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\":\"Patricia\",\n\t\"email\": \"patorive@gmail.com\",\n\t\"password\": \"myRating2020\",\n\t\"linkedin\": \"https://www.linkedin.com/in/patricia-oa-developer/\",\n\t\"role\": \"2\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/v1/accounts",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"accounts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create user type 1 user person",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\":\"Juan\",\n\t\"email\": \"juan.user1@yopmail.com\",\n\t\"password\": \"myRatingmanolo\",\n\t\"linkedin\": \"https://www.linkedin.com/in/manolouser/\",\n\t\"role\": \"1\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/v1/accounts",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"accounts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create user type 2 banca",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\":\"Maria\",\n\t\"email\": \"paorag19@gmail.com\",\n\t\"password\": \"myPassword2020\",\n\t\"linkedin\": \"https://www.linkedin.com/in/maria-ag-finance/\",\n\t\"role\": \"2\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/v1/accounts",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"accounts"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Companies",
+			"item": [
+				{
+					"name": "company banca",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer {{accessToken}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\":\"Banco Bestbank\",\n\t\"description\": \"Entidad financiera con sede en A Coruña\",\n\t\"sector_id\": \"96e07f1b-a09a-4903-976c-cfd08a819245\",\n\t\"url_web\": \"http://www.bestbank.com\",\n\t\"linkedin\": \"https://www.linkedin.com/in/bestbank/\",\n\t\"address\": \"Canton Grande, 2\",\n\t\"sede_id\": \"79daa7a8-bd2f-408a-9fa8-e7c2d177bbc7\"\n}\n\t"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/v1/companies",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"companies"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "company banca 2",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer {{accessToken}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\":\"Banco Artabro\",\n\t\"description\": \"Entidad financiera con sede en A Coruña\",\n\t\"sector_id\": \"66bc21c5-0cb2-4191-8d38-1b444467d2d2\",\n\t\"url_web\": \"http://www.bancoartabro.com\",\n\t\"linkedin\": \"https://www.linkedin.com/in/bancoartabro/\",\n\t\"address\": \"Canton Pequeño, 1\",\n\t\"sede_id\": \"79daa7a8-bd2f-408a-9fa8-e7c2d177bbc7\"\n}\n\t"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/v1/companies",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"companies"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "company banca change data",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer {{accessToken}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\":\"Banco Bestbank3\",\n\t\"description\": \"Entidad financiera con sede en Santiago\",\n\t\"sector_id\": \"66bc21c5-0cb2-4191-8d38-1b444467d2d2\",\n\t\"url_web\": \"http://www.bestbank3.com\",\n\t\"linkedin\": \"https://www.linkedin.com/in/bestbank2/\",\n\t\"address\": \"Canton Grande, 15\",\n\t\"sede_id\": \"79daa7a8-bd2f-408a-9fa8-e7c2d177bbc7\"\n}\n\t"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/v1/companies/0de6dc68-a6e4-4e03-940c-40a313fd75c2",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"companies",
+								"0de6dc68-a6e4-4e03-940c-40a313fd75c2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "company user 1 juan",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer {{accessToken}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\":\"Banco Otrobanco\",\n\t\"description\": \"Entidad financiera con sede en Vigo\",\n\t\"sector_id\": \"66bc21c5-0cb2-4191-8d38-1b444467d2d2\",\n\t\"url_web\": \"http://www.otrobanco.com\",\n\t\"linkedin\": \"https://www.linkedin.com/in/otrobanco/\",\n\t\"address\": \"García Barbón, 2\",\n\t\"sede_id\": \"3cc2a6a1-9afc-4575-b5e5-3b25bfbdcbd4\"\n}\n\t"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/v1/companies",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"companies"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Companies",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/v1/companies",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"companies"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Company",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/v1/companies/0de6dc68-a6e4-4e03-940c-40a313fd75c2",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"companies",
+								"0de6dc68-a6e4-4e03-940c-40a313fd75c2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "company sw",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{accessToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\":\"Software for the people\",\n\t\"description\": \"Creación y desarrollo de software desde Galicia\",\n\t\"sector_id\": \"dd1712bc-bcb4-47fd-a5ba-a699d4d4e6c0\",\n\t\"url_web\": \"http://www.software4people.es\",\n\t\"linkedin\": \"https://www.linkedin.com/in/software4people/\",\n\t\"address\": \"San Andres, 25 - 1º D\",\n\t\"sede_id\": \"79daa7a8-bd2f-408a-9fa8-e7c2d177bbc7\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/v1/companies",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"companies"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "logo company banca",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{accessToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "logo",
+									"type": "file",
+									"src": "/home/hab44/Documents/PROJECT/rating-empresas-api/img/bestbank.png"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseUrl}}/v1/companies/logo",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"companies",
+								"logo"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Sectors",
+			"item": [
+				{
+					"name": "sector sw develop",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{accessToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n \"sector\":\"Desarrollo de software\"\n}\n\t"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/v1/sectors",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"sectors"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "sector banca",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer {{accessToken}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n \"sector\":\"Financiero\"\n}\n\t"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/v1/sectors",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"sectors"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Sectors",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/v1/sectors",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"sectors"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Sector",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/v1/sectors/dd1712bc-bcb4-47fd-a5ba-a699d4d4e6c0",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"sectors",
+								"dd1712bc-bcb4-47fd-a5ba-a699d4d4e6c0"
 							]
 						}
 					},
