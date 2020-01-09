@@ -8,7 +8,8 @@ async function validateSchema(payload) {
   const schema = Joi.object({
     sector: Joi.string()
       .min(1)
-      .max(45),
+      .max(45)
+      .required(),
     userId: Joi.string()
       .guid({
         version: ["uuidv4"]

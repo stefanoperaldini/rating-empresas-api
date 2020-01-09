@@ -11,7 +11,13 @@ cloudinary.config({
 
 async function uploadCompanyLogo(req, res) {
   const { userId, role } = req.claims;
-  const { companyId, file } = req;
+  const { file } = req;
+
+  if (parseInt(role) !== 2) {
+    return res
+      .status(401)
+      .send({ message: "Only an user type 2 can update a company logo" });
+  }
 
   if (!file || !file.buffer) {
     return res.status(400).send({
@@ -26,7 +32,7 @@ async function uploadCompanyLogo(req, res) {
         public_id: userId,
         width: 200,
         height: 200,
-        format: "jpg",
+        format: "png",
         crop: "limit"
       },
       async (err, result) => {
@@ -41,12 +47,18 @@ async function uploadCompanyLogo(req, res) {
         try {
           const sqlQuery = `UPDATE companies
       SET url_logo = ?
-      WHERE id = ?`;
+      WHERE user_id = ?`;
           connection = await mysqlPool.getConnection();
-          connection.execute(sqlQuery, [secureUrl, companyId]);
+          const [updateStatus] = await connection.execute(sqlQuery, [
+            secureUrl,
+            userId
+          ]);
           connection.release();
 
-          console.log(result.secure_url);
+          if (updateStatus.changedRows !== 1) {
+            return res.status(404).send();
+          }
+
           res.header("Location", secureUrl);
           return res.status(201).send();
         } catch (e) {
