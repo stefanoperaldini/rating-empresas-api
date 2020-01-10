@@ -1,7 +1,6 @@
 "use strict";
 
 const Joi = require("@hapi/joi");
-const bcrypt = require("bcrypt");
 const mysqlPool = require("../../../database/mysql-pool");
 
 async function validate(payload) {
