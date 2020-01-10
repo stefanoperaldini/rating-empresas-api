@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "9cde6d6d-b3f3-425c-8a16-6d217034b0b7",
+		"_postman_id": "96f7df66-fa26-4b4e-b1cc-409fb09c1396",
 		"name": "RatingEmpresas",
 		"description": "Proyecto RatingEmpresas",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
@@ -273,6 +273,49 @@
 					"response": []
 				},
 				{
+					"name": "auth con pwd recovered",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "177caea2-8093-463b-945c-72d6b55bdfca",
+								"exec": [
+									"",
+									"pm.environment.set(\"accessToken\", pm.response.json().accessToken);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"email\": \"stefano.peraldini@gmail.com\",\n\t\"password\": \"neW123456\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/v1/accounts/login",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"accounts",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "auth user type 2 sw develop",
 					"event": [
 						{
@@ -330,7 +373,7 @@
 						}
 					],
 					"request": {
-						"method": "PUT",
+						"method": "POST",
 						"header": [
 							{
 								"key": "Content-Type",
@@ -344,37 +387,62 @@
 							"raw": "{\n\t\"email\": \"stefano.peraldini@gmail.com\"\n}"
 						},
 						"url": {
-							"raw": "{{baseUrl}}/v1/accounts/newactivationemail",
+							"raw": "{{baseUrl}}/v1/accounts/email/activation/recovery",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
 								"v1",
 								"accounts",
-								"newactivationemail"
+								"email",
+								"activation",
+								"recovery"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "auth PasswordRecovered",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"id": "177caea2-8093-463b-945c-72d6b55bdfca",
-								"exec": [
-									"",
-									"pm.environment.set(\"accessToken\", pm.response.json().accessToken);"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
+					"name": "pwdRecovery",
 					"request": {
 						"method": "POST",
 						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"email\": \"stefano.peraldini@gmail.com\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/v1/accounts/password/recovery",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"accounts",
+								"password",
+								"recovery"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "changePassword",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{accessToken}}",
+								"type": "text"
+							},
 							{
 								"key": "Content-Type",
 								"name": "Content-Type",
@@ -384,17 +452,43 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"email\": \"stefano.peraldini@gmail.com\",\n\t\"password\": \"neW123456\"\n}"
+							"raw": "{\n \"email\": \"stefano.peraldini@gmail.com\",\n \"oldPassword\": \"b8165b57aea24fbf987c3bdb7ca0f838\",\n \"newPassword\": \"neW123456\",\n \"confirmationPassword\": \"neW123456\"\n}"
 						},
 						"url": {
-							"raw": "{{baseUrl}}/v1/accounts/login",
+							"raw": "{{baseUrl}}/v1/accounts/password/change",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
 								"v1",
 								"accounts",
-								"login"
+								"password",
+								"change"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "logout",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer {{accessToken}}"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/v1/accounts/logout",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"accounts",
+								"logout"
 							]
 						}
 					},
@@ -481,71 +575,6 @@
 								"v1",
 								"accounts",
 								"login"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "pwdRecovery",
-					"request": {
-						"method": "PUT",
-						"header": [
-							{
-								"key": "Content-Type",
-								"name": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n\t\"email\": \"stefano.peraldini@gmail.com\"\n}"
-						},
-						"url": {
-							"raw": "{{baseUrl}}/v1/accounts/passwordrecovery",
-							"host": [
-								"{{baseUrl}}"
-							],
-							"path": [
-								"v1",
-								"accounts",
-								"passwordrecovery"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "changePassword",
-					"request": {
-						"method": "PUT",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "Bearer {{accessToken}}",
-								"type": "text"
-							},
-							{
-								"key": "Content-Type",
-								"name": "Content-Type",
-								"type": "text",
-								"value": "application/json"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n \"email\": \"stefano.peraldini@gmail.com\",\n \"oldPassword\": \"6578601583b24de0a8bbc16b48f9339f\",\n \"newPassword\": \"neW123456\",\n \"confirmationPassword\": \"neW123456\"\n}"
-						},
-						"url": {
-							"raw": "{{baseUrl}}/v1/accounts/changepassword",
-							"host": [
-								"{{baseUrl}}"
-							],
-							"path": [
-								"v1",
-								"accounts",
-								"changepassword"
 							]
 						}
 					},
