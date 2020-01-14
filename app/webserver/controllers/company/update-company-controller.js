@@ -55,7 +55,7 @@ async function updateCompany(req, res, next) {
 
   if (parseInt(role) !== 2) {
     return res.status(401).send({
-      message: "Only an user type 2 can create a company profile"
+      message: `Only an user type "enterprise" can create a company profile`
     });
   }
 

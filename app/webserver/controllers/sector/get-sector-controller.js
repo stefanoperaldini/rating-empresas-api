@@ -19,10 +19,7 @@ async function getSector(req, res, next) {
   const sectorId = req.params.sectorId;
 
   try {
-    const payload = {
-      sectorId
-    };
-    await validate(payload);
+    await validate({ sectorId });
   } catch (e) {
     return res.status(400).send(e);
   }

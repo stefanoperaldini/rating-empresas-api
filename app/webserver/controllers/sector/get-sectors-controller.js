@@ -25,7 +25,8 @@ async function getSectors(req, res) {
   let connection;
   try {
     connection = await mysqlPool.getConnection();
-    let sqlQuery = "SELECT COUNT(*) as numsRows FROM sectors;";
+    let sqlQuery = `SELECT COUNT(*) as numsRows 
+                    FROM sectors;`;
     let [rows] = await connection.query(sqlQuery);
     numsRows = parseInt(rows[0].numsRows);
     let offset = 0;
@@ -38,7 +39,10 @@ async function getSectors(req, res) {
       row4page = numsRows;
     }
 
-    sqlQuery = `SELECT s.id, s.sector FROM sectors s ORDER BY s.sector LIMIT ?,?;`;
+    sqlQuery = `SELECT id, sector 
+                FROM sectors
+                ORDER BY sector 
+                LIMIT ?,?;`;
     [rows] = await connection.execute(sqlQuery, [offset, row4page]);
     connection.release();
     return res.send({

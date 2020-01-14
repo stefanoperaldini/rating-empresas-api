@@ -10,11 +10,6 @@ async function validateSchema(payload) {
       .min(1)
       .max(45)
       .required(),
-    userId: Joi.string()
-      .guid({
-        version: ["uuidv4"]
-      })
-      .required()
   });
 
   Joi.assert(payload, schema);
@@ -22,14 +17,9 @@ async function validateSchema(payload) {
 
 async function createSector(req, res, next) {
   const sectorData = { ...req.body };
-  const { userId } = req.claims;
 
   try {
-    const payload = {
-      ...sectorData,
-      userId
-    };
-    await validateSchema(payload);
+    await validateSchema(sectorData);
   } catch (e) {
     return res.status(400).send(e);
   }

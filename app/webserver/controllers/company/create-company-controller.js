@@ -42,7 +42,7 @@ async function validate(payload) {
       .max(60),
     sede_id: Joi.string().guid({
       version: ["uuidv4"]
-    })
+    }).required()
   });
 
   Joi.assert(payload, schema);
