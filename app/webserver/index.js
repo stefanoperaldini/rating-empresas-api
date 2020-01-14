@@ -6,6 +6,8 @@ const {
   accountRouter,
   cityRouter,
   companyRouter,
+  positionRouter,
+  reviewRouter,
   sectorRouter,
   userRouter
 } = require("./routes");
@@ -18,6 +20,8 @@ app.use(express.json());
 app.use("/", accountRouter);
 app.use("/", cityRouter);
 app.use("/", companyRouter);
+app.use("/", positionRouter);
+app.use("/", reviewRouter);
 app.use("/", sectorRouter);
 app.use("/", userRouter);
 

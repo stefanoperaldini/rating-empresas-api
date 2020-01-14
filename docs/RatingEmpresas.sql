@@ -84,7 +84,7 @@ CREATE TABLE IF NOT EXISTS `EnterpriseRanking`.`companies` (
   `url_web` VARCHAR(255) NULL,
   `linkedin` VARCHAR(255) NULL,
   `address` VARCHAR(60) NULL,
-  `sede_id` CHAR(36) NULL,
+  `sede_id` CHAR(36) NOT NULL,
   `url_logo` VARCHAR(255) NULL,
   `user_id` CHAR(36) NOT NULL,
   `created_at` DATETIME NOT NULL,
@@ -174,7 +174,8 @@ ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 CREATE TABLE IF NOT EXISTS `EnterpriseRanking`.`positions` (
   `id` CHAR(36) NOT NULL,
   `name` VARCHAR(60) NOT NULL,
-  PRIMARY KEY (`id`))
+  PRIMARY KEY (`id`),
+  UNIQUE INDEX `name_UNIQUE` (`name` ASC))
 ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 
@@ -187,18 +188,19 @@ CREATE TABLE IF NOT EXISTS `EnterpriseRanking`.`reviews` (
   `position_id` VARCHAR(36) NOT NULL,
   `start_year` DATE NOT NULL,
   `end_year` DATE NULL,
-  `salary` DECIMAL(10,0) NOT NULL,
+  `salary` DECIMAL(10,0) NULL,
   `inhouse_training` CHAR(1) NOT NULL,
   `growth_opportunities` CHAR(1) NOT NULL,
   `work_enviroment` CHAR(1) NOT NULL,
   `personal_life` CHAR(1) NOT NULL,
   `company_culture` CHAR(1) NOT NULL,
+  `salary_valuation` CHAR(1) NOT NULL,
   `comment_title` VARCHAR(30) NOT NULL,
   `comment` VARCHAR(1000) NOT NULL,
   `created_at` DATETIME NOT NULL,
   `deleted_at` DATETIME NULL,
-  `city_id` CHAR(3) NULL,
-  `company_id` VARCHAR(36) NULL,
+  `city_id` CHAR(36) NOT NULL,
+  `company_id` VARCHAR(36) NOT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_reviews_1_idx` (`user_id` ASC),
   INDEX `fk_positions_position_id_position_id_idx` (`position_id` ASC),
