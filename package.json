@@ -1,0 +1,43 @@
+{
+  "name": "rating-empresas-api",
+  "version": "1.0.0",
+  "description": "Rating de empresas API",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stefanoperaldini/rating-empresas-api.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/stefanoperaldini/rating-empresas-api/issues"
+  },
+  "homepage": "https://github.com/stefanoperaldini/rating-empresas-api#readme",
+  "dependencies": {
+    "@hapi/joi": "^16.1.8",
+    "@sendgrid/mail": "^6.4.0",
+    "bcrypt": "^3.0.7",
+    "cloudinary": "^1.18.1",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "multer": "^1.4.2",
+    "mysql2": "^2.1.0",
+    "ndb": "^1.1.5",
+    "redis": "^2.8.0",
+    "uuid": "^3.3.3"
+  },
+  "devDependencies": {
+    "eslint": "^6.1.0",
+    "eslint-config-airbnb": "^18.0.1",
+    "eslint-plugin-import": "^2.19.1",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-react": "^7.17.0",
+    "eslint-plugin-react-hooks": "^1.7.0"
+  }
+}

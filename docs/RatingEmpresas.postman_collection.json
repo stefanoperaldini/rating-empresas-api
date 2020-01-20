@@ -1,0 +1,1497 @@
+{
+	"info": {
+		"_postman_id": "d658cc0e-44e6-4ff7-9829-0ad5653de383",
+		"name": "RatingEmpresas",
+		"description": "Proyecto RatingEmpresas",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "city",
+			"item": [
+				{
+					"name": "CitiesQuery",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/v1/cities?row4page=12&page=3",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"cities"
+							],
+							"query": [
+								{
+									"key": "row4page",
+									"value": "12"
+								},
+								{
+									"key": "page",
+									"value": "3"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Cities",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/v1/cities",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"cities"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "City",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/v1/regions/12/provinces/15/cities/79daa7a8-bd2f-408a-9fa8-e7c2d177bbc7",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"regions",
+								"12",
+								"provinces",
+								"15",
+								"cities",
+								"79daa7a8-bd2f-408a-9fa8-e7c2d177bbc7"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Regions",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/v1/regions",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"regions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Provinces",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/v1/provinces",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"provinces"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Province",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/v1/provinces/15",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"provinces",
+								"15"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Region",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/v1/regions/12",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"regions",
+								"12"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ProvincesRegion",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/v1/regions/12/provinces",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"regions",
+								"12",
+								"provinces"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CitiesRegionsProvinces",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/v1/regions/12/provinces/15/cities",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"regions",
+								"12",
+								"provinces",
+								"15",
+								"cities"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Account",
+			"item": [
+				{
+					"name": "create",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\":\"Stefano\",\n\t\"email\": \"stefano.peraldini@gmail.com\",\n\t\"password\": \"myPwd123456\",\n\t\"linkedin\": \"https://www.linkedin.com/in/stefano-peraldini-software-developer/\",\n\t\"role\": \"2\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/v1/accounts",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"accounts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create Victor",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\":\"Victor\",\n\t\"email\": \"vm_cs@outlook.com\",\n\t\"password\": \"123456\",\n\t\"role\": \"2\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/v1/accounts",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"accounts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "auth",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "177caea2-8093-463b-945c-72d6b55bdfca",
+								"exec": [
+									"",
+									"pm.environment.set(\"accessToken\", pm.response.json().accessToken);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"email\": \"stefano.peraldini@gmail.com\",\n\t\"password\": \"myPwd123456\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/v1/accounts/login",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"accounts",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "auth admin",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "177caea2-8093-463b-945c-72d6b55bdfca",
+								"exec": [
+									"",
+									"pm.environment.set(\"accessToken\", pm.response.json().accessToken);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"email\": \"admin@email.com\",\n\t\"password\": \"123456\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/v1/accounts/login",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"accounts",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "auth Victor",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "177caea2-8093-463b-945c-72d6b55bdfca",
+								"exec": [
+									"",
+									"pm.environment.set(\"accessToken\", pm.response.json().accessToken);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"email\": \"vm_cs@outlook.com\",\n\t\"password\": \"123456\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/v1/accounts/login",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"accounts",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "auth con pwd recovered",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "177caea2-8093-463b-945c-72d6b55bdfca",
+								"exec": [
+									"",
+									"pm.environment.set(\"accessToken\", pm.response.json().accessToken);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"email\": \"stefano.peraldini@gmail.com\",\n\t\"password\": \"neW123456\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/v1/accounts/login",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"accounts",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "auth user type 2 sw develop",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "177caea2-8093-463b-945c-72d6b55bdfca",
+								"exec": [
+									"",
+									"pm.environment.set(\"accessToken\", pm.response.json().accessToken);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"email\": \"patorive@gmail.com\",\n\t\"password\": \"myRating2020\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/v1/accounts/login",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"accounts",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "newActivationEmail",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "177caea2-8093-463b-945c-72d6b55bdfca",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"email\": \"stefano.peraldini@gmail.com\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/v1/accounts/email/activation/recovery",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"accounts",
+								"email",
+								"activation",
+								"recovery"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "pwdRecovery",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"email\": \"stefano.peraldini@gmail.com\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/v1/accounts/password/recovery",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"accounts",
+								"password",
+								"recovery"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "changePassword",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{accessToken}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n \"email\": \"stefano.peraldini@gmail.com\",\n \"oldPassword\": \"b8165b57aea24fbf987c3bdb7ca0f838\",\n \"newPassword\": \"neW123456\",\n \"confirmationPassword\": \"neW123456\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/v1/accounts/password/change",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"accounts",
+								"password",
+								"change"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "logout",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer {{accessToken}}"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/v1/accounts/logout",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"accounts",
+								"logout"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "auth user type 2 banca",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "177caea2-8093-463b-945c-72d6b55bdfca",
+								"exec": [
+									"",
+									"pm.environment.set(\"accessToken\", pm.response.json().accessToken);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"email\": \"paorag19@gmail.com\",\n\t\"password\": \"myPassword2020\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/v1/accounts/login",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"accounts",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "auth user type 1 juan",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "177caea2-8093-463b-945c-72d6b55bdfca",
+								"exec": [
+									"",
+									"pm.environment.set(\"accessToken\", pm.response.json().accessToken);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"email\": \"juan.user1@yopmail.com\",\n\t\"password\": \"myRatingmanolo\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/v1/accounts/login",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"accounts",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create user type 2 sw develop",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\":\"Patricia\",\n\t\"email\": \"patorive@gmail.com\",\n\t\"password\": \"myRating2020\",\n\t\"linkedin\": \"https://www.linkedin.com/in/patricia-oa-developer/\",\n\t\"role\": \"2\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/v1/accounts",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"accounts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create user type 1 user person",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\":\"Juan\",\n\t\"email\": \"juan.user1@yopmail.com\",\n\t\"password\": \"myRatingmanolo\",\n\t\"linkedin\": \"https://www.linkedin.com/in/manolouser/\",\n\t\"role\": \"1\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/v1/accounts",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"accounts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create user type 2 banca",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\":\"Maria\",\n\t\"email\": \"paorag19@gmail.com\",\n\t\"password\": \"myPassword2020\",\n\t\"linkedin\": \"https://www.linkedin.com/in/maria-ag-finance/\",\n\t\"role\": \"2\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/v1/accounts",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"accounts"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Companies",
+			"item": [
+				{
+					"name": "company banca",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer {{accessToken}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\":\"Banco Bestbank\",\n\t\"description\": \"Entidad financiera con sede en A Coruña\",\n\t\"sector_id\": \"b21ae042-6058-4f86-a030-a0b2bf2caabc\",\n\t\"url_web\": \"http://www.bestbank.com\",\n\t\"linkedin\": \"https://www.linkedin.com/in/bestbank/\",\n\t\"address\": \"Canton Grande, 2\",\n\t\"sede_id\": \"79daa7a8-bd2f-408a-9fa8-e7c2d177bbc7\"\n}\n\t"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/v1/companies",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"companies"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "company banca 2",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer {{accessToken}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\":\"Banco Artabro\",\n\t\"description\": \"Entidad financiera con sede en A Coruña\",\n\t\"sector_id\": \"66bc21c5-0cb2-4191-8d38-1b444467d2d2\",\n\t\"url_web\": \"http://www.bancoartabro.com\",\n\t\"linkedin\": \"https://www.linkedin.com/in/bancoartabro/\",\n\t\"address\": \"Canton Pequeño, 1\",\n\t\"sede_id\": \"79daa7a8-bd2f-408a-9fa8-e7c2d177bbc7\"\n}\n\t"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/v1/companies",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"companies"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "company banca change data",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer {{accessToken}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\":\"Banco Bestbank3\",\n\t\"description\": \"Entidad financiera con sede en Santiago\",\n\t\"sector_id\": \"66bc21c5-0cb2-4191-8d38-1b444467d2d2\",\n\t\"url_web\": \"http://www.bestbank3.com\",\n\t\"linkedin\": \"https://www.linkedin.com/in/bestbank2/\",\n\t\"address\": \"Canton Grande, 15\",\n\t\"sede_id\": \"79daa7a8-bd2f-408a-9fa8-e7c2d177bbc7\"\n}\n\t"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/v1/companies/0de6dc68-a6e4-4e03-940c-40a313fd75c2",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"companies",
+								"0de6dc68-a6e4-4e03-940c-40a313fd75c2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "company user 1 juan",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer {{accessToken}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\":\"Banco Otrobanco\",\n\t\"description\": \"Entidad financiera con sede en Vigo\",\n\t\"sector_id\": \"66bc21c5-0cb2-4191-8d38-1b444467d2d2\",\n\t\"url_web\": \"http://www.otrobanco.com\",\n\t\"linkedin\": \"https://www.linkedin.com/in/otrobanco/\",\n\t\"address\": \"García Barbón, 2\",\n\t\"sede_id\": \"3cc2a6a1-9afc-4575-b5e5-3b25bfbdcbd4\"\n}\n\t"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/v1/companies",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"companies"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Companies",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/v1/companies",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"companies"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Company",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/v1/companies/0de6dc68-a6e4-4e03-940c-40a313fd75c2",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"companies",
+								"0de6dc68-a6e4-4e03-940c-40a313fd75c2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "company sw",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{accessToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\":\"Software for the people\",\n\t\"description\": \"Creación y desarrollo de software desde Galicia\",\n\t\"sector_id\": \"dd1712bc-bcb4-47fd-a5ba-a699d4d4e6c0\",\n\t\"url_web\": \"http://www.software4people.es\",\n\t\"linkedin\": \"https://www.linkedin.com/in/software4people/\",\n\t\"address\": \"San Andres, 25 - 1º D\",\n\t\"sede_id\": \"79daa7a8-bd2f-408a-9fa8-e7c2d177bbc7\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/v1/companies",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"companies"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "logo company banca",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{accessToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "logo",
+									"type": "file",
+									"src": "/home/hab44/Documents/PROJECT/rating-empresas-api/img/bestbank.png"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseUrl}}/v1/companies/logo",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"companies",
+								"logo"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Sectors",
+			"item": [
+				{
+					"name": "sector sw develop",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{accessToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n \"sector\":\"Desarrollo de software\"\n}\n\t"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/v1/sectors",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"sectors"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "sector banca",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer {{accessToken}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n \"sector\":\"Financiero\"\n}\n\t"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/v1/sectors",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"sectors"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Sectors",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/v1/sectors",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"sectors"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Sector",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/v1/sectors/10cd099b-b3db-47e1-92ab-c8f638a59d78",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"sectors",
+								"10cd099b-b3db-47e1-92ab-c8f638a59d78"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "update",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{accessToken}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"linkedin\": \"https://www.linkedin.com/in/stefano-peraldini-software-developerssss\",\n\t\"role\": \"2\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/v1/users",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer {{accessToken}}"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/v1/users",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer {{accessToken}}"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/v1/users",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"users"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Positions",
+			"item": [
+				{
+					"name": "Position",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/v1/positions/caa52ca4-1cf3-4c47-b50a-fa4c026d0be2",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"positions",
+								"caa52ca4-1cf3-4c47-b50a-fa4c026d0be2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Position",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer {{accessToken}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n \"name\":\"Developer Backend\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/v1/positions",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"positions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Positions",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/v1/positions",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"positions"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Reviews",
+			"item": [
+				{
+					"name": "Review",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/v1/reviews/59713168-69e9-40e9-a33d-623d63c6309f",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"reviews",
+								"59713168-69e9-40e9-a33d-623d63c6309f"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Review",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer {{accessToken}}"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/v1/reviews/052d6970-458b-4443-b8a1-1e72822f92f8",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"reviews",
+								"052d6970-458b-4443-b8a1-1e72822f92f8"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Review",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer {{accessToken}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n \"position_id\":\"e291458b-8404-42c1-bb44-f91371183d1b\",\n \"start_year\":\"2015-01-01\",\n \"end_year\":\"2019-01-01\",\n \"salary\":\"1430.20\",\n \"inhouse_training\":\"5\",\n \"growth_opportunities\":\"5\",\n \"work_enviroment\":\"5\",\n \"personal_life\":\"5\",\n \"company_culture\":\"5\",\n \"salary_valuation\":\"5\",\n \"comment_title\":\"Commento\",\n \"comment\":\"Testo commento\",\n \"city_id\":\"79daa7a8-bd2f-408a-9fa8-e7c2d177bbc7\",\n \"company_id\":\"97446c01-c666-4a89-a145-43db1bc2d487\"\n}\n\t"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/v1/reviews",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"reviews"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"protocolProfileBehavior": {}
+}
