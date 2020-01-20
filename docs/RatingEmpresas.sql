@@ -188,7 +188,7 @@ CREATE TABLE IF NOT EXISTS `EnterpriseRanking`.`reviews` (
   `position_id` VARCHAR(36) NOT NULL,
   `start_year` DATE NOT NULL,
   `end_year` DATE NULL,
-  `salary` DECIMAL(10,0) NULL,
+  `salary` DECIMAL(10,2) NULL,
   `inhouse_training` CHAR(1) NOT NULL,
   `growth_opportunities` CHAR(1) NOT NULL,
   `work_enviroment` CHAR(1) NOT NULL,

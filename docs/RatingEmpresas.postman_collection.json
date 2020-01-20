@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "93028b30-3168-4bac-8f0b-a84565981b6b",
+		"_postman_id": "d658cc0e-44e6-4ff7-9829-0ad5653de383",
 		"name": "RatingEmpresas",
 		"description": "Proyecto RatingEmpresas",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
@@ -230,6 +230,35 @@
 					"response": []
 				},
 				{
+					"name": "create Victor",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\":\"Victor\",\n\t\"email\": \"vm_cs@outlook.com\",\n\t\"password\": \"123456\",\n\t\"role\": \"2\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/v1/accounts",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"accounts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "auth",
 					"event": [
 						{
@@ -257,6 +286,92 @@
 						"body": {
 							"mode": "raw",
 							"raw": "{\n\t\"email\": \"stefano.peraldini@gmail.com\",\n\t\"password\": \"myPwd123456\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/v1/accounts/login",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"accounts",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "auth admin",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "177caea2-8093-463b-945c-72d6b55bdfca",
+								"exec": [
+									"",
+									"pm.environment.set(\"accessToken\", pm.response.json().accessToken);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"email\": \"admin@email.com\",\n\t\"password\": \"123456\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/v1/accounts/login",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"accounts",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "auth Victor",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "177caea2-8093-463b-945c-72d6b55bdfca",
+								"exec": [
+									"",
+									"pm.environment.set(\"accessToken\", pm.response.json().accessToken);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"email\": \"vm_cs@outlook.com\",\n\t\"password\": \"123456\"\n}"
 						},
 						"url": {
 							"raw": "{{baseUrl}}/v1/accounts/login",
@@ -691,7 +806,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"name\":\"Banco Bestbank\",\n\t\"description\": \"Entidad financiera con sede en A Coruña\",\n\t\"sector_id\": \"9009dab9-f7e9-4bdc-9546-4cb5872f76bf\",\n\t\"url_web\": \"http://www.bestbank.com\",\n\t\"linkedin\": \"https://www.linkedin.com/in/bestbank/\",\n\t\"address\": \"Canton Grande, 2\",\n\t\"sede_id\": \"79daa7a8-bd2f-408a-9fa8-e7c2d177bbc7\"\n}\n\t"
+							"raw": "{\n\t\"name\":\"Banco Bestbank\",\n\t\"description\": \"Entidad financiera con sede en A Coruña\",\n\t\"sector_id\": \"b21ae042-6058-4f86-a030-a0b2bf2caabc\",\n\t\"url_web\": \"http://www.bestbank.com\",\n\t\"linkedin\": \"https://www.linkedin.com/in/bestbank/\",\n\t\"address\": \"Canton Grande, 2\",\n\t\"sede_id\": \"79daa7a8-bd2f-408a-9fa8-e7c2d177bbc7\"\n}\n\t"
 						},
 						"url": {
 							"raw": "{{baseUrl}}/v1/companies",
@@ -1297,14 +1412,14 @@
 							}
 						},
 						"url": {
-							"raw": "{{baseUrl}}/v1/reviews/0de6dc68-a6e4-4e03-940c-40a313fd75c2",
+							"raw": "{{baseUrl}}/v1/reviews/59713168-69e9-40e9-a33d-623d63c6309f",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
 								"v1",
 								"reviews",
-								"0de6dc68-a6e4-4e03-940c-40a313fd75c2"
+								"59713168-69e9-40e9-a33d-623d63c6309f"
 							]
 						}
 					},
@@ -1319,17 +1434,23 @@
 								"key": "Authorization",
 								"type": "text",
 								"value": "Bearer {{accessToken}}"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
 							}
 						],
 						"url": {
-							"raw": "{{baseUrl}}/v1/reviews/73737737373",
+							"raw": "{{baseUrl}}/v1/reviews/052d6970-458b-4443-b8a1-1e72822f92f8",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
 								"v1",
 								"reviews",
-								"73737737373"
+								"052d6970-458b-4443-b8a1-1e72822f92f8"
 							]
 						}
 					},
@@ -1353,7 +1474,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n \"position_id\":\"e3c57956-53b2-45d1-9cfd-bc97697e27a7\",\n \"start_year\":\"2015-01-01\",\n \"end_year\":\"2019-01-01\",\n \"salary\":\"1430.20\",\n \"inhouse_training\":\"5\",\n \"growth_opportunities\":\"5\",\n \"work_enviroment\":\"5\",\n \"personal_life\":\"5\",\n \"company_culture\":\"5\",\n \"salary_valuation\":\"5\",\n \"comment_title\":\"Commento\",\n \"comment\":\"Testo commento\",\n \"city_id\":\"79daa7a8-bd2f-408a-9fa8-e7c2d177bbc7\",\n \"company_id\":\"fd7a4daa-2416-4ce0-8a13-9567ab003701\"\n}\n\t"
+							"raw": "{\n \"position_id\":\"e291458b-8404-42c1-bb44-f91371183d1b\",\n \"start_year\":\"2015-01-01\",\n \"end_year\":\"2019-01-01\",\n \"salary\":\"1430.20\",\n \"inhouse_training\":\"5\",\n \"growth_opportunities\":\"5\",\n \"work_enviroment\":\"5\",\n \"personal_life\":\"5\",\n \"company_culture\":\"5\",\n \"salary_valuation\":\"5\",\n \"comment_title\":\"Commento\",\n \"comment\":\"Testo commento\",\n \"city_id\":\"79daa7a8-bd2f-408a-9fa8-e7c2d177bbc7\",\n \"company_id\":\"97446c01-c666-4a89-a145-43db1bc2d487\"\n}\n\t"
 						},
 						"url": {
 							"raw": "{{baseUrl}}/v1/reviews",
