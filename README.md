@@ -13,7 +13,10 @@ git commit -m "XXX"
 git push origin nameBranch  
 
 # GitHub  
-Create a pull request y merging with develop (no master!!!!)  
+Create a pull request y merging nameBranch with develop (no master!!!!)
+
+# Delete branch
+git branch -d nameBranch  
 
 # Creating and Finishing a release branch  
 git checkout develop  
@@ -29,4 +32,4 @@ git push origin --tags
 
 git checkout develop  
 git merge --no-ff release-0.1  
-git push origin develop  
+git push origin develop
