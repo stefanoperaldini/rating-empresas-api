@@ -18,15 +18,15 @@ Create a pull request y merging with develop (no master!!!!)
 # Creating and Finishing a release branch
 git checkout develop
 git checkout -b release-0.1 develop 
-git push origin release-0.1 (subo in github la rama release)
+git push origin release-0.1 
 
 git checkout master
 git merge --no-ff release-0.1
-git tag -a 0.1 (creo tag version in master)
+git tag -a 0.1
 git tag 
 git push origin master 
-git push origin --tags (para tener tag version en gitHub)
+git push origin --tags 
 
 git checkout develop
-git merge --no-ff release-0.1  (no haria falta porque las dos son iguales en nuestro caso sin testing y fix))
+git merge --no-ff release-0.1
 git push origin develop
