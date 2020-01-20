@@ -6,16 +6,17 @@ const mysqlPool = require("../../../database/mysql-pool");
 async function validate(payload) {
     const schema = Joi.object({
         row4page: Joi.number(),
-        page: Joi.number()
+        page: Joi.number(),
+        name: Joi.string().max(60),
     });
     Joi.assert(payload, schema);
 }
 
 async function getCities(req, res) {
-    let { row4page, page } = req.query;
+    let { row4page, page, name } = req.query;
 
     try {
-        await validate({ row4page, page });
+        await validate({ row4page, page, name });
     } catch (e) {
         return res.status(400).send(e);
     }
@@ -38,19 +39,36 @@ async function getCities(req, res) {
             row4page = numsRows;
         }
 
-        sqlQuery =
-            `SELECT c.region_id, r.name, c.province_id, p.name, c.id, c.name 
-             FROM cities AS c 
-             INNER JOIN regions AS r ON c.region_id = r.id 
-             INNER JOIN provinces AS p ON c.province_id = p.id 
-             ORDER BY c.name LIMIT ?,?;`;
-        [rows] = await connection.execute(sqlQuery, [offset, row4page]);
-        connection.release();
-        return res.send({
-            numsRows,
-            page,
-            rows
-        });
+        if (name) {
+            sqlQuery =
+                `SELECT name 
+             FROM cities
+             WHERE name LIKE '${name}%'
+             ORDER BY name;`;
+            [rows] = await connection.query(sqlQuery);
+            connection.release();
+            return res.send({
+                numsRows,
+                page,
+                rows
+            });
+        } else {
+            sqlQuery =
+                `SELECT c.region_id, r.name, c.province_id, p.name, c.id, c.name 
+                 FROM cities AS c 
+                 INNER JOIN regions AS r ON c.region_id = r.id 
+                 INNER JOIN provinces AS p ON c.province_id = p.id 
+                 ORDER BY c.name LIMIT ?,?;`;
+            [rows] = await connection.execute(sqlQuery, [offset, row4page]);
+            connection.release();
+            return res.send({
+                numsRows,
+                page,
+                rows
+            });
+        }
+
+
     } catch (e) {
         if (connection) {
             connection.release();
