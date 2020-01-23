@@ -8,11 +8,6 @@ async function validate(payload) {
     linkedin: Joi.string()
       .allow("")
       .uri(),
-    role: Joi.number()
-      .integer()
-      .min(1)
-      .max(2)
-      .required()
   });
   Joi.assert(payload, schema);
 }
@@ -40,13 +35,11 @@ async function updateUser(req, res, next) {
 
     const sqlUpdateUser = `UPDATE users
                                 SET linkedin = ?,
-                                role = ?,
                                 modified_at = ?
                                 WHERE id = ? AND deleted_at IS NULL`;
 
     const [updateStatus] = await connection.execute(sqlUpdateUser, [
       accountData.linkedin,
-      accountData.role,
       now,
       userId
     ]);
