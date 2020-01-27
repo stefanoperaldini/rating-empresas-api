@@ -23,7 +23,8 @@ async function getCompany(req, res, next) {
     };
     await validate(payload);
   } catch (e) {
-    return res.status(400).send(e);
+    console.error(e);
+    return res.status(400).send("Data are not valid");
   }
 
   try {
@@ -35,19 +36,12 @@ async function getCompany(req, res, next) {
     const [results] = await connection.execute(getCompanyQuery, [companyId]);
     connection.release();
     if (results.length === 0) {
-      return res.status(404).send();
+      return res.status(404).send("Company not found");
     }
-
-    const [companyData] = results;
-
-    return res.send({
-      data: companyData
-    });
+    return res.send(results[0]);
   } catch (e) {
     console.error(e);
-    res.status(500).send({
-      message: e.message
-    });
+    return res.status(500).send();
   }
 }
 

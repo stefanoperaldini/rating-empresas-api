@@ -75,7 +75,8 @@ async function createReview(req, res, next) {
   try {
     await validate(reviewData);
   } catch (e) {
-    return res.status(400).send(e);
+    console.error(e);
+    return res.status(400).send("Data are not valid");
   }
 
   const now = new Date()
@@ -118,11 +119,12 @@ async function createReview(req, res, next) {
       if (connection) {
         connection.release();
       }
-
+      console.error(e);
       if (e.code === "ER_DUP_ENTRY") {
-        console.log(e.message);
-        return res.status(409).send();
+        return res.status(409).send("Review already exists");
       }
+      return res.status(500).send();
+
     }
   } catch (e) {
     console.error(e);

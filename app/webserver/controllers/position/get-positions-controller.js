@@ -17,7 +17,8 @@ async function getPositions(req, res) {
     try {
         await validate({ row4page, page });
     } catch (e) {
-        return res.status(400).send(e);
+        console.error(e);
+        return res.status(400).send("Data are not valid");
     }
 
     let numsRows = 0;

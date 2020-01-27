@@ -57,7 +57,8 @@ async function createAccount(req, res, next) {
     try {
         await validate(accountData);
     } catch (e) {
-        return res.status(400).send(e);
+        console.error(e);
+        return res.status(400).send("Data are not valid");
     }
 
     const createdAt = new Date()
@@ -86,16 +87,17 @@ async function createAccount(req, res, next) {
         try {
             await sendEmailRegistration(accountData.email, verificationCode);
         } catch (e) {
-            console.log(e);
+            console.error(e);
         }
         return res.status(201).send();
     } catch (e) {
         if (connection) {
             connection.release();
         }
-        console.log(e);
-        if (e.code === "ER_DUP_ENTRY") res.status(409).send();
 
+        if (e.code === "ER_DUP_ENTRY") return res.status(409).send("User already exists");
+
+        console.error(e);
         return res.status(500).send();
     }
 }

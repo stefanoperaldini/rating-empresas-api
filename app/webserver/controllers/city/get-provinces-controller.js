@@ -11,7 +11,7 @@ async function getProvinces(req, res) {
                           ORDER BY name;`;
         const [rows] = await connection.execute(sqlQuery);
         connection.release();
-        res.send(rows);
+        return res.send(rows);
     } catch (e) {
         if (connection) {
             connection.release();

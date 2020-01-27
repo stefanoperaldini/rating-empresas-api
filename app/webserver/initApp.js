@@ -30,7 +30,7 @@ async function initApp() {
       connection.release();
     }
 
-    if (e.code != "ER_DUP_ENTRY") console.log(e);
+    if (e.code != "ER_DUP_ENTRY") console.error(e);
   }
 }
 

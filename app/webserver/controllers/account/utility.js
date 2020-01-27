@@ -10,12 +10,13 @@ async function sendEmailPassword(email, newPassword) {
   let subject = "Rating Empresas - Password recovery";
   let text = `Dear ${username}. The new password is: ${newPassword}.`;
   let html = `<p>Dear ${username}</p><p>The new password is: ${newPassword}.</p>
-        <p>We recommend changing your password after the first login to ${process.env.HTTP_SERVER_DOMAIN}</p>`;
+        <p>We recommend changing your password after the first <a href="${process.env.HTTP_SERVER_FRONTEND}/account/login">Login</a></p>`;
 
   if (newPassword === null) {
     subject = "Rating Empresas - Change password";
     text = `Dear ${username}. The password has been changed.`;
-    html = `<p>Dear ${username}</p><p>The password has been changed.</p><p>${process.env.HTTP_SERVER_DOMAIN}</p>`;
+    html = `<p>Dear ${username}</p><p>The password has been changed.</p><p><a href="${process.env.HTTP_SERVER_FRONTEND}/account/login">Login</a></p>`;
+
   }
 
   const msg = {
@@ -35,7 +36,7 @@ async function sendEmailPassword(email, newPassword) {
 }
 
 async function sendEmailRegistration(email, verificationCode) {
-  const linkActivacion = `${process.env.HTTP_SERVER_DOMAIN}/v1/accounts/activate?verification_code=${verificationCode}`;
+  const linkActivacion = `${process.env.HTTP_SERVER_FRONTEND}/account/activate/verification_code=${verificationCode}`;
   const [username] = email.split("@");
   const msg = {
     to: email,
@@ -47,7 +48,7 @@ async function sendEmailRegistration(email, verificationCode) {
     text: `Dear ${username}. Thank you for registering. To activate your account, please click on the folowing link 
         (this will confirm your email address): ${linkActivacion}. Thank You`,
     html: `<p>Dear ${username}</p><p>Thank you for registering. To activate your account, please click on the folowing link 
-        (this will confirm your email address):</p><p><a href="${linkActivacion}">${linkActivacion}</a></p>
+        (this will confirm your email address):</p><p><a href="${linkActivacion}">Activate Account</a></p>
         <p>Thank You</p>`
   };
 

@@ -18,7 +18,7 @@ async function deleteUser(req, res, next) {
         connection.release();
 
         if (deletedStatus.changedRows !== 1) {
-            return res.status(404).send();
+            return res.status(404).send("User not found");
         }
 
         return res.status(204).send();
@@ -26,7 +26,8 @@ async function deleteUser(req, res, next) {
         if (connection) {
             connection.release();
         }
-        return res.status(500).send(e.message);
+        console.error(e);
+        return res.status(500).send();
     }
 }
 

@@ -21,7 +21,7 @@ async function updateUser(req, res, next) {
     await validate(accountData);
   } catch (e) {
     console.error(e);
-    return res.status(400).send(e);
+    return res.status(400).send("Data are not valid");
   }
 
   const now = new Date()
@@ -46,7 +46,7 @@ async function updateUser(req, res, next) {
     connection.release();
 
     if (updateStatus.changedRows !== 1) {
-      return res.status(404).send();
+      return res.status(404).send("User not found");
     }
 
     return res.status(204).send();
@@ -54,9 +54,8 @@ async function updateUser(req, res, next) {
     if (connection) {
       connection.release();
     }
-
     console.error(e);
-    return res.status(500).send(e.message);
+    return res.status(500).send();
   }
 }
 

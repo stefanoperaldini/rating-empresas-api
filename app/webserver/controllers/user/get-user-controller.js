@@ -13,7 +13,7 @@ async function getUser(req, res, next) {
         connection.release();
 
         if (rows.length !== 1) {
-            return res.status(404).send();
+            return res.status(404).send("User not found");
         }
 
         return res.send(rows[0]);
@@ -21,7 +21,6 @@ async function getUser(req, res, next) {
         if (connection) {
             connection.release();
         }
-
         console.error(e);
         return res.status(500).send();
     }

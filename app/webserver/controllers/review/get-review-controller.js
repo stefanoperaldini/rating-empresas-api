@@ -24,7 +24,8 @@ async function getReview(req, res, next) {
     };
     await validate(payload);
   } catch (e) {
-    return res.status(400).send(e);
+    console.error(e);
+    return res.status(400).send("Data are not valid");
   }
 
   let connection;
@@ -47,7 +48,7 @@ async function getReview(req, res, next) {
     connection.release();
 
     if (rows.length !== 1) {
-      return res.status(404).send();
+      return res.status(404).send("Review not found");
     }
 
     const review = { ...rows[0] };

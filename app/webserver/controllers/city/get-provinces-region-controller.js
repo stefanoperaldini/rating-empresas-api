@@ -16,7 +16,8 @@ async function getProvincesRegion(req, res) {
     try {
         await validate({ regionId });
     } catch (e) {
-        return res.status(400).send(e);
+        console.error(e);
+        return res.status(400).send("Data are not valid");
     }
 
     let connection;
@@ -33,7 +34,7 @@ async function getProvincesRegion(req, res) {
         if (rows.length === 0) {
             return res.status(404).send("Provinces not founded");
         }
-        res.send(rows);
+        return res.send(rows);
     } catch (e) {
         if (connection) {
             connection.release();

@@ -21,7 +21,8 @@ async function getPosition(req, res, next) {
     try {
         await validate({ positionId });
     } catch (e) {
-        return res.status(400).send(e);
+        console.error(e);
+        return res.status(400).send("Data are not valid");
     }
 
     try {
@@ -32,19 +33,13 @@ async function getPosition(req, res, next) {
         const [results] = await connection.execute(getPositionQuery, [positionId]);
         connection.release();
         if (results.length === 0) {
-            return res.status(404).send();
+            return res.status(404).send("Position not found");
         }
 
-        const [positionData] = results;
-
-        return res.send({
-            data: positionData
-        });
+        return res.send(results[0]);
     } catch (e) {
         console.error(e);
-        res.status(500).send({
-            message: e.message
-        });
+        return res.status(500).send();
     }
 }
 

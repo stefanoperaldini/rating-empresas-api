@@ -34,9 +34,8 @@ async function changePassword(req, res, next) {
     try {
         await validate(accountData);
     } catch (e) {
-
         console.error(e);
-        return res.status(400).send(e);
+        return res.status(400).send("Data are not valid");
     }
 
     const now = new Date()
@@ -57,20 +56,20 @@ async function changePassword(req, res, next) {
 
 
         if (rows.length !== 1) {
-            return res.status(404).send();
+            return res.status(404).send("User not found");
         }
 
         const user = rows[0];
 
         const isPasswordOk = await bcrypt.compare(accountData.oldPassword, user.password);
         if (!isPasswordOk) {
-            return res.status(401).send();
+            return res.status(401).send("Old password not correct");
         }
 
         if (accountData.newPassword !== accountData.confirmationPassword) {
-            return res.status(400).send();
+            return res.status(400).send("Confirmation password no correct");
         } else if (accountData.oldPassword === accountData.newPassword) {
-            return res.status(400).send();
+            return res.status(400).send("Password reuse not permitted");
         }
 
         const securePwd = await bcrypt.hash(accountData.newPassword, 10);
@@ -88,7 +87,7 @@ async function changePassword(req, res, next) {
         connection.release();
 
         if (updateStatus.changedRows !== 1) {
-            return res.status(404).send();
+            return res.status(404).send("Update password error");
         }
 
         connection.release();
@@ -96,7 +95,7 @@ async function changePassword(req, res, next) {
         try {
             await sendEmailPassword(accountData.email, null);
         } catch (e) {
-            console.log(e);
+            console.error(e);
         }
 
         return res.send();
@@ -104,9 +103,8 @@ async function changePassword(req, res, next) {
         if (connection) {
             connection.release();
         }
-
         console.error(e);
-        return res.status(500).send(e.message);
+        return res.status(500).send();
     }
 }
 

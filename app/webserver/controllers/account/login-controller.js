@@ -26,7 +26,7 @@ async function login(req, res, next) {
         await validate(accountData);
     } catch (e) {
         console.error(e);
-        return res.status(401).send(e);
+        return res.status(400).send("Data are not valid");
     }
 
     const sqlQuery =
@@ -54,7 +54,7 @@ async function login(req, res, next) {
                 return res.status(401).send("Incorrect password");
             }
         } catch (e) {
-            res.status(500);
+            return res.status(500).send();
         }
 
         const payloadJwt = {
@@ -76,7 +76,7 @@ async function login(req, res, next) {
             connection.release();
         }
         console.error(e);
-        res.status(500).send();
+        return res.status(500).send();
     }
 }
 
