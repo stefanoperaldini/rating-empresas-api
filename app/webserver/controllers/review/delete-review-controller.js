@@ -28,7 +28,8 @@ async function deleteReview(req, res, next) {
   try {
     await validate({ reviewId });
   } catch (e) {
-    return res.status(400).send(e);
+    console.error(e);
+    return res.status(400).send("Data are not valid");
   }
 
   let connection;
@@ -48,7 +49,7 @@ async function deleteReview(req, res, next) {
     connection.release();
 
     if (deletedStatus.changedRows !== 1) {
-      return res.status(404).send();
+      return res.status(404).send("Review not found");
     }
 
     return res.status(204).send();
@@ -56,8 +57,8 @@ async function deleteReview(req, res, next) {
     if (connection) {
       connection.release();
     }
-
-    return res.status(500).send(e.message);
+    console.error(e);
+    return res.status(500).send();
   }
 }
 

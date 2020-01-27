@@ -6,16 +6,16 @@ const redis = require("redis");
 async function checkAccountSession(req, res, next) {
     const { authorization } = req.headers;
     if (!authorization) {
-        return res.status(401).send();
+        return res.status(401).send("Authorization error");
     }
 
     const [prefix, token] = authorization.split(" ");
     if (prefix !== "Bearer" || !token) {
-        return res.status(401).send();
+        return res.status(401).send("Authorization error");
     }
 
     try {
-        const { userId, role } = await jwt.verify(token, process.env.AUTH_JWT_SECRET);
+        const { userId, role } = jwt.verify(token, process.env.AUTH_JWT_SECRET);
 
         req.claims = {
             userId,
@@ -25,7 +25,7 @@ async function checkAccountSession(req, res, next) {
 
     } catch (e) {
         console.error(e);
-        return res.status(401).send();
+        return res.status(401).send("Authorization error");
     }
 
     try {
@@ -34,10 +34,10 @@ async function checkAccountSession(req, res, next) {
         clientRedis.get(`logout:${token}`, (err, result) => {
             // If that key exist in Redis store
             if (result) {
-                return res.status(401).send();
+                return res.status(401).send("Unauthorized");
             }
             if (err) {
-                console.log(err);
+                console.error(err);
                 return res.status(500).send();
             }
             next();

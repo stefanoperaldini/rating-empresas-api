@@ -36,7 +36,7 @@ async function listen(port) {
     server = await app.listen(port);
     return server;
   } catch (err) {
-    console.log(err);
+    console.error(err);
     throw err;
   }
 }

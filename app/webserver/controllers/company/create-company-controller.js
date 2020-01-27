@@ -53,15 +53,14 @@ async function createCompany(req, res, next) {
   const { userId, role } = req.claims;
 
   if (parseInt(role) !== 2) {
-    return res.status(401).send({
-      message: "Only an user type 2 can create a company profile"
-    });
+    return res.status(401).send("Only an user type company can create a company profile");
   }
 
   try {
     await validate(companyData);
   } catch (e) {
-    return res.status(400).send(e);
+    console.error(e);
+    return res.status(400).send("Data are not valid");
   }
 
   // tabla company
@@ -126,8 +125,11 @@ async function createCompany(req, res, next) {
       }
 
       if (e.code === "ER_DUP_ENTRY") {
-        return res.status(409).send();
+        return res.status(409).send("Company already exists");
       }
+
+      console.error(e);
+      return res.status(500).send();
     }
   } catch (e) {
     console.error(e);

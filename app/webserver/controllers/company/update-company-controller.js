@@ -55,7 +55,7 @@ async function updateCompany(req, res, next) {
 
   if (parseInt(role) !== 2) {
     return res.status(401).send({
-      message: `Only an user type "enterprise" can create a company profile`
+      message: `Only an user type company can update a company profile`
     });
   }
 
@@ -63,7 +63,7 @@ async function updateCompany(req, res, next) {
     await validateSchema(companyData);
   } catch (e) {
     console.error(e);
-    return res.status(400).send(e);
+    return res.status(400).send("Data are not valid");
   }
 
   let connection;
@@ -101,7 +101,7 @@ async function updateCompany(req, res, next) {
     connection.release();
 
     if (updateStatus.changedRows !== 1) {
-      return res.status(404).send();
+      return res.status(404).send("Company not found");
     }
 
     return res.status(204).send();
@@ -109,11 +109,8 @@ async function updateCompany(req, res, next) {
     if (connection) {
       connection.release();
     }
-
     console.error(e);
-    return res.status(500).send({
-      message: e.message
-    });
+    return res.status(500).send();
   }
 }
 

@@ -14,7 +14,7 @@ const router = express.Router();
 
 router.post("/v1/accounts", createAccount);
 router.post("/v1/accounts/login", login);
-router.get("/v1/accounts/activate", activate);
+router.put("/v1/accounts/activate/:verification_code", activate);
 router.post("/v1/accounts/password/recovery", passwordRecovery);
 router.post("/v1/accounts/password/change", checkAccountSession, changePassword);
 router.post("/v1/accounts/email/activation/recovery", newActivationEmail);

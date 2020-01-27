@@ -16,13 +16,11 @@ async function uploadCompanyLogo(req, res) {
   if (parseInt(role) !== 2) {
     return res
       .status(401)
-      .send({ message: "Only an user type 2 can update a company logo" });
+      .send("Only an user type company can update a company logo");
   }
 
   if (!file || !file.buffer) {
-    return res.status(400).send({
-      message: "invalid image"
-    });
+    return res.status(400).send("Invalid image");
   }
 
   cloudinary.uploader
@@ -56,7 +54,7 @@ async function uploadCompanyLogo(req, res) {
           connection.release();
 
           if (updateStatus.changedRows !== 1) {
-            return res.status(404).send();
+            return res.status(404).send("Company not found");
           }
 
           res.header("Location", secureUrl);
@@ -66,7 +64,7 @@ async function uploadCompanyLogo(req, res) {
             connection.release();
           }
           console.error(e);
-          return res.status(500).send(e.message);
+          return res.status(500).send();
         }
       }
     )

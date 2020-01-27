@@ -8,7 +8,8 @@ async function logoutUser(req, res, next) {
         const clientRedis = redis.createClient();
         await clientRedis.set(`logout:${token}`, 'O', 'EX', process.env.REDIS_TTL);
     } catch (e) {
-        return res.status(500).send(e.message);
+        console.error(e);
+        return res.status(500).send();
     }
     return res.send();
 }

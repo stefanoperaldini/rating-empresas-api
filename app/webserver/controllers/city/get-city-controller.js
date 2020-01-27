@@ -23,7 +23,8 @@ async function getCity(req, res) {
     try {
         await validate({ regionId, provinceId, cityId });
     } catch (e) {
-        return res.status(400).send(e);
+        console.error(e);
+        return res.status(400).send("Data are not valid");
     }
 
     let connection;
@@ -42,7 +43,7 @@ async function getCity(req, res) {
         if (rows.length === 0) {
             return res.status(404).send("City not found");
         }
-        res.send(rows);
+        return res.send(rows);
     } catch (e) {
         if (connection) {
             connection.release();

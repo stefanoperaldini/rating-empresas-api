@@ -13,7 +13,7 @@ async function passwordRecovery(req, res, next) {
         await validateEmail(accountData);
     } catch (e) {
         console.error(e);
-        return res.status(400).send(e);
+        return res.status(400).send("Data are not valid");
     }
 
     const newPassword = uuidV4().replace(/-/g, '');
@@ -41,13 +41,13 @@ async function passwordRecovery(req, res, next) {
         connection.release();
 
         if (updateStatus.changedRows !== 1) {
-            return res.status(404).send();
+            return res.status(404).send("User not found");
         }
 
         try {
             await sendEmailPassword(accountData.email, newPassword);
         } catch (e) {
-            console.log(e);
+            console.error(e);
         }
 
         return res.send();
@@ -55,9 +55,8 @@ async function passwordRecovery(req, res, next) {
         if (connection) {
             connection.release();
         }
-
         console.error(e);
-        return res.status(500).send(e.message);
+        return res.status(500).send();
     }
 }
 
