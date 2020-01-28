@@ -50,11 +50,7 @@ async function validate(payload) {
 
 async function createCompany(req, res, next) {
   const companyData = { ...req.body };
-  const { userId, role } = req.claims;
-
-  if (parseInt(role) !== 2) {
-    return res.status(401).send("Only an user type company can create a company profile");
-  }
+  const { userId } = req.claims;
 
   try {
     await validate(companyData);

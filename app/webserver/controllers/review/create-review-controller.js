@@ -13,13 +13,13 @@ async function validate(payload) {
         version: ["uuidv4"]
       })
       .required(),
-    start_year: Joi.date()
-      .greater("1-1-1980")
-      .max("now")
+    start_year: Joi.number()
+      .integer()
+      .min(1980)
       .required(),
-    end_year: Joi.date()
-      .greater("1-1-1980")
-      .max("now"),
+    end_year: Joi.number()
+      .integer()
+      .min(2020),
     salary: Joi.number().min(0),
     inhouse_training: Joi.number()
       .integer()

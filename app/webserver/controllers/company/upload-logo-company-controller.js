@@ -10,14 +10,8 @@ cloudinary.config({
 });
 
 async function uploadCompanyLogo(req, res) {
-  const { userId, role } = req.claims;
+  const { userId } = req.claims;
   const { file } = req;
-
-  if (parseInt(role) !== 2) {
-    return res
-      .status(401)
-      .send("Only an user type company can update a company logo");
-  }
 
   if (!file || !file.buffer) {
     return res.status(400).send("Invalid image");

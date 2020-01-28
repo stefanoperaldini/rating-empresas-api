@@ -1,7 +1,7 @@
 'use strict';
 
 const mysqlPool = require('../../../database/mysql-pool');
-const { sendEmailRegistration, validateEmail } = require("./utility");
+const { sendEmailRegistration, validateEmail } = require("../utility");
 
 async function newActivationEmail(req, res, next) {
 

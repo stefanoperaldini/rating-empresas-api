@@ -3,7 +3,7 @@
 const bcrypt = require("bcrypt");
 const mysqlPool = require('../../../database/mysql-pool');
 const uuidV4 = require("uuid/v4");
-const { sendEmailPassword, validateEmail } = require("./utility");
+const { sendEmailPassword, validateEmail } = require("../utility");
 
 async function passwordRecovery(req, res, next) {
 

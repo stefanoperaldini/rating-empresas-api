@@ -46,18 +46,12 @@ async function validateSchema(payload) {
 
 async function updateCompany(req, res, next) {
   const { companyId } = req.params;
-  const { userId, role } = req.claims;
+  const { userId } = req.claims;
   const companyData = {
     ...req.body,
     companyId,
     userId
   };
-
-  if (parseInt(role) !== 2) {
-    return res.status(401).send({
-      message: `Only an user type company can update a company profile`
-    });
-  }
 
   try {
     await validateSchema(companyData);
