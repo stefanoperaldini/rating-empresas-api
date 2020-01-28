@@ -45,9 +45,9 @@ async function sendEmailRegistration(email, verificationCode) {
       name: "Rating Empresas"
     },
     subject: "Welcome to Hack a Boss Rating Empresas",
-    text: `Dear ${username}. Thank you for registering. To activate your account, please please visit the page 
-    (this will confirm your email address): ${linkActivacion}. Thank You`,
-    html: `<p>Dear ${username}</p><p>Thank you for registering. To activate your account, please click on the folowing link 
+    text: `Dear ${username}. Thank you for registering. To activate your account, please visit the page (this will confirm your email address):
+     ${linkActivacion}. Thank You`,
+    html: `<p>Dear ${username}</p><p>Thank you for registering. To activate your account, please click on the folow link 
         (this will confirm your email address):</p><p><a href="${linkActivacion}">Activate Account</a></p>
         <p>Thank You</p>`
   };
@@ -57,9 +57,8 @@ async function sendEmailRegistration(email, verificationCode) {
   return data;
 }
 
-
 async function sendEmailReport(reviewId) {
-  const linkReportToDelete = `${process.env.HTTP_SERVER_FRONTEND}/review/${reviewId}`;
+  const linkReportReviewToDelete = `${process.env.HTTP_SERVER_FRONTEND}/review/${reviewId}`;
   const msg = {
     to: process.env.ADMIN_EMAIL,
     from: {
@@ -67,8 +66,8 @@ async function sendEmailReport(reviewId) {
       name: "Rating Empresas"
     },
     subject: "Rating Empresas - Report review",
-    text: `To delete the review please visit the page ${linkReportToDelete}. Thank You`,
-    html: `<p>To delete the review, please click on the folowing link</p><p><a href="${linkReportToDelete}">Delete review</a></p>
+    text: `To delete the reported review, please visit the page ${linkReportReviewToDelete}. Thank You`,
+    html: `<p>To delete the reported review, please click on the folow link:</p><p><a href="${linkReportReviewToDelete}">Delete reported review</a></p>
         <p>Thank You</p>`
   };
 

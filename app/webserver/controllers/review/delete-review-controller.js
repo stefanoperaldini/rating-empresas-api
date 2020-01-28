@@ -17,13 +17,6 @@ async function validate(payload) {
 
 async function deleteReview(req, res, next) {
   const { reviewId } = req.params;
-  const { userId, role } = req.claims;
-
-  if (parseInt(role) !== 0) {
-    return res.status(401).send({
-      message: "Only an user type admin can create a company profile"
-    });
-  }
 
   try {
     await validate({ reviewId });
