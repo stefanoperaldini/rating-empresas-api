@@ -53,8 +53,6 @@ async function getReview(req, res, next) {
 
     const review = { ...rows[0] };
 
-    review.start_year = review.start_year.toISOString().substring(0, 10);
-    review.end_year = review.end_year.toISOString().substring(0, 10);
     review.created_at = review.created_at.toISOString().substring(0, 10);
 
     return res.send(review);

@@ -19,7 +19,7 @@ async function validate(payload) {
       .required(),
     end_year: Joi.number()
       .integer()
-      .min(2020),
+      .max(2020),
     salary: Joi.number().min(0),
     inhouse_training: Joi.number()
       .integer()
