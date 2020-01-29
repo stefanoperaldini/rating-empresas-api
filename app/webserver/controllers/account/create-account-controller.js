@@ -10,16 +10,22 @@ async function validate(payload) {
     const schema = Joi.object({
         name: Joi
             .string()
+            .max(45)
             .required(),
         email: Joi
             .string()
+            .max(45)
             .email()
             .required(),
         password: Joi
             .string()
             .regex(/^[a-zA-Z0-9]{3,30}$/)
             .required(),
-        linkedin: Joi.string().allow("").uri(),
+        linkedin: Joi
+            .string()
+            .max(255)
+            .allow("")
+            .uri(),
         role: Joi.number()
             .integer()
             .min(1)

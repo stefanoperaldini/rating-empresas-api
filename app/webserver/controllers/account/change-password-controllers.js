@@ -7,19 +7,11 @@ const { sendEmailPassword } = require("../utility");
 
 async function validate(payload) {
     const schema = Joi.object({
-        email: Joi
-            .string()
-            .email()
-            .required(),
         oldPassword: Joi
             .string()
             .regex(/^[a-zA-Z0-9]{3,36}$/)
             .required(),
         newPassword: Joi
-            .string()
-            .regex(/^[a-zA-Z0-9]{3,36}$/)
-            .required(),
-        confirmationPassword: Joi
             .string()
             .regex(/^[a-zA-Z0-9]{3,36}$/)
             .required(),
@@ -29,6 +21,7 @@ async function validate(payload) {
 
 async function changePassword(req, res, next) {
 
+    const { userId } = req.claims;
     const accountData = { ...req.body };
 
     try {
@@ -45,14 +38,14 @@ async function changePassword(req, res, next) {
     const securePwd = await bcrypt.hash(accountData.newPassword, 10);
 
     const sqlQuery =
-        `SELECT id, email, password, activated_at, role  
-         FROM users WHERE email = ? AND deleted_at IS NULL`;
+        `SELECT  password
+         FROM users WHERE id = ? AND deleted_at IS NULL`;
 
     let connection;
     try {
         connection = await mysqlPool.getConnection();
 
-        const [rows] = await connection.query(sqlQuery, [accountData.email]);
+        const [rows] = await connection.query(sqlQuery, [userId]);
 
 
         if (rows.length !== 1) {
@@ -66,9 +59,7 @@ async function changePassword(req, res, next) {
             return res.status(401).send("Old password not correct");
         }
 
-        if (accountData.newPassword !== accountData.confirmationPassword) {
-            return res.status(400).send("Confirmation password no correct");
-        } else if (accountData.oldPassword === accountData.newPassword) {
+        if (accountData.oldPassword === accountData.newPassword) {
             return res.status(400).send("Password reuse not permitted");
         }
 
@@ -77,12 +68,12 @@ async function changePassword(req, res, next) {
         const sqlUpdateUser = `UPDATE users
                                 SET password = ?,
                                 modified_at = ?
-                                WHERE email = ?`;
+                                WHERE id = ?`;
 
         const [updateStatus] = await connection.execute(sqlUpdateUser, [
             securePwd,
             now,
-            accountData.email,
+            userId,
         ]);
         connection.release();
 
