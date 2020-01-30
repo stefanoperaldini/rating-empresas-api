@@ -9,19 +9,20 @@ async function getReviewUser(req, res) {
     connection = await mysqlPool.getConnection();
     //FIXME r.deleted_at,
     const sqlQuery = `SELECT r.id, r.start_year, r.end_year, r.created_at, 
-            r.salary_valuation, r.inhouse_training, r.growth_opportunities, 
-            r.work_enviroment, r.personal_life, r.comment_title, r.comment
+                        r.salary_valuation, r.inhouse_training, r.growth_opportunities, 
+                        r.work_enviroment, r.personal_life, r.comment_title, r.comment, 
+                        p.name, c.name as company_name, ci.name as city_name
                       FROM reviews r
                       LEFT JOIN positions p
                         ON r.position_id = p.id
-                      LEFT JOIN companies c
+                        LEFT JOIN companies c
                         ON r.company_id = c.id
-                        LEFT JOIN companies_cities ci
-                        ON r.city_id = ci.city_id
+                        LEFT JOIN cities ci
+                        ON r.city_id = ci.id
                       WHERE
                         r.user_id = ?
                         AND r.deleted_at IS NULL
-                        ORDER BY r.created_at DESC`;
+                      ORDER BY r.created_at DESC;`;
 
     const [rows] = await connection.execute(sqlQuery, [userId]);
     connection.release();
