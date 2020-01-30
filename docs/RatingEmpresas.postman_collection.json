@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "e5d72272-d2c5-4c4f-ad80-bd4732f320f7",
+		"_postman_id": "a39bee06-bf3a-4b80-8b50-ce496e7d89f0",
 		"name": "RatingEmpresas",
 		"description": "Proyecto RatingEmpresas",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
@@ -1141,6 +1141,50 @@
 								"reviews",
 								"blacklist",
 								"763675789659879"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Reviews user",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{accessToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/v1/reviews/user/list",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"reviews",
+								"user",
+								"list"
 							]
 						}
 					},
