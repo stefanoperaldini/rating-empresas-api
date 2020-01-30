@@ -193,7 +193,6 @@ CREATE TABLE IF NOT EXISTS `EnterpriseRanking`.`reviews` (
   `growth_opportunities` CHAR(1) NOT NULL,
   `work_enviroment` CHAR(1) NOT NULL,
   `personal_life` CHAR(1) NOT NULL,
-  `company_culture` CHAR(1) NOT NULL,
   `salary_valuation` CHAR(1) NOT NULL,
   `comment_title` VARCHAR(30) NOT NULL,
   `comment` VARCHAR(1000) NOT NULL,

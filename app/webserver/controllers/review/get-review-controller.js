@@ -35,7 +35,7 @@ async function getReview(req, res, next) {
     const sqlQuery = `SELECT r.id, r.start_year,
                         r.end_year, r.created_at, r.salary,
                         r.inhouse_training, r.growth_opportunities, r.work_enviroment, r.personal_life,
-                        r.company_culture, r.salary_valuation, r.comment_title, r.comment
+                        r.salary_valuation, r.comment_title, r.comment
                       FROM reviews r
                       LEFT JOIN positions p
                         ON r.position_id = p.id

@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "a39bee06-bf3a-4b80-8b50-ce496e7d89f0",
+		"_postman_id": "1e1caaba-21db-4fd4-a0b0-aceaca1326ab",
 		"name": "RatingEmpresas",
 		"description": "Proyecto RatingEmpresas",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
@@ -1100,7 +1100,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n \"position_id\":\"0ef2ac13-38b5-4ef8-9c28-6ea00841f43a\",\n \"start_year\":\"2015\",\n \"end_year\":\"2019\",\n \"salary\":\"1430.20\",\n \"inhouse_training\":\"5\",\n \"growth_opportunities\":\"5\",\n \"work_enviroment\":\"5\",\n \"personal_life\":\"5\",\n \"company_culture\":\"5\",\n \"salary_valuation\":\"5\",\n \"comment_title\":\"Commento\",\n \"comment\":\"Testo commento\",\n \"city_id\":\"79daa7a8-bd2f-408a-9fa8-e7c2d177bbc7\",\n \"company_id\":\"fa688c9a-94f7-4cf1-b145-f58347ba21a3\"\n}\n\t"
+							"raw": "{\n \"position_id\":\"0ef2ac13-38b5-4ef8-9c28-6ea00841f43a\",\n \"start_year\":\"2015\",\n \"end_year\":\"2019\",\n \"salary\":\"1430.20\",\n \"inhouse_training\":\"5\",\n \"growth_opportunities\":\"5\",\n \"work_enviroment\":\"5\",\n \"personal_life\":\"5\",\n \"salary_valuation\":\"5\",\n \"comment_title\":\"Commento\",\n \"comment\":\"Testo commento\",\n \"city_id\":\"79daa7a8-bd2f-408a-9fa8-e7c2d177bbc7\",\n \"company_id\":\"fa688c9a-94f7-4cf1-b145-f58347ba21a3\"\n}\n\t"
 						},
 						"url": {
 							"raw": "{{baseUrl}}/v1/reviews",
