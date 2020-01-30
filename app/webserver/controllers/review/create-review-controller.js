@@ -37,10 +37,6 @@ async function validate(payload) {
       .integer()
       .min(1)
       .max(5),
-    company_culture: Joi.number()
-      .integer()
-      .min(1)
-      .max(5),
     salary_valuation: Joi.number()
       .integer()
       .min(1)
