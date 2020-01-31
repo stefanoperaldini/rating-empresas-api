@@ -1,4 +1,4 @@
-'use strict'
+"use strict";
 
 const express = require("express");
 const router = express.Router();
@@ -8,8 +8,13 @@ const deleteUser = require("../controllers/user/delete-user-controller");
 const updateUser = require("../controllers/user/update-user-controller");
 const getUser = require("../controllers/user/get-user-controller");
 
-router.delete("/v1/users", checkAccountSession, checkRolePermission("1", "2"), deleteUser);
-router.put("/v1/users", checkAccountSession, updateUser);
+router.delete(
+  "/v1/users",
+  checkAccountSession,
+  checkRolePermission("1", "2"),
+  deleteUser
+);
+router.patch("/v1/users", checkAccountSession, updateUser);
 router.get("/v1/users", checkAccountSession, getUser);
 
 module.exports = router;
