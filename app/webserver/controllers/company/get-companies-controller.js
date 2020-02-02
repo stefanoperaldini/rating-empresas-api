@@ -39,7 +39,7 @@ async function getCompanies(req, res) {
       row4page = numsRows;
     }
 
-    sqlQuery = `SELECT com.id, com.name,
+    sqlQuery = `SELECT com.id, com.name, com.description, 
       com.url_web, com.linkedin, com.url_logo, com.address, com.sede_id, com.sector_id
       FROM companies com
       ORDER BY com.name LIMIT ?,?;`;

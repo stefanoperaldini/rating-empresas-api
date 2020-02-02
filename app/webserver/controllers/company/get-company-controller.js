@@ -29,7 +29,7 @@ async function getCompany(req, res, next) {
 
   try {
     const connection = await mysqlPool.getConnection();
-    const getCompanyQuery = `SELECT com.id, com.name,
+    const getCompanyQuery = `SELECT com.id, com.name, com.description, 
       com.url_web, com.linkedin, com.url_logo, com.address, com.sede_id, com.sector_id
       FROM companies com
       WHERE com.id = ?`;
