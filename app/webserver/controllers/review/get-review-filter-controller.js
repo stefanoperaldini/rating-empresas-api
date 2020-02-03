@@ -15,16 +15,19 @@ async function validate(payload) {
     }),
     cityId: Joi.string().guid({
       version: ["uuidv4"]
+    }),
+    sectorId: Joi.string().guid({
+      version: ["uuidv4"]
     })
   });
   Joi.assert(payload, schema);
 }
 
 async function getReviewsFilter(req, res) {
-  let { row4page, page, companyId, positionId, cityId } = req.query;
+  let { row4page, page, companyId, positionId, cityId, sectorId } = req.query;
 
   try {
-    await validate({ row4page, page, companyId, positionId, cityId });
+    await validate({ row4page, page, companyId, positionId, cityId, sectorId });
   } catch (e) {
     console.error(e);
     return res.status(400).send("Data are not valid");
@@ -51,20 +54,25 @@ async function getReviewsFilter(req, res) {
     let optWhere = "WHERE r.deleted_at IS NULL";
     let queryParams = [offset, row4page];
 
-    if (companyId || positionId || cityId) {
+    if (companyId || positionId || cityId || sectorId) {
       if (companyId) {
-        optWhere = `${optWhere} AND  r.company_id = ?`;
+        optWhere = `${optWhere} AND r.company_id = ?`;
         queryParams = [companyId, ...queryParams];
       }
 
       if (positionId) {
-        optWhere = `${optWhere} AND  p.id = ?`;
+        optWhere = `${optWhere} AND p.id = ?`;
         queryParams = [positionId, ...queryParams];
       }
 
       if (cityId) {
-        optWhere = `${optWhere} AND  ci.id = ?`;
+        optWhere = `${optWhere} AND ci.id = ?`;
         queryParams = [cityId, ...queryParams];
+      }
+
+      if (sectorId) {
+        optWhere = `${optWhere} AND s.id = ?`;
+        queryParams = [sectorId, ...queryParams];
       }
     }
 
