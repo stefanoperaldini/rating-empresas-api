@@ -6,6 +6,7 @@ const checkRolePermission = require("../controllers/account/check-role-permissio
 const createReview = require("../controllers/review/create-review-controller");
 const deleteReview = require("../controllers/review/delete-review-controller");
 const getReview = require("../controllers/review/get-review-controller");
+const getReviewsFilter = require("../controllers/review/get-review-filter-controller");
 const getReviewUser = require("../controllers/review/get-review-user-controller");
 const reportReview = require("../controllers/review/report-review-controller");
 
@@ -24,6 +25,8 @@ router.get(
   checkRolePermission("1"),
   getReviewUser
 );
+router.get("/v1/reviews/filter/all", getReviewsFilter);
+
 router.post(
   "/v1/reviews",
   checkAccountSession,
