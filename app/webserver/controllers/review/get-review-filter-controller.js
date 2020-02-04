@@ -91,8 +91,6 @@ async function getReviewsFilter(req, res) {
                         ON r.city_id = ci.id
                        ${optWhere}
                       ORDER BY r.created_at DESC LIMIT ?,?;`;
-    console.log(sqlQuery);
-    console.log(queryParams);
 
     [rows] = await connection.execute(sqlQuery, queryParams);
 

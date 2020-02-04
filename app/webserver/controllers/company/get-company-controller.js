@@ -29,9 +29,10 @@ async function getCompany(req, res, next) {
 
   try {
     const connection = await mysqlPool.getConnection();
-    const getCompanyQuery = `SELECT c.id, c.name,
-      c.url_web, c.linkedin, c.url_logo, c.address, c.sede_id, c.sector_id, s.sector, c.user_id,
-      u.role, s.sector
+    const getCompanyQuery = `SELECT c.id, c.name, c.description,
+      c.url_web, c.linkedin, c.url_logo, c.address, c.sede_id, c.sector_id, 
+      ci.name as city_name, s.sector, c.user_id,
+      u.role
       FROM companies AS c
       INNER JOIN users AS u ON u.id = c.user_id
       INNER JOIN sectors AS s ON c.sector_id = s.id
