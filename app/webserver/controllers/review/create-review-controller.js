@@ -91,8 +91,6 @@ async function createReview(req, res, next) {
   try {
     const connection = await mysqlPool.getConnection();
     try {
-      const sqlCreateCompany = "INSERT INTO reviews SET ?";
-      await connection.query(sqlCreateCompany, review);
 
       try {
         const sqlAddCity = "INSERT INTO companies_cities SET ?";
@@ -106,6 +104,9 @@ async function createReview(req, res, next) {
           return res.status(500).send();
         }
       }
+
+      const sqlCreateCompany = "INSERT INTO reviews SET ?";
+      await connection.query(sqlCreateCompany, review);
 
       connection.release();
 

@@ -56,6 +56,7 @@ async function updateCompany(req, res, next) {
   try {
     await validateSchema(companyData);
   } catch (e) {
+    console.log(companyData);
     console.error(e);
     return res.status(400).send("Data are not valid");
   }
@@ -76,9 +77,9 @@ async function updateCompany(req, res, next) {
         linkedin = ?,
         address = ?,
         sede_id = ?,
+        user_id = ?,
         updated_at = ?
-          WHERE id = ?
-        AND user_id = ?`;
+          WHERE id = ?`;
 
     const [updateStatus] = await connection.query(sqlUpdateCompany, [
       companyData.name,
@@ -88,9 +89,9 @@ async function updateCompany(req, res, next) {
       companyData.linkedin,
       companyData.address,
       companyData.sede_id,
+      userId,
       now,
       companyId,
-      userId
     ]);
     connection.release();
 
