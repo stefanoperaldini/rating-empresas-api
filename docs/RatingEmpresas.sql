@@ -94,7 +94,6 @@ CREATE TABLE IF NOT EXISTS `EnterpriseRanking`.`companies` (
   INDEX `fk_companies_sede_id_city_id_idx` (`sede_id` ASC),
   INDEX `fk_companies_user_id_user_id_idx` (`user_id` ASC),
   UNIQUE INDEX `name_UNIQUE` (`name` ASC),
-  UNIQUE INDEX `user_id_UNIQUE` (`user_id` ASC),
   CONSTRAINT `fk_companies_sector_id_sector_id`
     FOREIGN KEY (`sector_id`)
     REFERENCES `EnterpriseRanking`.`sectors` (`id`)
