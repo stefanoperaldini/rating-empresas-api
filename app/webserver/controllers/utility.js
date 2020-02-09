@@ -57,7 +57,7 @@ async function sendEmailRegistration(email, verificationCode) {
 }
 
 async function sendEmailReport(reviewId) {
-  const linkReportToDelete = `${process.env.HTTP_SERVER_FRONTEND}/review/${reviewId}`;
+  const linkReportToDelete = `${process.env.HTTP_SERVER_FRONTEND}/review/report/${reviewId}`;
   const msg = {
     to: process.env.ADMIN_EMAIL,
     from: {
