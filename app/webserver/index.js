@@ -18,6 +18,15 @@ initApp(); // inicializo app (creo account admin si no existe)
 const app = express();
 app.use(cors());
 app.use(express.json());
+app.use((req, res, next) => {
+  const accessControlAllowHeaders = [
+    'Location'
+  ];
+
+  res.header('Access-Control-Allow-Headers', accessControlAllowHeaders.join(','));
+  res.header('Access-Control-Expose-Headers', accessControlAllowHeaders.join(','));
+  next();
+});
 app.use("/", accountRouter);
 app.use("/", cityRouter);
 app.use("/", companyRouter);
@@ -36,7 +45,7 @@ async function listen(port) {
     server = await app.listen(port);
     return server;
   } catch (err) {
-    console.log(err);
+    console.error(err);
     throw err;
   }
 }

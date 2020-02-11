@@ -46,24 +46,19 @@ async function validateSchema(payload) {
 
 async function updateCompany(req, res, next) {
   const { companyId } = req.params;
-  const { userId, role } = req.claims;
+  const { userId } = req.claims;
   const companyData = {
     ...req.body,
     companyId,
     userId
   };
 
-  if (parseInt(role) !== 2) {
-    return res.status(401).send({
-      message: `Only an user type "enterprise" can create a company profile`
-    });
-  }
-
   try {
     await validateSchema(companyData);
   } catch (e) {
+    console.log(companyData);
     console.error(e);
-    return res.status(400).send(e);
+    return res.status(400).send("Data are not valid");
   }
 
   let connection;
@@ -82,9 +77,9 @@ async function updateCompany(req, res, next) {
         linkedin = ?,
         address = ?,
         sede_id = ?,
+        user_id = ?,
         updated_at = ?
-          WHERE id = ?
-        AND user_id = ?`;
+          WHERE id = ?`;
 
     const [updateStatus] = await connection.query(sqlUpdateCompany, [
       companyData.name,
@@ -94,14 +89,14 @@ async function updateCompany(req, res, next) {
       companyData.linkedin,
       companyData.address,
       companyData.sede_id,
+      userId,
       now,
       companyId,
-      userId
     ]);
     connection.release();
 
     if (updateStatus.changedRows !== 1) {
-      return res.status(404).send();
+      return res.status(404).send("Company not found");
     }
 
     return res.status(204).send();
@@ -109,11 +104,8 @@ async function updateCompany(req, res, next) {
     if (connection) {
       connection.release();
     }
-
     console.error(e);
-    return res.status(500).send({
-      message: e.message
-    });
+    return res.status(500).send();
   }
 }
 

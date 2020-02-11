@@ -17,18 +17,12 @@ async function validate(payload) {
 
 async function deleteReview(req, res, next) {
   const { reviewId } = req.params;
-  const { userId, role } = req.claims;
-
-  if (parseInt(role) !== 0) {
-    return res.status(401).send({
-      message: "Only an user type admin can create a company profile"
-    });
-  }
 
   try {
     await validate({ reviewId });
   } catch (e) {
-    return res.status(400).send(e);
+    console.error(e);
+    return res.status(400).send("Data are not valid");
   }
 
   let connection;
@@ -48,7 +42,7 @@ async function deleteReview(req, res, next) {
     connection.release();
 
     if (deletedStatus.changedRows !== 1) {
-      return res.status(404).send();
+      return res.status(404).send("Review not found");
     }
 
     return res.status(204).send();
@@ -56,8 +50,8 @@ async function deleteReview(req, res, next) {
     if (connection) {
       connection.release();
     }
-
-    return res.status(500).send(e.message);
+    console.error(e);
+    return res.status(500).send();
   }
 }
 

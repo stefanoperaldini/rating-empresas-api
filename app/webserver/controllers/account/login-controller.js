@@ -26,7 +26,7 @@ async function login(req, res, next) {
         await validate(accountData);
     } catch (e) {
         console.error(e);
-        return res.status(401).send(e);
+        return res.status(400).send("Data are not valid");
     }
 
     const sqlQuery =
@@ -39,22 +39,22 @@ async function login(req, res, next) {
         const [rows] = await connection.query(sqlQuery, [accountData.email]);
         connection.release();
         if (rows.length !== 1) {
-            return res.status(404).send();
+            return res.status(404).send("User not found");
         }
 
         const user = rows[0];
 
         if (!user.activated_at) {
-            return res.status(403).send("You need to confirm the verification link");
+            return res.status(401).send("You need to confirm the verification link");
         }
 
         try {
             const isPasswordOk = await bcrypt.compare(accountData.password, user.password);
             if (!isPasswordOk) {
-                return res.status(401).send();
+                return res.status(401).send("Incorrect password");
             }
         } catch (e) {
-            res.status(500);
+            return res.status(500).send();
         }
 
         const payloadJwt = {
@@ -76,7 +76,7 @@ async function login(req, res, next) {
             connection.release();
         }
         console.error(e);
-        res.status(500).send();
+        return res.status(500).send();
     }
 }
 

@@ -17,7 +17,7 @@ async function initApp() {
     await connection.query("INSERT INTO users SET ?", {
       id: uuidV4(),
       name: "admin",
-      email: "admin@email.com",
+      email: process.env.ADMIN_EMAIL,
       password: securePwd,
       linkedin: "",
       role: 0,
@@ -30,7 +30,7 @@ async function initApp() {
       connection.release();
     }
 
-    if (e.code != "ER_DUP_ENTRY") console.log(e);
+    if (e.code != "ER_DUP_ENTRY") console.error(e);
   }
 }
 

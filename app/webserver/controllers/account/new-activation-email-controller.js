@@ -1,7 +1,7 @@
 'use strict';
 
 const mysqlPool = require('../../../database/mysql-pool');
-const { sendEmailRegistration, validateEmail } = require("./utility");
+const { sendEmailRegistration, validateEmail } = require("../utility");
 
 async function newActivationEmail(req, res, next) {
 
@@ -11,7 +11,7 @@ async function newActivationEmail(req, res, next) {
         await validateEmail(accountData);
     } catch (e) {
         console.error(e);
-        return res.status(400).send(e);
+        return res.status(400).send("Data are not valid");
     }
 
     const sqlQuery =
@@ -26,7 +26,7 @@ async function newActivationEmail(req, res, next) {
         const [rows] = await connection.query(sqlQuery, [accountData.email]);
         connection.release();
         if (rows.length !== 1) {
-            return res.status(404).send();
+            return res.status(404).send("User not found or already activated");
         }
 
         const user = rows[0];
@@ -34,7 +34,7 @@ async function newActivationEmail(req, res, next) {
         try {
             await await sendEmailRegistration(accountData.email, user.verification_code);
         } catch (e) {
-            console.log(e);
+            console.error(e);
         }
 
         return res.send();
@@ -42,9 +42,8 @@ async function newActivationEmail(req, res, next) {
         if (connection) {
             connection.release();
         }
-
         console.error(e);
-        return res.status(500).send(e.message);
+        return res.status(500).send();
     }
 }
 

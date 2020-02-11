@@ -8,11 +8,6 @@ async function validate(payload) {
     linkedin: Joi.string()
       .allow("")
       .uri(),
-    role: Joi.number()
-      .integer()
-      .min(1)
-      .max(2)
-      .required()
   });
   Joi.assert(payload, schema);
 }
@@ -26,7 +21,7 @@ async function updateUser(req, res, next) {
     await validate(accountData);
   } catch (e) {
     console.error(e);
-    return res.status(400).send(e);
+    return res.status(400).send("Data are not valid");
   }
 
   const now = new Date()
@@ -40,20 +35,18 @@ async function updateUser(req, res, next) {
 
     const sqlUpdateUser = `UPDATE users
                                 SET linkedin = ?,
-                                role = ?,
                                 modified_at = ?
                                 WHERE id = ? AND deleted_at IS NULL`;
 
     const [updateStatus] = await connection.execute(sqlUpdateUser, [
       accountData.linkedin,
-      accountData.role,
       now,
       userId
     ]);
     connection.release();
 
     if (updateStatus.changedRows !== 1) {
-      return res.status(404).send();
+      return res.status(404).send("User not found");
     }
 
     return res.status(204).send();
@@ -61,9 +54,8 @@ async function updateUser(req, res, next) {
     if (connection) {
       connection.release();
     }
-
     console.error(e);
-    return res.status(500).send(e.message);
+    return res.status(500).send();
   }
 }
 

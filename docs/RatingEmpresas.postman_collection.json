@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "d658cc0e-44e6-4ff7-9829-0ad5653de383",
+		"_postman_id": "37beba90-d86d-47cd-8f4a-d6672ed332ee",
 		"name": "RatingEmpresas",
 		"description": "Proyecto RatingEmpresas",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
@@ -214,36 +214,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"name\":\"Stefano\",\n\t\"email\": \"stefano.peraldini@gmail.com\",\n\t\"password\": \"myPwd123456\",\n\t\"linkedin\": \"https://www.linkedin.com/in/stefano-peraldini-software-developer/\",\n\t\"role\": \"2\"\n}"
-						},
-						"url": {
-							"raw": "{{baseUrl}}/v1/accounts",
-							"host": [
-								"{{baseUrl}}"
-							],
-							"path": [
-								"v1",
-								"accounts"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "create Victor",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"name": "Content-Type",
-								"type": "text",
-								"value": "application/json"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n\t\"name\":\"Victor\",\n\t\"email\": \"vm_cs@outlook.com\",\n\t\"password\": \"123456\",\n\t\"role\": \"2\"\n}"
+							"raw": "{\n\t\"name\":\"Stefano\",\n\t\"email\": \"stefano.peraldini@gmail.com\",\n\t\"password\": \"myPwd123456\",\n\t\"linkedin\": \"https://www.linkedin.com/in/stefano-peraldini-software-developer/\",\n\t\"role\": \"1\"\n}"
 						},
 						"url": {
 							"raw": "{{baseUrl}}/v1/accounts",
@@ -285,179 +256,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"email\": \"stefano.peraldini@gmail.com\",\n\t\"password\": \"myPwd123456\"\n}"
-						},
-						"url": {
-							"raw": "{{baseUrl}}/v1/accounts/login",
-							"host": [
-								"{{baseUrl}}"
-							],
-							"path": [
-								"v1",
-								"accounts",
-								"login"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "auth admin",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"id": "177caea2-8093-463b-945c-72d6b55bdfca",
-								"exec": [
-									"",
-									"pm.environment.set(\"accessToken\", pm.response.json().accessToken);"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"name": "Content-Type",
-								"type": "text",
-								"value": "application/json"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n\t\"email\": \"admin@email.com\",\n\t\"password\": \"123456\"\n}"
-						},
-						"url": {
-							"raw": "{{baseUrl}}/v1/accounts/login",
-							"host": [
-								"{{baseUrl}}"
-							],
-							"path": [
-								"v1",
-								"accounts",
-								"login"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "auth Victor",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"id": "177caea2-8093-463b-945c-72d6b55bdfca",
-								"exec": [
-									"",
-									"pm.environment.set(\"accessToken\", pm.response.json().accessToken);"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"name": "Content-Type",
-								"type": "text",
-								"value": "application/json"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n\t\"email\": \"vm_cs@outlook.com\",\n\t\"password\": \"123456\"\n}"
-						},
-						"url": {
-							"raw": "{{baseUrl}}/v1/accounts/login",
-							"host": [
-								"{{baseUrl}}"
-							],
-							"path": [
-								"v1",
-								"accounts",
-								"login"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "auth con pwd recovered",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"id": "177caea2-8093-463b-945c-72d6b55bdfca",
-								"exec": [
-									"",
-									"pm.environment.set(\"accessToken\", pm.response.json().accessToken);"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"name": "Content-Type",
-								"type": "text",
-								"value": "application/json"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n\t\"email\": \"stefano.peraldini@gmail.com\",\n\t\"password\": \"neW123456\"\n}"
-						},
-						"url": {
-							"raw": "{{baseUrl}}/v1/accounts/login",
-							"host": [
-								"{{baseUrl}}"
-							],
-							"path": [
-								"v1",
-								"accounts",
-								"login"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "auth user type 2 sw develop",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"id": "177caea2-8093-463b-945c-72d6b55bdfca",
-								"exec": [
-									"",
-									"pm.environment.set(\"accessToken\", pm.response.json().accessToken);"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"name": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n\t\"email\": \"patorive@gmail.com\",\n\t\"password\": \"myRating2020\"\n}"
+							"raw": "{\n\t\"email\": \"stefano.peraldini@gmail.com\",\n\t\"password\": \"ad8e195fff82458b9499c8981f8ce852\"\n}"
 						},
 						"url": {
 							"raw": "{{baseUrl}}/v1/accounts/login",
@@ -567,7 +366,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n \"email\": \"stefano.peraldini@gmail.com\",\n \"oldPassword\": \"b8165b57aea24fbf987c3bdb7ca0f838\",\n \"newPassword\": \"neW123456\",\n \"confirmationPassword\": \"neW123456\"\n}"
+							"raw": "{\n \"oldPassword\": \"ad8e195fff82458b9499c8981f8ce852\",\n \"newPassword\": \"123456\"\n}"
 						},
 						"url": {
 							"raw": "{{baseUrl}}/v1/accounts/password/change",
@@ -608,179 +407,6 @@
 						}
 					},
 					"response": []
-				},
-				{
-					"name": "auth user type 2 banca",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"id": "177caea2-8093-463b-945c-72d6b55bdfca",
-								"exec": [
-									"",
-									"pm.environment.set(\"accessToken\", pm.response.json().accessToken);"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"name": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n\t\"email\": \"paorag19@gmail.com\",\n\t\"password\": \"myPassword2020\"\n}"
-						},
-						"url": {
-							"raw": "{{baseUrl}}/v1/accounts/login",
-							"host": [
-								"{{baseUrl}}"
-							],
-							"path": [
-								"v1",
-								"accounts",
-								"login"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "auth user type 1 juan",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"id": "177caea2-8093-463b-945c-72d6b55bdfca",
-								"exec": [
-									"",
-									"pm.environment.set(\"accessToken\", pm.response.json().accessToken);"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"name": "Content-Type",
-								"type": "text",
-								"value": "application/json"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n\t\"email\": \"juan.user1@yopmail.com\",\n\t\"password\": \"myRatingmanolo\"\n}"
-						},
-						"url": {
-							"raw": "{{baseUrl}}/v1/accounts/login",
-							"host": [
-								"{{baseUrl}}"
-							],
-							"path": [
-								"v1",
-								"accounts",
-								"login"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "create user type 2 sw develop",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"name": "Content-Type",
-								"type": "text",
-								"value": "application/json"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n\t\"name\":\"Patricia\",\n\t\"email\": \"patorive@gmail.com\",\n\t\"password\": \"myRating2020\",\n\t\"linkedin\": \"https://www.linkedin.com/in/patricia-oa-developer/\",\n\t\"role\": \"2\"\n}"
-						},
-						"url": {
-							"raw": "{{baseUrl}}/v1/accounts",
-							"host": [
-								"{{baseUrl}}"
-							],
-							"path": [
-								"v1",
-								"accounts"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "create user type 1 user person",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"name": "Content-Type",
-								"type": "text",
-								"value": "application/json"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n\t\"name\":\"Juan\",\n\t\"email\": \"juan.user1@yopmail.com\",\n\t\"password\": \"myRatingmanolo\",\n\t\"linkedin\": \"https://www.linkedin.com/in/manolouser/\",\n\t\"role\": \"1\"\n}"
-						},
-						"url": {
-							"raw": "{{baseUrl}}/v1/accounts",
-							"host": [
-								"{{baseUrl}}"
-							],
-							"path": [
-								"v1",
-								"accounts"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "create user type 2 banca",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"name": "Content-Type",
-								"type": "text",
-								"value": "application/json"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n\t\"name\":\"Maria\",\n\t\"email\": \"paorag19@gmail.com\",\n\t\"password\": \"myPassword2020\",\n\t\"linkedin\": \"https://www.linkedin.com/in/maria-ag-finance/\",\n\t\"role\": \"2\"\n}"
-						},
-						"url": {
-							"raw": "{{baseUrl}}/v1/accounts",
-							"host": [
-								"{{baseUrl}}"
-							],
-							"path": [
-								"v1",
-								"accounts"
-							]
-						}
-					},
-					"response": []
 				}
 			],
 			"protocolProfileBehavior": {}
@@ -806,7 +432,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"name\":\"Banco Bestbank\",\n\t\"description\": \"Entidad financiera con sede en A Coruña\",\n\t\"sector_id\": \"b21ae042-6058-4f86-a030-a0b2bf2caabc\",\n\t\"url_web\": \"http://www.bestbank.com\",\n\t\"linkedin\": \"https://www.linkedin.com/in/bestbank/\",\n\t\"address\": \"Canton Grande, 2\",\n\t\"sede_id\": \"79daa7a8-bd2f-408a-9fa8-e7c2d177bbc7\"\n}\n\t"
+							"raw": "{\n\t\"name\":\"Banco Bestbank\",\n\t\"description\": \"Entidad financiera con sede en A Coruña\",\n\t\"sector_id\": \"59a36aa8-2ad2-4de4-88d5-ef32a4e2ca70\",\n\t\"url_web\": \"http://www.bestbank.com\",\n\t\"linkedin\": \"https://www.linkedin.com/in/bestbank/\",\n\t\"address\": \"Canton Grande, 2\",\n\t\"sede_id\": \"79daa7a8-bd2f-408a-9fa8-e7c2d177bbc7\"\n}\n\t"
 						},
 						"url": {
 							"raw": "{{baseUrl}}/v1/companies",
@@ -872,7 +498,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"name\":\"Banco Bestbank3\",\n\t\"description\": \"Entidad financiera con sede en Santiago\",\n\t\"sector_id\": \"66bc21c5-0cb2-4191-8d38-1b444467d2d2\",\n\t\"url_web\": \"http://www.bestbank3.com\",\n\t\"linkedin\": \"https://www.linkedin.com/in/bestbank2/\",\n\t\"address\": \"Canton Grande, 15\",\n\t\"sede_id\": \"79daa7a8-bd2f-408a-9fa8-e7c2d177bbc7\"\n}\n\t"
+							"raw": "{\n\t\"name\":\"Banco Bestbank3\",\n\t\"description\": \"Entidad financiera con sede en Santiago\",\n\t\"sector_id\": \"59a36aa8-2ad2-4de4-88d5-ef32a4e2ca70\",\n\t\"url_web\": \"http://www.bestbank3.com\",\n\t\"linkedin\": \"https://www.linkedin.com/in/bestbank2/\",\n\t\"address\": \"Canton Grande, 15\",\n\t\"sede_id\": \"79daa7a8-bd2f-408a-9fa8-e7c2d177bbc7\"\n}\n\t"
 						},
 						"url": {
 							"raw": "{{baseUrl}}/v1/companies/0de6dc68-a6e4-4e03-940c-40a313fd75c2",
@@ -1185,14 +811,14 @@
 							}
 						],
 						"url": {
-							"raw": "{{baseUrl}}/v1/sectors/10cd099b-b3db-47e1-92ab-c8f638a59d78",
+							"raw": "{{baseUrl}}/v1/sectors/59a36aa8-2ad2-4de4-88d5-ef32a4e2ca70",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
 								"v1",
 								"sectors",
-								"10cd099b-b3db-47e1-92ab-c8f638a59d78"
+								"59a36aa8-2ad2-4de4-88d5-ef32a4e2ca70"
 							]
 						}
 					},
@@ -1223,7 +849,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"linkedin\": \"https://www.linkedin.com/in/stefano-peraldini-software-developerssss\",\n\t\"role\": \"2\"\n}"
+							"raw": "{\n\t\"linkedin\": \"https://www.linkedin.com/in/stefano-peraldini-software-developerssss\"\n}"
 						},
 						"url": {
 							"raw": "{{baseUrl}}/v1/users",
@@ -1305,14 +931,14 @@
 							}
 						],
 						"url": {
-							"raw": "{{baseUrl}}/v1/positions/caa52ca4-1cf3-4c47-b50a-fa4c026d0be2",
+							"raw": "{{baseUrl}}/v1/positions/0ef2ac13-38b5-4ef8-9c28-6ea00841f43a",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
 								"v1",
 								"positions",
-								"caa52ca4-1cf3-4c47-b50a-fa4c026d0be2"
+								"0ef2ac13-38b5-4ef8-9c28-6ea00841f43a"
 							]
 						}
 					},
@@ -1412,14 +1038,14 @@
 							}
 						},
 						"url": {
-							"raw": "{{baseUrl}}/v1/reviews/59713168-69e9-40e9-a33d-623d63c6309f",
+							"raw": "{{baseUrl}}/v1/reviews/c6033b4a-40fa-4678-9473-65e1c6abebc1",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
 								"v1",
 								"reviews",
-								"59713168-69e9-40e9-a33d-623d63c6309f"
+								"c6033b4a-40fa-4678-9473-65e1c6abebc1"
 							]
 						}
 					},
@@ -1474,7 +1100,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n \"position_id\":\"e291458b-8404-42c1-bb44-f91371183d1b\",\n \"start_year\":\"2015-01-01\",\n \"end_year\":\"2019-01-01\",\n \"salary\":\"1430.20\",\n \"inhouse_training\":\"5\",\n \"growth_opportunities\":\"5\",\n \"work_enviroment\":\"5\",\n \"personal_life\":\"5\",\n \"company_culture\":\"5\",\n \"salary_valuation\":\"5\",\n \"comment_title\":\"Commento\",\n \"comment\":\"Testo commento\",\n \"city_id\":\"79daa7a8-bd2f-408a-9fa8-e7c2d177bbc7\",\n \"company_id\":\"97446c01-c666-4a89-a145-43db1bc2d487\"\n}\n\t"
+							"raw": "{\n \"position_id\":\"0ef2ac13-38b5-4ef8-9c28-6ea00841f43a\",\n \"start_year\":\"2015\",\n \"end_year\":\"2019\",\n \"salary\":\"1430.20\",\n \"inhouse_training\":\"5\",\n \"growth_opportunities\":\"5\",\n \"work_enviroment\":\"5\",\n \"personal_life\":\"5\",\n \"salary_valuation\":\"5\",\n \"comment_title\":\"Commento\",\n \"comment\":\"Testo commento\",\n \"city_id\":\"79daa7a8-bd2f-408a-9fa8-e7c2d177bbc7\",\n \"company_id\":\"fa688c9a-94f7-4cf1-b145-f58347ba21a3\"\n}\n\t"
 						},
 						"url": {
 							"raw": "{{baseUrl}}/v1/reviews",
@@ -1484,6 +1110,128 @@
 							"path": [
 								"v1",
 								"reviews"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Report",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer {{accessToken}}"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/v1/reviews/blacklist/763675789659879",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"reviews",
+								"blacklist",
+								"763675789659879"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Reviews filter",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/v1/reviews/filter/all?companyId=7c81f14a-33d6-4d5b-87fc-6283d9a2d899",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"reviews",
+								"filter",
+								"all"
+							],
+							"query": [
+								{
+									"key": "companyId",
+									"value": "7c81f14a-33d6-4d5b-87fc-6283d9a2d899"
+								},
+								{
+									"key": "positionId",
+									"value": "abf43128-3f38-4e1a-9e6c-94145eac0dbe",
+									"disabled": true
+								},
+								{
+									"key": "cityId",
+									"value": "79daa7a8-bd2f-408a-9fa8-e7c2d177bbc7",
+									"disabled": true
+								},
+								{
+									"key": "sectorId",
+									"value": "67431fa2-ec11-4a43-8353-5e43d7320421",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Reviews user",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{accessToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/v1/reviews/user/list",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"reviews",
+								"user",
+								"list"
 							]
 						}
 					},

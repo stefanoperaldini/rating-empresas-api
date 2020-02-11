@@ -17,7 +17,8 @@ async function getCompanies(req, res) {
   try {
     await validate({ row4page, page });
   } catch (e) {
-    return res.status(400).send(e);
+    console.error(e);
+    return res.status(400).send("Data are not valid");
   }
 
   let numsRows = 0;
@@ -38,10 +39,13 @@ async function getCompanies(req, res) {
       row4page = numsRows;
     }
 
-    sqlQuery = `SELECT com.id, com.name,
-      com.url_web, com.linkedin, com.url_logo, com.address, com.sede_id, com.sector_id
-      FROM companies com
-      ORDER BY com.name LIMIT ?,?;`;
+    sqlQuery = `SELECT c.id, c.name, c.description,
+      c.url_web, c.linkedin, c.url_logo, c.address, c.sede_id, c.sector_id, s.sector, c.user_id,
+      u.role AS userRole, u.deleted_at AS userDeleteAt
+      FROM companies c
+      INNER JOIN users AS u ON u.id = c.user_id
+      INNER JOIN sectors AS s ON c.sector_id = s.id
+      ORDER BY c.name LIMIT ?,?;`;
     [rows] = await connection.execute(sqlQuery, [offset, row4page]);
     connection.release();
     return res.send({

@@ -13,13 +13,13 @@ async function validate(payload) {
         version: ["uuidv4"]
       })
       .required(),
-    start_year: Joi.date()
-      .greater("1-1-1980")
-      .max("now")
+    start_year: Joi.number()
+      .integer()
+      .min(1980)
       .required(),
-    end_year: Joi.date()
-      .greater("1-1-1980")
-      .max("now"),
+    end_year: Joi.number()
+      .integer()
+      .max(2020),
     salary: Joi.number().min(0),
     inhouse_training: Joi.number()
       .integer()
@@ -34,10 +34,6 @@ async function validate(payload) {
       .min(1)
       .max(5),
     personal_life: Joi.number()
-      .integer()
-      .min(1)
-      .max(5),
-    company_culture: Joi.number()
       .integer()
       .min(1)
       .max(5),
@@ -75,7 +71,8 @@ async function createReview(req, res, next) {
   try {
     await validate(reviewData);
   } catch (e) {
-    return res.status(400).send(e);
+    console.error(e);
+    return res.status(400).send("Data are not valid");
   }
 
   const now = new Date()
@@ -94,8 +91,6 @@ async function createReview(req, res, next) {
   try {
     const connection = await mysqlPool.getConnection();
     try {
-      const sqlCreateCompany = "INSERT INTO reviews SET ?";
-      await connection.query(sqlCreateCompany, review);
 
       try {
         const sqlAddCity = "INSERT INTO companies_cities SET ?";
@@ -110,6 +105,9 @@ async function createReview(req, res, next) {
         }
       }
 
+      const sqlCreateCompany = "INSERT INTO reviews SET ?";
+      await connection.query(sqlCreateCompany, review);
+
       connection.release();
 
       res.header("Location", `${httpServerDomain}/v1/reviews/${reviewId}`);
@@ -118,11 +116,12 @@ async function createReview(req, res, next) {
       if (connection) {
         connection.release();
       }
-
+      console.error(e);
       if (e.code === "ER_DUP_ENTRY") {
-        console.log(e.message);
-        return res.status(409).send();
+        return res.status(409).send("Review already exists");
       }
+      return res.status(500).send();
+
     }
   } catch (e) {
     console.error(e);

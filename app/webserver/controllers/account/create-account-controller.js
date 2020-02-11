@@ -4,22 +4,28 @@ const bcrypt = require("bcrypt");
 const Joi = require("@hapi/joi");
 const mysqlPool = require("../../../database/mysql-pool");
 const uuidV4 = require("uuid/v4");
-const { sendEmailRegistration } = require("./utility");
+const { sendEmailRegistration } = require("../utility");
 
 async function validate(payload) {
     const schema = Joi.object({
         name: Joi
             .string()
+            .max(45)
             .required(),
         email: Joi
             .string()
+            .max(45)
             .email()
             .required(),
         password: Joi
             .string()
             .regex(/^[a-zA-Z0-9]{3,30}$/)
             .required(),
-        linkedin: Joi.string().allow("").uri(),
+        linkedin: Joi
+            .string()
+            .max(255)
+            .allow("")
+            .uri(),
         role: Joi.number()
             .integer()
             .min(1)
@@ -57,7 +63,8 @@ async function createAccount(req, res, next) {
     try {
         await validate(accountData);
     } catch (e) {
-        return res.status(400).send(e);
+        console.error(e);
+        return res.status(400).send("Data are not valid");
     }
 
     const createdAt = new Date()
@@ -86,16 +93,17 @@ async function createAccount(req, res, next) {
         try {
             await sendEmailRegistration(accountData.email, verificationCode);
         } catch (e) {
-            console.log(e);
+            console.error(e);
         }
         return res.status(201).send();
     } catch (e) {
         if (connection) {
             connection.release();
         }
-        console.log(e);
-        if (e.code === "ER_DUP_ENTRY") res.status(409).send();
 
+        if (e.code === "ER_DUP_ENTRY") return res.status(409).send("User already exists");
+
+        console.error(e);
         return res.status(500).send();
     }
 }

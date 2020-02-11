@@ -11,7 +11,7 @@ async function getRegions(req, res) {
                           ORDER BY name;`;
         const [rows] = await connection.query(sqlQuery);
         connection.release();
-        res.send(rows);
+        return res.send(rows);
     } catch (e) {
         if (connection) {
             connection.release();
@@ -20,6 +20,5 @@ async function getRegions(req, res) {
         return res.status(500).send();
     }
 }
-
 
 module.exports = getRegions;

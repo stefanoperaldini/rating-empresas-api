@@ -21,7 +21,8 @@ async function createPosition(req, res, next) {
     try {
         await validateSchema(positionData);
     } catch (e) {
-        return res.status(400).send(e);
+        console.error(e);
+        return res.status(400).send("Data are not valid");
     }
 
     const id = uuidV4();
@@ -48,7 +49,7 @@ async function createPosition(req, res, next) {
         }
 
         if (e.code === "ER_DUP_ENTRY") {
-            return res.status(409).send();
+            return res.status(409).send("Position already exists");
         }
 
         console.error(e);

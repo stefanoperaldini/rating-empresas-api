@@ -10,19 +10,11 @@ cloudinary.config({
 });
 
 async function uploadCompanyLogo(req, res) {
-  const { userId, role } = req.claims;
+  const { userId } = req.claims;
   const { file } = req;
 
-  if (parseInt(role) !== 2) {
-    return res
-      .status(401)
-      .send({ message: "Only an user type 2 can update a company logo" });
-  }
-
   if (!file || !file.buffer) {
-    return res.status(400).send({
-      message: "invalid image"
-    });
+    return res.status(400).send("Invalid image");
   }
 
   cloudinary.uploader
@@ -40,34 +32,9 @@ async function uploadCompanyLogo(req, res) {
           console.error(err);
           return res.status(400).send(err);
         }
-
         const { secure_url: secureUrl } = result;
-
-        let connection;
-        try {
-          const sqlQuery = `UPDATE companies
-      SET url_logo = ?
-      WHERE user_id = ?`;
-          connection = await mysqlPool.getConnection();
-          const [updateStatus] = await connection.execute(sqlQuery, [
-            secureUrl,
-            userId
-          ]);
-          connection.release();
-
-          if (updateStatus.changedRows !== 1) {
-            return res.status(404).send();
-          }
-
-          res.header("Location", secureUrl);
-          return res.status(201).send();
-        } catch (e) {
-          if (connection) {
-            connection.release();
-          }
-          console.error(e);
-          return res.status(500).send(e.message);
-        }
+        res.header("Location", secureUrl);
+        return res.status(201).send();
       }
     )
     .end(file.buffer);

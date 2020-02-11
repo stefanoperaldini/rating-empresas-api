@@ -94,7 +94,6 @@ CREATE TABLE IF NOT EXISTS `EnterpriseRanking`.`companies` (
   INDEX `fk_companies_sede_id_city_id_idx` (`sede_id` ASC),
   INDEX `fk_companies_user_id_user_id_idx` (`user_id` ASC),
   UNIQUE INDEX `name_UNIQUE` (`name` ASC),
-  UNIQUE INDEX `user_id_UNIQUE` (`user_id` ASC),
   CONSTRAINT `fk_companies_sector_id_sector_id`
     FOREIGN KEY (`sector_id`)
     REFERENCES `EnterpriseRanking`.`sectors` (`id`)
@@ -186,14 +185,13 @@ CREATE TABLE IF NOT EXISTS `EnterpriseRanking`.`reviews` (
   `id` CHAR(36) NOT NULL,
   `user_id` VARCHAR(36) NOT NULL,
   `position_id` VARCHAR(36) NOT NULL,
-  `start_year` DATE NOT NULL,
-  `end_year` DATE NULL,
+  `start_year` SMALLINT UNSIGNED NOT NULL,
+  `end_year` SMALLINT UNSIGNED NULL,
   `salary` DECIMAL(10,2) NULL,
   `inhouse_training` CHAR(1) NOT NULL,
   `growth_opportunities` CHAR(1) NOT NULL,
   `work_enviroment` CHAR(1) NOT NULL,
   `personal_life` CHAR(1) NOT NULL,
-  `company_culture` CHAR(1) NOT NULL,
   `salary_valuation` CHAR(1) NOT NULL,
   `comment_title` VARCHAR(30) NOT NULL,
   `comment` VARCHAR(1000) NOT NULL,

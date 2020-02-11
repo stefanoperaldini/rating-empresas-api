@@ -15,7 +15,8 @@ async function getRegion(req, res) {
     try {
         await validate({ regionId });
     } catch (e) {
-        return res.status(400).send(e);
+        console.error(e);
+        return res.status(400).send("Data are not valid");
     }
     let connection;
     try {
@@ -28,7 +29,7 @@ async function getRegion(req, res) {
         if (rows.length === 0) {
             return res.status(404).send("Region not found");
         }
-        res.send(rows);
+        return res.send(rows);
     } catch (e) {
         if (connection) {
             connection.release();

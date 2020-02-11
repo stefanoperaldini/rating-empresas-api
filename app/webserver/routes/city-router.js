@@ -14,13 +14,10 @@ const getProvincesRegion = require("../controllers/city/get-provinces-region-con
 const router = express.Router();
 
 router.get("/v1/cities", getCities);
+router.get("/v1/cities/:cityId", getCity);
 router.get(
   "/v1/regions/:regionId/provinces/:provinceId/cities",
   getCitiesProvinceRegion
-);
-router.get(
-  "/v1/regions/:regionId/provinces/:provinceId/cities/:cityId",
-  getCity
 );
 router.get("/v1/regions", getRegions);
 router.get("/v1/regions/:regionId", getRegion);
