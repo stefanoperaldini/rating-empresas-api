@@ -2,6 +2,7 @@
 
 const Joi = require("@hapi/joi");
 const mysqlPool = require("../../../database/mysql-pool");
+const math = require("mathjs");
 
 async function validate(payload) {
   const schema = Joi.object({
@@ -102,10 +103,12 @@ async function getReviewsFilter(req, res) {
 
     const reviews = rows.map(review => {
       const created_at = review.created_at.toISOString().substring(0, 10);
+      const everage = math.round(math.divide((parseInt(review.inhouse_training) + parseInt(review.growth_opportunities) + parseInt(review.work_enviroment) + parseInt(review.personal_life) + parseInt(review.salary_valuation)), 5), 1);
 
       return {
         ...review,
-        created_at
+        created_at,
+        everage,
       };
     });
 

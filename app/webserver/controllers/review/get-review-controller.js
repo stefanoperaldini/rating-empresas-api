@@ -2,6 +2,7 @@
 
 const Joi = require("@hapi/joi");
 const mysqlPool = require("../../../database/mysql-pool");
+const math = require("mathjs");
 
 async function validate(payload) {
   const schema = Joi.object({
@@ -31,7 +32,6 @@ async function getReview(req, res, next) {
   let connection;
   try {
     connection = await mysqlPool.getConnection();
-    //FIXME r.deleted_at,
     const sqlQuery = `SELECT r.id, r.start_year,
                         r.end_year, r.created_at, r.salary,
                         r.inhouse_training, r.growth_opportunities, r.work_enviroment, r.personal_life,
@@ -53,9 +53,11 @@ async function getReview(req, res, next) {
 
     const review = { ...rows[0] };
 
-    review.created_at = review.created_at.toISOString().substring(0, 10);
+    const created_at = review.created_at.toISOString().substring(0, 10);
 
-    return res.send(review);
+    const everage = math.round(math.divide((parseInt(review.inhouse_training) + parseInt(review.growth_opportunities) + parseInt(review.work_enviroment) + parseInt(review.personal_life) + parseInt(review.salary_valuation)), 5), 1);
+
+    return res.send({ ...review, created_at, everage });
   } catch (e) {
     if (connection) {
       connection.release();
