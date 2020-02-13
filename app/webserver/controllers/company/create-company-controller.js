@@ -22,7 +22,12 @@ async function validate(payload) {
       .required(),
     url_web: Joi.string()
       .allow("")
-      .uri(),
+      .uri()
+      .max(255),
+    url_logo: Joi.string()
+      .allow("")
+      .uri()
+      .max(255),
     linkedin: Joi.string()
       .allow("")
       .uri(),
@@ -61,7 +66,8 @@ async function createCompany(req, res, next) {
     url_web,
     linkedin,
     address,
-    sede_id
+    sede_id,
+    url_logo
   } = companyData;
 
   const companyId = uuidV4();
@@ -74,6 +80,7 @@ async function createCompany(req, res, next) {
     linkedin,
     address,
     sede_id,
+    url_logo,
     user_id: userId,
     created_at: now
   };

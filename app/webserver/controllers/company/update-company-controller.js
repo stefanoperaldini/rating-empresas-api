@@ -19,7 +19,12 @@ async function validateSchema(payload) {
       .required(),
     url_web: Joi.string()
       .allow("")
-      .uri(),
+      .uri()
+      .max(255),
+    url_logo: Joi.string()
+      .allow("")
+      .uri()
+      .max(255),
     linkedin: Joi.string()
       .allow("")
       .uri(),
@@ -56,7 +61,6 @@ async function updateCompany(req, res, next) {
   try {
     await validateSchema(companyData);
   } catch (e) {
-    console.log(companyData);
     console.error(e);
     return res.status(400).send("Data are not valid");
   }
@@ -78,7 +82,8 @@ async function updateCompany(req, res, next) {
         address = ?,
         sede_id = ?,
         user_id = ?,
-        updated_at = ?
+        updated_at = ?,
+        url_logo = ?
           WHERE id = ?`;
 
     const [updateStatus] = await connection.query(sqlUpdateCompany, [
@@ -91,7 +96,8 @@ async function updateCompany(req, res, next) {
       companyData.sede_id,
       userId,
       now,
-      companyId,
+      companyData.url_logo,
+      companyId
     ]);
     connection.release();
 
