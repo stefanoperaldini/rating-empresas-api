@@ -19,10 +19,7 @@ async function validate(payload) {
 async function getCompany(req, res, next) {
   const companyId = req.params.companyId;
   try {
-    const payload = {
-      companyId
-    };
-    await validate(payload);
+    await validate({ companyId });
   } catch (e) {
     console.error(e);
     return res.status(400).send("Data are not valid");
