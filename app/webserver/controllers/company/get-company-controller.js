@@ -1,7 +1,6 @@
 "use strict";
 
 const Joi = require("@hapi/joi");
-const math = require("mathjs");
 const mysqlPool = require("../../../database/mysql-pool");
 
 async function validate(payload) {
@@ -38,23 +37,27 @@ async function getCompany(req, res, next) {
                               avg_personal_life,
                               avg_salary_valuation
                             FROM(
-                              SELECT c.id, c.name, c.sector_id, c.sede_id, c.user_id,
-                              COUNT(r.id) as n_review,
-                              ROUND(AVG(salary), 1) AS avg_salary,
-                              ROUND(AVG(inhouse_training), 1) AS avg_inhouse_training,
-                              ROUND(AVG(growth_opportunities), 1) AS avg_growth_opportunities,
-                              ROUND(AVG(work_enviroment), 1) AS avg_work_enviroment,
-                              ROUND(AVG(personal_life), 1) AS avg_personal_life,
-                              ROUND(AVG(salary_valuation), 1) AS avg_salary_valuation
-                                              FROM reviews AS r
-                                              LEFT JOIN companies c
-                                              ON r.company_id = c.id
-                                              LEFT JOIN sectors s
-                                              ON c.sector_id = s.id
-                                              LEFT JOIN cities AS ci
-                                              ON r.city_id = ci.id
-                                              WHERE r.deleted_at IS NULL
-                                              GROUP BY c.id) AS res_companies
+                              SELECT *, (avg_salary_valuation + avg_inhouse_training + avg_growth_opportunities + avg_work_enviroment +  avg_personal_life )/5.0 as everage
+                              FROM(
+                                    SELECT c.id, c.name, c.sector_id, c.sede_id, c.user_id,
+                                    COUNT(r.id) as n_review,
+                                    ROUND(AVG(salary), 1) AS avg_salary,
+                                    ROUND(AVG(inhouse_training), 1) AS avg_inhouse_training,
+                                    ROUND(AVG(growth_opportunities), 1) AS avg_growth_opportunities,
+                                    ROUND(AVG(work_enviroment), 1) AS avg_work_enviroment,
+                                    ROUND(AVG(personal_life), 1) AS avg_personal_life,
+                                    ROUND(AVG(salary_valuation), 1) AS avg_salary_valuation
+                                                    FROM reviews AS r
+                                                    LEFT JOIN companies c
+                                                    ON r.company_id = c.id
+                                                    LEFT JOIN sectors s
+                                                    ON c.sector_id = s.id
+                                                    LEFT JOIN cities AS ci
+                                                    ON r.city_id = ci.id
+                                                    WHERE r.deleted_at IS NULL
+                                                    GROUP BY c.id
+                               ) AS tmp_companies 
+                            ) AS res_companies
                             LEFT JOIN companies c
                             ON res_companies.id = c.id
                             LEFT JOIN sectors AS sec
@@ -70,10 +73,7 @@ async function getCompany(req, res, next) {
       return res.status(404).send("Company not found");
     }
 
-    const everage = math.round(
-      math.divide((results[0].avg_inhouse_training + results[0].avg_growth_opportunities + results[0].avg_work_enviroment + results[0].avg_personal_life + results[0].avg_salary_valuation), 5), 1);
-
-    return res.send({ ...results[0], everage });
+    return res.send(results[0]);
 
   } catch (e) {
     console.error(e);
