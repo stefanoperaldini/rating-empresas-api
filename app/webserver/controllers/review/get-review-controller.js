@@ -2,7 +2,6 @@
 
 const Joi = require("@hapi/joi");
 const mysqlPool = require("../../../database/mysql-pool");
-const math = require("mathjs");
 
 async function validate(payload) {
   const schema = Joi.object({
@@ -36,6 +35,7 @@ async function getReview(req, res, next) {
                         r.end_year, r.created_at, r.salary,
                         r.inhouse_training, r.growth_opportunities, r.work_enviroment, r.personal_life,
                         r.salary_valuation, r.comment_title, r.comment
+                        (r.salary_valuation + r.inhouse_training + r.growth_opportunities + r.work_enviroment +  r.personal_life )/5.0 as everage
                       FROM reviews r
                       LEFT JOIN positions p
                         ON r.position_id = p.id
@@ -43,7 +43,8 @@ async function getReview(req, res, next) {
                         ON r.company_id = c.id
                       WHERE
                         r.id = ?
-                        AND r.deleted_at IS NULL`;
+                        AND r.deleted_at IS NULL
+                      GROUP BY r.id`;
     const [rows] = await connection.execute(sqlQuery, [reviewId]);
     connection.release();
 
@@ -55,9 +56,7 @@ async function getReview(req, res, next) {
 
     const created_at = review.created_at.toISOString().substring(0, 10);
 
-    const everage = math.round(math.divide((parseInt(review.inhouse_training) + parseInt(review.growth_opportunities) + parseInt(review.work_enviroment) + parseInt(review.personal_life) + parseInt(review.salary_valuation)), 5), 1);
-
-    return res.send({ ...review, created_at, everage });
+    return res.send({ ...review, created_at, });
   } catch (e) {
     if (connection) {
       connection.release();

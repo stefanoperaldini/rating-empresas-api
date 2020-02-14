@@ -32,7 +32,7 @@ async function checkAccountSession(req, res, next) {
         const clientRedis = await redis.createClient();
 
         clientRedis.get(`logout:${token}`, (err, result) => {
-            // If that key exist in Redis store
+            // key exist in Redis store
             if (result) {
                 return res.status(401).send("Unauthorized");
             }

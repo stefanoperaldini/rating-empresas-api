@@ -1,35 +1,105 @@
 "use strict";
 
 const Joi = require("@hapi/joi");
+const redis = require("redis");
+
 const mysqlPool = require("../../../database/mysql-pool");
-const math = require("mathjs");
 
 async function validate(payload) {
   const schema = Joi.object({
     row4page: Joi.number(),
-    page: Joi.number()
+    page: Joi.number(),
+    sectorId: Joi.string().guid({
+      version: ["uuidv4"]
+    }),
+    positionId: Joi.string().guid({
+      version: ["uuidv4"]
+    }),
+    cityId: Joi.string().guid({
+      version: ["uuidv4"]
+    }),
+    sortTipe: Joi.number()
+      .integer()
+      .min(1)
+      .max(6)
   });
   Joi.assert(payload, schema);
 }
 
 async function getCompanies(req, res) {
-  let { row4page, page } = req.query;
+  let { row4page, page, sectorId, positionId, cityId, sortTipe } = req.query;
 
   try {
-    await validate({ row4page, page });
+    await validate({ row4page, page, sectorId, positionId, cityId, sortTipe });
   } catch (e) {
     console.error(e);
     return res.status(400).send("Data are not valid");
   }
 
-  let numsRows = 0;
-
   let connection;
+
   try {
     connection = await mysqlPool.getConnection();
-    let sqlQuery = "SELECT COUNT(*) as numsRows FROM companies;";
-    let [rows] = await connection.query(sqlQuery);
-    numsRows = parseInt(rows[0].numsRows);
+
+    let strSort = "ORDER BY everage DESC";
+    switch (sortTipe) {
+      case "2":
+        strSort = "ORDER BY r.salary_valuation DESC";
+        break;
+      case "3":
+        strSort = "ORDER BY r.inhouse_training DESC";
+        break;
+      case "4":
+        strSort = "ORDER BY r.growth_opportunities DESC";
+        break;
+      case "5":
+        strSort = "ORDER BY r.work_enviroment DESC";
+        break;
+      case "6":
+        strSort = "ORDER BY r.personal_life DESC";
+        break;
+    }
+
+    let optWhere = "WHERE r.deleted_at IS NULL";
+    let queryParams = [];
+
+    if (sectorId || positionId || cityId) {
+      if (sectorId) {
+        optWhere = `${optWhere} AND c.sector_id = ?`;
+        queryParams = [...queryParams, sectorId,];
+      }
+
+      if (positionId) {
+        optWhere = `${optWhere} AND r.position_id = ?`;
+        queryParams = [...queryParams, positionId,];
+      }
+
+      if (cityId) {
+        optWhere = `${optWhere} AND r.city_id = ?`;
+        queryParams = [...queryParams, cityId,];
+      }
+    }
+
+    queryParams = [...queryParams,];
+
+
+
+    let sqlQuery = `SELECT COUNT(*) as numsRows FROM (
+				            	SELECT COUNT(r.id) as n_review
+                      FROM reviews AS r
+                      LEFT JOIN companies c
+                      ON r.company_id = c.id
+                      LEFT JOIN sectors s
+                      ON c.sector_id = s.id
+                      LEFT JOIN cities AS ci
+                      ON r.city_id = ci.id
+                    ${ optWhere}
+                    GROUP BY c.id) AS tempCompanies`;
+
+    let [rows] = await connection.query(sqlQuery, queryParams);
+
+    let numsRows = parseInt(rows[0].numsRows);
+
     let offset = 0;
     if ((row4page != undefined) & (page != undefined)) {
       row4page = parseInt(row4page);
@@ -41,33 +111,38 @@ async function getCompanies(req, res) {
     }
 
     sqlQuery = `SELECT c.id as company_id, c.name, sec.sector AS sector_name, ci.id AS sede_id, 
-                        res_companies.user_id, ci.name AS sede_name,
-                        c.description, c.url_web, c.linkedin, c.url_logo, c.address,
-                        n_review, 
-                        avg_salary, 
-                        avg_inhouse_training,
-                        avg_growth_opportunities,
-                        avg_work_enviroment,
-                        avg_personal_life,
-                        avg_salary_valuation
+		              res_companies.user_id, ci.name AS sede_name,
+		              c.description, c.url_web, c.linkedin, c.url_logo, c.address,
+		              n_review, 
+		              avg_salary, 
+                  avg_inhouse_training,
+                  avg_growth_opportunities,
+                  avg_work_enviroment,
+                  avg_personal_life,
+                  avg_salary_valuation
+                  everage
                 FROM(
-	                    SELECT c.id, c.name, c.sector_id, c.sede_id, c.user_id,
-			                        COUNT(r.id) as n_review,
-                              ROUND(AVG(salary),1) AS avg_salary,
-			                        ROUND(AVG(inhouse_training),1) AS avg_inhouse_training,
-			                        ROUND(AVG(growth_opportunities),1) AS avg_growth_opportunities,
-			                        ROUND(AVG(work_enviroment),1) AS avg_work_enviroment,
-			                        ROUND(AVG(personal_life),1) AS avg_personal_life,
-			                        ROUND(AVG(salary_valuation),1) AS avg_salary_valuation
-	                    FROM reviews AS r
-	                    LEFT JOIN companies c
-	                    ON r.company_id = c.id
-	                    LEFT JOIN sectors s
-	                    ON c.sector_id = s.id
-                      LEFT JOIN cities AS ci
-                      ON r.city_id = ci.id
-	                    WHERE r.deleted_at IS NULL
-	                    GROUP BY c.id ) AS res_companies
+                      SELECT *, (avg_salary_valuation + avg_inhouse_training + avg_growth_opportunities + avg_work_enviroment +  avg_personal_life )/5.0 as everage
+                      FROM(
+                          SELECT c.id, c.name, c.sector_id, c.sede_id, c.user_id,
+                                  COUNT(r.id) as n_review,
+                                  ROUND(AVG(salary),1) AS avg_salary,
+                                  ROUND(AVG(inhouse_training),1) AS avg_inhouse_training,
+                                  ROUND(AVG(growth_opportunities),1) AS avg_growth_opportunities,
+                                  ROUND(AVG(work_enviroment),1) AS avg_work_enviroment,
+                                  ROUND(AVG(personal_life),1) AS avg_personal_life,
+                                  ROUND(AVG(salary_valuation),1) AS avg_salary_valuation
+                          FROM reviews AS r
+                          LEFT JOIN companies c
+                          ON r.company_id = c.id
+                          LEFT JOIN sectors s
+                          ON c.sector_id = s.id
+                          LEFT JOIN cities AS ci
+                          ON r.city_id = ci.id
+                          ${optWhere}
+                          GROUP BY c.id
+                      ) AS tmp_companies 
+                ) AS res_companies
                 LEFT JOIN companies c
                 ON res_companies.id = c.id
                 LEFT JOIN sectors AS sec
@@ -76,23 +151,47 @@ async function getCompanies(req, res) {
                 ON res_companies.sede_id = ci.id
                 INNER JOIN users AS u 
                 ON u.id = res_companies.user_id
-                ORDER BY c.name LIMIT ?,?;`;
-    [rows] = await connection.execute(sqlQuery, [offset, row4page]);
-    connection.release();
+                ${strSort}
+                LIMIT ?,?;`;
 
-    const rows_companies = rows.map(company => {
-      const everage = math.round(math.divide((parseFloat(company.avg_inhouse_training) + parseFloat(company.avg_growth_opportunities) + parseFloat(company.avg_work_enviroment) + parseFloat(company.avg_personal_life) + parseFloat(company.avg_salary_valuation)), 5), 1);
-      return {
-        ...company,
-        everage,
-      };
+    // Manage query REDIS 
+    const clientRedis = await redis.createClient();
+
+
+    clientRedis.get(`query:${optWhere}-${strSort}-${queryParams}-${offset}-${row4page}`, async function (err, result) {
+      // key exist in Redis store
+      if (result) {
+        return res.send({
+          numsRows,
+          page,
+          rows_companies: JSON.parse(result),
+        });
+      }
+      if (err) {
+        console.error(err);
+      }
+
+      [rows] = await connection.execute(sqlQuery, [...queryParams, offset, row4page]);
+
+      connection.release();
+
+      if (rows.length === 0) {
+        return res.status(404).send("Companies not founded");
+      }
+
+      try {
+        await clientRedis.set(`query:${optWhere}-${strSort}-${queryParams}-${offset}-${row4page}`, JSON.stringify(rows), 'EX', process.env.REDIS_TTL_QUERY);
+      } catch (e) {
+        console.error(e);
+      }
+
+      return res.send({
+        numsRows,
+        page,
+        rows_companies: rows,
+      });
     });
 
-    return res.send({
-      numsRows,
-      page,
-      rows_companies
-    });
   } catch (e) {
     if (connection) {
       connection.release();
