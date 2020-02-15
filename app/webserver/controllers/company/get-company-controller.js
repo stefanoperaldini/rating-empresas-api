@@ -35,7 +35,8 @@ async function getCompany(req, res, next) {
                               avg_growth_opportunities,
                               avg_work_enviroment,
                               avg_personal_life,
-                              avg_salary_valuation
+                              avg_salary_valuation,
+                              everage
                             FROM(
                               SELECT *, (avg_salary_valuation + avg_inhouse_training + avg_growth_opportunities + avg_work_enviroment +  avg_personal_life )/5.0 as everage
                               FROM(
