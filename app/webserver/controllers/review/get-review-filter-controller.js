@@ -144,7 +144,7 @@ async function getReviewsFilter(req, res) {
       };
     });
 
-    numsRows = reviews.length;
+    // numsRows = reviews.length;
 
     return res.send({
       numsRows,

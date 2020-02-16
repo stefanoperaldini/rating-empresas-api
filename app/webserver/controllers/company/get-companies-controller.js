@@ -155,42 +155,41 @@ async function getCompanies(req, res) {
                 LIMIT ?,?;`;
 
     // Manage query REDIS 
-    const clientRedis = await redis.createClient();
+    //const clientRedis = await redis.createClient();
 
+    //await clientRedis.get(`query:${optWhere}-${strSort}-${queryParams}-${offset}-${row4page}`, async function (err, result) {
+    // key exist in Redis store
+    // if (result) {
+    //   return res.send({
+    //     numsRows,
+    //     page,
+    //     rows_companies: JSON.parse(result),
+    //   });
+    // }
+    // if (err) {
+    //   console.error(err);
+    // }
 
-    clientRedis.get(`query:${optWhere}-${strSort}-${queryParams}-${offset}-${row4page}`, async function (err, result) {
-      // key exist in Redis store
-      if (result) {
-        return res.send({
-          numsRows,
-          page,
-          rows_companies: JSON.parse(result),
-        });
-      }
-      if (err) {
-        console.error(err);
-      }
+    [rows] = await connection.execute(sqlQuery, [...queryParams, offset, row4page]);
 
-      [rows] = await connection.execute(sqlQuery, [...queryParams, offset, row4page]);
+    connection.release();
 
-      connection.release();
+    if (rows.length === 0) {
+      return res.status(404).send("Companies not founded");
+    }
 
-      if (rows.length === 0) {
-        return res.status(404).send("Companies not founded");
-      }
+    // try {
+    //   await clientRedis.set(`query:${optWhere}-${strSort}-${queryParams}-${offset}-${row4page}`, JSON.stringify(rows), 'EX', process.env.REDIS_TTL_QUERY);
+    // } catch (e) {
+    //   console.error(e);
+    // }
 
-      try {
-        await clientRedis.set(`query:${optWhere}-${strSort}-${queryParams}-${offset}-${row4page}`, JSON.stringify(rows), 'EX', process.env.REDIS_TTL_QUERY);
-      } catch (e) {
-        console.error(e);
-      }
-
-      return res.send({
-        numsRows,
-        page,
-        rows_companies: rows,
-      });
+    return res.send({
+      numsRows,
+      page,
+      rows_companies: rows,
     });
+    // });
 
   } catch (e) {
     if (connection) {

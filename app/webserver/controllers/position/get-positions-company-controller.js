@@ -28,12 +28,14 @@ async function getPositions(req, res) {
     let connection;
     try {
         connection = await mysqlPool.getConnection();
-        const sqlQuery = `SELECT distinct p.id, p.name
-                        FROM reviews
-                        LEFT JOIN positions AS p
-                        ON reviews.position_id = p.id
-                    WHERE  reviews.company_id = ?
-                    ORDER BY p.name`;
+        // AVG(salary) skip a salary igual a NULL
+        const sqlQuery = `SELECT p.id, p.name, COUNT(*) as numsReviews, ROUND(AVG(salary),2) AS avg_salary
+                            FROM reviews
+                            LEFT JOIN positions AS p
+                            ON reviews.position_id = p.id
+                                WHERE  reviews.company_id = ?
+                            GROUP BY p.id
+                            ORDER BY p.name;`;
         const [rows] = await connection.execute(sqlQuery, [companyId,]);
         connection.release();
         return res.send(rows);
