@@ -21,7 +21,7 @@ async function validate(payload) {
     sortTipe: Joi.number()
       .integer()
       .min(1)
-      .max(6)
+      .max(7)
   });
   Joi.assert(payload, schema);
 }
@@ -57,6 +57,9 @@ async function getCompanies(req, res) {
         break;
       case "6":
         strSort = "ORDER BY r.personal_life DESC";
+        break;
+      case "7":
+        strSort = "ORDER BY c.name ASC";
         break;
     }
 
@@ -110,7 +113,7 @@ async function getCompanies(req, res) {
       row4page = numsRows;
     }
 
-    sqlQuery = `SELECT c.id as company_id, c.name, sec.sector AS sector_name, ci.id AS sede_id, 
+    sqlQuery = `SELECT c.id as company_id, c.name, sec.id AS sector_id, sec.sector AS sector_name, ci.id AS sede_id, 
 		              res_companies.user_id, ci.name AS sede_name,
 		              c.description, c.url_web, c.linkedin, c.url_logo, c.address,
 		              n_review, 
