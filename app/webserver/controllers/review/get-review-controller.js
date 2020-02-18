@@ -34,7 +34,7 @@ async function getReview(req, res, next) {
     const sqlQuery = `SELECT r.id, r.start_year,
                         r.end_year, r.created_at, r.salary,
                         r.inhouse_training, r.growth_opportunities, r.work_enviroment, r.personal_life,
-                        r.salary_valuation, r.comment_title, r.comment
+                        r.salary_valuation, r.comment_title, r.comment,
                         (r.salary_valuation + r.inhouse_training + r.growth_opportunities + r.work_enviroment +  r.personal_life )/5.0 as everage
                       FROM reviews r
                       LEFT JOIN positions p
