@@ -108,7 +108,7 @@ async function getReviewsFilter(req, res) {
       row4page = numsRows;
     }
 
-    sqlQuery = `SELECT r.id, r.start_year, r.end_year, r.created_at, r.salary,
+    sqlQuery = `SELECT r.id, r.start_year, r.end_year, r.user_id, r.created_at, r.salary,
                       r.salary_valuation, r.inhouse_training, r.growth_opportunities,
                       r.work_enviroment, r.personal_life, r.comment_title, r.comment,
                       p.name, ci.name as city_name, s.sector, 

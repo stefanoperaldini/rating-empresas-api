@@ -44,22 +44,22 @@ async function getCompanies(req, res) {
     let numsRows = 0;
     let rows = [];
     if (filters === undefined || filters === "yes") {
-      let strSort = "ORDER BY everage DESC";
+      let strSort = "ORDER BY everage DESC, c.name ASC";
       switch (sortTipe) {
         case "2":
-          strSort = "ORDER BY r.salary_valuation DESC";
+          strSort = "ORDER BY avg_salary_valuation DESC, c.name ASC";
           break;
         case "3":
-          strSort = "ORDER BY r.inhouse_training DESC";
+          strSort = "ORDER BY avg_inhouse_training DESC, c.name ASC";
           break;
         case "4":
-          strSort = "ORDER BY r.growth_opportunities DESC";
+          strSort = "ORDER BY avg_growth_opportunities DESC, c.name ASC";
           break;
         case "5":
-          strSort = "ORDER BY r.work_enviroment DESC";
+          strSort = "ORDER BY avg_work_enviroment DESC, c.name ASC";
           break;
         case "6":
-          strSort = "ORDER BY r.personal_life DESC";
+          strSort = "ORDER BY avg_personal_life DESC, c.name ASC";
           break;
         case "7":
           strSort = "ORDER BY c.name ASC";

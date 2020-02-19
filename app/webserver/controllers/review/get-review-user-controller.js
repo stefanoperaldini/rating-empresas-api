@@ -7,7 +7,7 @@ async function getReviewUser(req, res) {
   let connection;
   try {
     connection = await mysqlPool.getConnection();
-    const sqlQuery = `SELECT r.id, r.start_year, r.end_year, r.created_at, 
+    const sqlQuery = `SELECT r.id, r.start_year, r.end_year, r.user_id, r.created_at, 
                         r.salary_valuation, r.inhouse_training, r.growth_opportunities, 
                         r.work_enviroment, r.personal_life, r.comment_title, r.comment, 
                         p.name, c.name as company_name, ci.name as city_name,
