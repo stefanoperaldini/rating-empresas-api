@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "37beba90-d86d-47cd-8f4a-d6672ed332ee",
+		"_postman_id": "1e1caaba-21db-4fd4-a0b0-aceaca1326ab",
 		"name": "RatingEmpresas",
 		"description": "Proyecto RatingEmpresas",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
@@ -10,7 +10,7 @@
 			"name": "city",
 			"item": [
 				{
-					"name": "CitiesQuery",
+					"name": "CitiesPaging",
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -38,7 +38,7 @@
 					"response": []
 				},
 				{
-					"name": "Cities",
+					"name": "AllCities",
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -56,21 +56,41 @@
 					"response": []
 				},
 				{
-					"name": "City",
+					"name": "LikeCities",
 					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{baseUrl}}/v1/regions/12/provinces/15/cities/79daa7a8-bd2f-408a-9fa8-e7c2d177bbc7",
+							"raw": "{{baseUrl}}/v1/cities?name=Coru",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
 								"v1",
-								"regions",
-								"12",
-								"provinces",
-								"15",
+								"cities"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "Coru"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "City",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/v1/cities/79daa7a8-bd2f-408a-9fa8-e7c2d177bbc7",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
 								"cities",
 								"79daa7a8-bd2f-408a-9fa8-e7c2d177bbc7"
 							]
@@ -214,7 +234,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"name\":\"Stefano\",\n\t\"email\": \"stefano.peraldini@gmail.com\",\n\t\"password\": \"myPwd123456\",\n\t\"linkedin\": \"https://www.linkedin.com/in/stefano-peraldini-software-developer/\",\n\t\"role\": \"1\"\n}"
+							"raw": "{\n\t\"name\":\"Stefano\",\n\t\"email\": \"stefano.peraldini@gmail.com\",\n\t\"password\": \"123456\",\n\t\"linkedin\": \"https://www.linkedin.com/in/stefano-peraldini-software-developer/\",\n\t\"role\": \"1\"\n}"
 						},
 						"url": {
 							"raw": "{{baseUrl}}/v1/accounts",
@@ -224,6 +244,37 @@
 							"path": [
 								"v1",
 								"accounts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "activate",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\":\"Stefano\",\n\t\"email\": \"stefano.peraldini@gmail.com\",\n\t\"password\": \"myPwd123456\",\n\t\"linkedin\": \"https://www.linkedin.com/in/stefano-peraldini-software-developer/\",\n\t\"role\": \"1\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/v1/accounts/activate/331e6adc-48aa-45c9-9cd1-eba74cb0b340",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"accounts",
+								"activate",
+								"331e6adc-48aa-45c9-9cd1-eba74cb0b340"
 							]
 						}
 					},
@@ -256,7 +307,136 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"email\": \"stefano.peraldini@gmail.com\",\n\t\"password\": \"ad8e195fff82458b9499c8981f8ce852\"\n}"
+							"raw": "{\n\t\"email\": \"stefano.peraldini@gmail.com\",\n\t\"password\": \"123456\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/v1/accounts/login",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"accounts",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "auth tipe 2",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "177caea2-8093-463b-945c-72d6b55bdfca",
+								"exec": [
+									"",
+									"pm.environment.set(\"accessToken\", pm.response.json().accessToken);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"email\": \"pmolina12@yopmail.com\",\n\t\"password\": \"123456\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/v1/accounts/login",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"accounts",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "auth tipe 1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "177caea2-8093-463b-945c-72d6b55bdfca",
+								"exec": [
+									"",
+									"pm.environment.set(\"accessToken\", pm.response.json().accessToken);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"email\": \"oscpenedo159@yopmail.com\",\n\t\"password\": \"123456\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/v1/accounts/login",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"accounts",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "auth tipe 0",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "177caea2-8093-463b-945c-72d6b55bdfca",
+								"exec": [
+									"",
+									"pm.environment.set(\"accessToken\", pm.response.json().accessToken);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"email\": \"admin_workplace@yopmail.com\",\n\t\"password\": \"123456\"\n}"
 						},
 						"url": {
 							"raw": "{{baseUrl}}/v1/accounts/login",
@@ -366,7 +546,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n \"oldPassword\": \"ad8e195fff82458b9499c8981f8ce852\",\n \"newPassword\": \"123456\"\n}"
+							"raw": "{\n \"oldPassword\": \"6ac3d555eaae4925a4a442b0ae102ad2\",\n \"newPassword\": \"123456\"\n}"
 						},
 						"url": {
 							"raw": "{{baseUrl}}/v1/accounts/password/change",
@@ -432,7 +612,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"name\":\"Banco Bestbank\",\n\t\"description\": \"Entidad financiera con sede en A Coruña\",\n\t\"sector_id\": \"59a36aa8-2ad2-4de4-88d5-ef32a4e2ca70\",\n\t\"url_web\": \"http://www.bestbank.com\",\n\t\"linkedin\": \"https://www.linkedin.com/in/bestbank/\",\n\t\"address\": \"Canton Grande, 2\",\n\t\"sede_id\": \"79daa7a8-bd2f-408a-9fa8-e7c2d177bbc7\"\n}\n\t"
+							"raw": "{\n\t\"name\":\"Banco Bestbank\",\n\t\"description\": \"Entidad financiera con sede en A Coruña\",\n\t\"sector_id\": \"6538f2f3-fc77-46c3-94f4-beafe019baaa\",\n\t\"url_web\": \"http://www.bestbank.com\",\n\t\"linkedin\": \"https://www.linkedin.com/in/bestbank/\",\n\t\"address\": \"Canton Grande, 2\",\n\t\"sede_id\": \"79daa7a8-bd2f-408a-9fa8-e7c2d177bbc7\"\n}\n\t"
 						},
 						"url": {
 							"raw": "{{baseUrl}}/v1/companies",
@@ -448,40 +628,7 @@
 					"response": []
 				},
 				{
-					"name": "company banca 2",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"type": "text",
-								"value": "application/json"
-							},
-							{
-								"key": "Authorization",
-								"type": "text",
-								"value": "Bearer {{accessToken}}"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n\t\"name\":\"Banco Artabro\",\n\t\"description\": \"Entidad financiera con sede en A Coruña\",\n\t\"sector_id\": \"66bc21c5-0cb2-4191-8d38-1b444467d2d2\",\n\t\"url_web\": \"http://www.bancoartabro.com\",\n\t\"linkedin\": \"https://www.linkedin.com/in/bancoartabro/\",\n\t\"address\": \"Canton Pequeño, 1\",\n\t\"sede_id\": \"79daa7a8-bd2f-408a-9fa8-e7c2d177bbc7\"\n}\n\t"
-						},
-						"url": {
-							"raw": "{{baseUrl}}/v1/companies",
-							"host": [
-								"{{baseUrl}}"
-							],
-							"path": [
-								"v1",
-								"companies"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "company banca change data",
+					"name": "company banca",
 					"request": {
 						"method": "PUT",
 						"header": [
@@ -498,50 +645,17 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"name\":\"Banco Bestbank3\",\n\t\"description\": \"Entidad financiera con sede en Santiago\",\n\t\"sector_id\": \"59a36aa8-2ad2-4de4-88d5-ef32a4e2ca70\",\n\t\"url_web\": \"http://www.bestbank3.com\",\n\t\"linkedin\": \"https://www.linkedin.com/in/bestbank2/\",\n\t\"address\": \"Canton Grande, 15\",\n\t\"sede_id\": \"79daa7a8-bd2f-408a-9fa8-e7c2d177bbc7\"\n}\n\t"
+							"raw": "{\n\t\"name\":\"Banco Bestbank\",\n\t\"description\": \"Entidad financiera con sede en A Coruña\",\n\t\"sector_id\": \"6538f2f3-fc77-46c3-94f4-beafe019baaa\",\n\t\"url_web\": \"http://www.bestbank.com\",\n\t\"linkedin\": \"https://www.linkedin.com/in/bestbank/\",\n\t\"address\": \"Canton Grande, 2\",\n\t\"sede_id\": \"79daa7a8-bd2f-408a-9fa8-e7c2d177bbc7\"\n}\n\t"
 						},
 						"url": {
-							"raw": "{{baseUrl}}/v1/companies/0de6dc68-a6e4-4e03-940c-40a313fd75c2",
+							"raw": "{{baseUrl}}/v1/companies/b495fa6d-4b63-4cce-8814-20f72aac6822",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
 								"v1",
 								"companies",
-								"0de6dc68-a6e4-4e03-940c-40a313fd75c2"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "company user 1 juan",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"type": "text",
-								"value": "application/json"
-							},
-							{
-								"key": "Authorization",
-								"type": "text",
-								"value": "Bearer {{accessToken}}"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n\t\"name\":\"Banco Otrobanco\",\n\t\"description\": \"Entidad financiera con sede en Vigo\",\n\t\"sector_id\": \"66bc21c5-0cb2-4191-8d38-1b444467d2d2\",\n\t\"url_web\": \"http://www.otrobanco.com\",\n\t\"linkedin\": \"https://www.linkedin.com/in/otrobanco/\",\n\t\"address\": \"García Barbón, 2\",\n\t\"sede_id\": \"3cc2a6a1-9afc-4575-b5e5-3b25bfbdcbd4\"\n}\n\t"
-						},
-						"url": {
-							"raw": "{{baseUrl}}/v1/companies",
-							"host": [
-								"{{baseUrl}}"
-							],
-							"path": [
-								"v1",
-								"companies"
+								"b495fa6d-4b63-4cce-8814-20f72aac6822"
 							]
 						}
 					},
@@ -585,6 +699,131 @@
 					"response": []
 				},
 				{
+					"name": "CompaniesFilter",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/v1/companies?sortTipe=7&sectorId=4136ecf0-271c-4ea6-9893-ad03b9c0fd5e",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"companies"
+							],
+							"query": [
+								{
+									"key": "sortTipe",
+									"value": "7"
+								},
+								{
+									"key": "sectorId",
+									"value": "4136ecf0-271c-4ea6-9893-ad03b9c0fd5e"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CompanyCity",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/v1/companies/cities/e2961ced-ef78-42c8-bb4e-f0eaf242ca23",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"companies",
+								"cities",
+								"e2961ced-ef78-42c8-bb4e-f0eaf242ca23"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CompanyCity active",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/v1/companies/cities/active",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"companies",
+								"cities",
+								"active"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "Company",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
@@ -609,54 +848,21 @@
 							}
 						},
 						"url": {
-							"raw": "{{baseUrl}}/v1/companies/0de6dc68-a6e4-4e03-940c-40a313fd75c2",
+							"raw": "{{baseUrl}}/v1/companies/e2961ced-ef78-42c8-bb4e-f0eaf242ca23",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
 								"v1",
 								"companies",
-								"0de6dc68-a6e4-4e03-940c-40a313fd75c2"
+								"e2961ced-ef78-42c8-bb4e-f0eaf242ca23"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "company sw",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							},
-							{
-								"key": "Authorization",
-								"value": "Bearer {{accessToken}}",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n\t\"name\":\"Software for the people\",\n\t\"description\": \"Creación y desarrollo de software desde Galicia\",\n\t\"sector_id\": \"dd1712bc-bcb4-47fd-a5ba-a699d4d4e6c0\",\n\t\"url_web\": \"http://www.software4people.es\",\n\t\"linkedin\": \"https://www.linkedin.com/in/software4people/\",\n\t\"address\": \"San Andres, 25 - 1º D\",\n\t\"sede_id\": \"79daa7a8-bd2f-408a-9fa8-e7c2d177bbc7\"\n}"
-						},
-						"url": {
-							"raw": "{{baseUrl}}/v1/companies",
-							"host": [
-								"{{baseUrl}}"
-							],
-							"path": [
-								"v1",
-								"companies"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "logo company banca",
+					"name": "logo company",
 					"request": {
 						"method": "POST",
 						"header": [
@@ -678,7 +884,7 @@
 								{
 									"key": "logo",
 									"type": "file",
-									"src": "/home/hab44/Documents/PROJECT/rating-empresas-api/img/bestbank.png"
+									"src": "/home/hab31/HaB/01_proyecto/rating-empresas-frontend/src/img/GitHub-Mark-32px.png"
 								}
 							]
 						},
@@ -702,39 +908,6 @@
 		{
 			"name": "Sectors",
 			"item": [
-				{
-					"name": "sector sw develop",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							},
-							{
-								"key": "Authorization",
-								"value": "Bearer {{accessToken}}",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n \"sector\":\"Desarrollo de software\"\n}\n\t"
-						},
-						"url": {
-							"raw": "{{baseUrl}}/v1/sectors",
-							"host": [
-								"{{baseUrl}}"
-							],
-							"path": [
-								"v1",
-								"sectors"
-							]
-						}
-					},
-					"response": []
-				},
 				{
 					"name": "sector banca",
 					"request": {
@@ -811,14 +984,14 @@
 							}
 						],
 						"url": {
-							"raw": "{{baseUrl}}/v1/sectors/59a36aa8-2ad2-4de4-88d5-ef32a4e2ca70",
+							"raw": "{{baseUrl}}/v1/sectors/4136ecf0-271c-4ea6-9893-ad03b9c0fd5e",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
 								"v1",
 								"sectors",
-								"59a36aa8-2ad2-4de4-88d5-ef32a4e2ca70"
+								"4136ecf0-271c-4ea6-9893-ad03b9c0fd5e"
 							]
 						}
 					},
@@ -833,7 +1006,7 @@
 				{
 					"name": "update",
 					"request": {
-						"method": "PUT",
+						"method": "PATCH",
 						"header": [
 							{
 								"key": "Authorization",
@@ -931,14 +1104,14 @@
 							}
 						],
 						"url": {
-							"raw": "{{baseUrl}}/v1/positions/0ef2ac13-38b5-4ef8-9c28-6ea00841f43a",
+							"raw": "{{baseUrl}}/v1/positions/8600a510-3856-47bc-b6ff-e33fb4488710",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
 								"v1",
 								"positions",
-								"0ef2ac13-38b5-4ef8-9c28-6ea00841f43a"
+								"8600a510-3856-47bc-b6ff-e33fb4488710"
 							]
 						}
 					},
@@ -1006,6 +1179,38 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Positions Company",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "",
+								"type": "text",
+								"value": "",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/v1/positions/company/e2961ced-ef78-42c8-bb4e-f0eaf242ca23",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"positions",
+								"company",
+								"e2961ced-ef78-42c8-bb4e-f0eaf242ca23"
+							]
+						}
+					},
+					"response": []
 				}
 			],
 			"protocolProfileBehavior": {}
@@ -1038,14 +1243,106 @@
 							}
 						},
 						"url": {
-							"raw": "{{baseUrl}}/v1/reviews/c6033b4a-40fa-4678-9473-65e1c6abebc1",
+							"raw": "{{baseUrl}}/v1/reviews/03cfed66-964d-4093-9dc0-cf07dec241ac",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
 								"v1",
 								"reviews",
-								"c6033b4a-40fa-4678-9473-65e1c6abebc1"
+								"03cfed66-964d-4093-9dc0-cf07dec241ac"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ReviewsQuery",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/v1/reviews/filter/all?companyId=e2961ced-ef78-42c8-bb4e-f0eaf242ca23&positionId=8600a510-3856-47bc-b6ff-e33fb4488710&sortTipe=1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"reviews",
+								"filter",
+								"all"
+							],
+							"query": [
+								{
+									"key": "companyId",
+									"value": "e2961ced-ef78-42c8-bb4e-f0eaf242ca23"
+								},
+								{
+									"key": "positionId",
+									"value": "8600a510-3856-47bc-b6ff-e33fb4488710"
+								},
+								{
+									"key": "sortTipe",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ReviewsAll",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/v1/reviews/filter/all",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"reviews",
+								"filter",
+								"all"
 							]
 						}
 					},
@@ -1069,14 +1366,14 @@
 							}
 						],
 						"url": {
-							"raw": "{{baseUrl}}/v1/reviews/052d6970-458b-4443-b8a1-1e72822f92f8",
+							"raw": "{{baseUrl}}/v1/reviews/552e12ec-d09a-44ef-b700-3065f6a899e6",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
 								"v1",
 								"reviews",
-								"052d6970-458b-4443-b8a1-1e72822f92f8"
+								"552e12ec-d09a-44ef-b700-3065f6a899e6"
 							]
 						}
 					},
@@ -1100,7 +1397,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n \"position_id\":\"0ef2ac13-38b5-4ef8-9c28-6ea00841f43a\",\n \"start_year\":\"2015\",\n \"end_year\":\"2019\",\n \"salary\":\"1430.20\",\n \"inhouse_training\":\"5\",\n \"growth_opportunities\":\"5\",\n \"work_enviroment\":\"5\",\n \"personal_life\":\"5\",\n \"salary_valuation\":\"5\",\n \"comment_title\":\"Commento\",\n \"comment\":\"Testo commento\",\n \"city_id\":\"79daa7a8-bd2f-408a-9fa8-e7c2d177bbc7\",\n \"company_id\":\"fa688c9a-94f7-4cf1-b145-f58347ba21a3\"\n}\n\t"
+							"raw": "{\n \"position_id\":\"866a6420-fb8b-44bb-aa36-a988877e8fb9\",\n \"start_year\":\"2015\",\n \"end_year\":\"2019\",\n \"salary\":\"1430.20\",\n \"inhouse_training\":\"5\",\n \"growth_opportunities\":\"4\",\n \"work_enviroment\":\"3\",\n \"personal_life\":\"2\",\n \"salary_valuation\":\"1\",\n \"comment_title\":\"Commento\",\n \"comment\":\"Testo commento\",\n \"city_id\":\"79daa7a8-bd2f-408a-9fa8-e7c2d177bbc7\",\n \"company_id\":\"e6ed804e-37ac-4a9e-b702-633e944b1175\"\n}\n\t"
 						},
 						"url": {
 							"raw": "{{baseUrl}}/v1/reviews",
@@ -1132,7 +1429,7 @@
 							}
 						],
 						"url": {
-							"raw": "{{baseUrl}}/v1/reviews/blacklist/763675789659879",
+							"raw": "{{baseUrl}}/v1/reviews/blacklist/03cfed66-964d-4093-9dc0-cf07dec241ac",
 							"host": [
 								"{{baseUrl}}"
 							],
@@ -1140,54 +1437,7 @@
 								"v1",
 								"reviews",
 								"blacklist",
-								"763675789659879"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Reviews filter",
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Content-Type",
-								"type": "text",
-								"value": "application/json"
-							}
-						],
-						"url": {
-							"raw": "{{baseUrl}}/v1/reviews/filter/all?companyId=7c81f14a-33d6-4d5b-87fc-6283d9a2d899",
-							"host": [
-								"{{baseUrl}}"
-							],
-							"path": [
-								"v1",
-								"reviews",
-								"filter",
-								"all"
-							],
-							"query": [
-								{
-									"key": "companyId",
-									"value": "7c81f14a-33d6-4d5b-87fc-6283d9a2d899"
-								},
-								{
-									"key": "positionId",
-									"value": "abf43128-3f38-4e1a-9e6c-94145eac0dbe",
-									"disabled": true
-								},
-								{
-									"key": "cityId",
-									"value": "79daa7a8-bd2f-408a-9fa8-e7c2d177bbc7",
-									"disabled": true
-								},
-								{
-									"key": "sectorId",
-									"value": "67431fa2-ec11-4a43-8353-5e43d7320421",
-									"disabled": true
-								}
+								"03cfed66-964d-4093-9dc0-cf07dec241ac"
 							]
 						}
 					},

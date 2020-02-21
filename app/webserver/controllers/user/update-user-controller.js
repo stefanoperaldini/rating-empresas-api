@@ -12,7 +12,7 @@ async function validate(payload) {
   Joi.assert(payload, schema);
 }
 
-async function updateUser(req, res, next) {
+async function updateUser(req, res) {
   const { userId } = req.claims;
 
   const accountData = { ...req.body };

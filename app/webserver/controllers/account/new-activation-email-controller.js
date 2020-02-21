@@ -3,7 +3,7 @@
 const mysqlPool = require('../../../database/mysql-pool');
 const { sendEmailRegistration, validateEmail } = require("../utility");
 
-async function newActivationEmail(req, res, next) {
+async function newActivationEmail(req, res) {
 
     const accountData = { ...req.body };
 
@@ -32,7 +32,7 @@ async function newActivationEmail(req, res, next) {
         const user = rows[0];
 
         try {
-            await await sendEmailRegistration(accountData.email, user.verification_code);
+            await sendEmailRegistration(accountData.email, user.verification_code);
         } catch (e) {
             console.error(e);
         }

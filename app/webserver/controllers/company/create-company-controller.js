@@ -44,7 +44,7 @@ async function validate(payload) {
   Joi.assert(payload, schema);
 }
 
-async function createCompany(req, res, next) {
+async function createCompany(req, res) {
   const companyData = { ...req.body };
   const { userId } = req.claims;
 

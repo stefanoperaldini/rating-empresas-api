@@ -22,7 +22,6 @@ async function checkAccountSession(req, res, next) {
             role,
             token,
         };
-
     } catch (e) {
         console.error(e);
         return res.status(401).send("Authorization error");

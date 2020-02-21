@@ -66,8 +66,6 @@ async function getCities(req, res) {
                 rows
             });
         }
-
-
     } catch (e) {
         if (connection) {
             connection.release();

@@ -2,8 +2,8 @@
 
 const bcrypt = require("bcrypt");
 const Joi = require("@hapi/joi");
-const mysqlPool = require("../../../database/mysql-pool");
 const uuidV4 = require("uuid/v4");
+const mysqlPool = require("../../../database/mysql-pool");
 const { sendEmailRegistration } = require("../utility");
 
 async function validate(payload) {
@@ -52,12 +52,12 @@ async function addVerificationCode(uuid) {
     return verificationCode;
 }
 
-async function createAccount(req, res, next) {
+async function createAccount(req, res) {
     /*
     * Role:
     * 0 admin
     * 1 user
-    * 2 enterprise
+    * 2 company
     */
     const accountData = { ...req.body };
     try {
@@ -100,7 +100,6 @@ async function createAccount(req, res, next) {
         if (connection) {
             connection.release();
         }
-
         if (e.code === "ER_DUP_ENTRY") return res.status(409).send("User already exists");
 
         console.error(e);

@@ -2,7 +2,7 @@
 
 const mysqlPool = require("../../../database/mysql-pool");
 
-async function getCompaniesCities(req, res, next) {
+async function getCompaniesCities(req, res) {
 
     try {
         const connection = await mysqlPool.getConnection();

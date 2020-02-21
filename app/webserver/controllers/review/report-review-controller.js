@@ -2,7 +2,7 @@
 
 const { sendEmailReport } = require("../utility");
 
-async function reportReview(req, res, next) {
+async function reportReview(req, res) {
     const { reviewId } = req.params;
 
     try {

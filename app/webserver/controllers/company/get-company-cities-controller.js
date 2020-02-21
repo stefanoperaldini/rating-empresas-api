@@ -15,7 +15,7 @@ async function validate(payload) {
     Joi.assert(payload, schema);
 }
 
-async function getCompanyCities(req, res, next) {
+async function getCompanyCities(req, res) {
     const companyId = req.params.companyId;
     try {
         await validate({ companyId });
@@ -33,13 +33,14 @@ async function getCompanyCities(req, res, next) {
                                  WHERE companies_cities.company_id = ?
                                  ORDER BY c.name`;
         const [results] = await connection.execute(getCompanyQuery, [companyId]);
+
         connection.release();
+
         if (results.length === 0) {
             return res.status(404).send("Company not found");
         }
 
         return res.send(results);
-
     } catch (e) {
         console.error(e);
         return res.status(500).send();

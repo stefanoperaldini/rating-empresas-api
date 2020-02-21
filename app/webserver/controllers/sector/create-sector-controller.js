@@ -15,7 +15,7 @@ async function validateSchema(payload) {
   Joi.assert(payload, schema);
 }
 
-async function createSector(req, res, next) {
+async function createSector(req, res) {
   const sectorData = { ...req.body };
 
   try {

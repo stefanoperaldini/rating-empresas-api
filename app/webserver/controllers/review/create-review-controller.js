@@ -64,7 +64,7 @@ async function validate(payload) {
   Joi.assert(payload, schema);
 }
 
-async function createReview(req, res, next) {
+async function createReview(req, res) {
   const reviewData = { ...req.body };
   const { userId } = req.claims;
 
