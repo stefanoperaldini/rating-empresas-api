@@ -21,11 +21,10 @@ async function validate(payload) {
             .string()
             .regex(/^[a-zA-Z0-9]{3,30}$/)
             .required(),
-        linkedin: Joi
-            .string()
-            .max(255)
+        linkedin: Joi.string()
             .allow("")
-            .uri(),
+            .regex(/^https:\/\/[a-z]{2,3}\.linkedin\.com\/.*$/)
+            .max(255),
         role: Joi.number()
             .integer()
             .min(1)

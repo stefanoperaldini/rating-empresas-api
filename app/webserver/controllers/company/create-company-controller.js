@@ -22,7 +22,7 @@ async function validate(payload) {
       .required(),
     url_web: Joi.string()
       .allow("")
-      .uri()
+      .regex(/^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([-.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/)
       .max(255),
     url_logo: Joi.string()
       .allow("")
@@ -30,8 +30,10 @@ async function validate(payload) {
       .max(255),
     linkedin: Joi.string()
       .allow("")
-      .uri(),
+      .regex(/^https:\/\/[a-z]{2,3}\.linkedin\.com\/.*$/)
+      .max(255),
     address: Joi.string()
+      .allow("")
       .min(10)
       .max(60),
     sede_id: Joi.string()
