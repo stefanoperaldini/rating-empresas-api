@@ -23,8 +23,6 @@ async function getPositions(req, res) {
         return res.status(400).send("Data are not valid");
     }
 
-    let numsRows = 0;
-
     let connection;
     try {
         connection = await mysqlPool.getConnection();

@@ -49,7 +49,7 @@ async function validateSchema(payload) {
   Joi.assert(payload, schema);
 }
 
-async function updateCompany(req, res, next) {
+async function updateCompany(req, res) {
   const { companyId } = req.params;
   const { userId } = req.claims;
   const companyData = {

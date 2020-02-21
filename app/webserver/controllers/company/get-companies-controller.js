@@ -1,8 +1,6 @@
 "use strict";
 
 const Joi = require("@hapi/joi");
-//const redis = require("redis");
-
 const mysqlPool = require("../../../database/mysql-pool");
 
 async function validate(payload) {
@@ -158,22 +156,6 @@ async function getCompanies(req, res) {
                   ${strSort}
                   LIMIT ?,?;`;
 
-      // Manage query REDIS 
-      //const clientRedis = await redis.createClient();
-
-      //await clientRedis.get(`query:${optWhere}-${strSort}-${queryParams}-${offset}-${row4page}`, async function (err, result) {
-      // key exist in Redis store
-      // if (result) {
-      //   return res.send({
-      //     numsRows,
-      //     page,
-      //     rows_companies: JSON.parse(result),
-      //   });
-      // }
-      // if (err) {
-      //   console.error(err);
-      // }
-
       [rows] = await connection.execute(sqlQuery, [...queryParams, offset, row4page]);
     } else {
       let sqlQuery = `SELECT COUNT(*) as numsRows FROM companies`;
@@ -203,18 +185,11 @@ async function getCompanies(req, res) {
       return res.status(404).send("Companies not founded");
     }
 
-    // try {
-    //   await clientRedis.set(`query:${optWhere}-${strSort}-${queryParams}-${offset}-${row4page}`, JSON.stringify(rows), 'EX', process.env.REDIS_TTL_QUERY);
-    // } catch (e) {
-    //   console.error(e);
-    // }
-
     return res.send({
       numsRows,
       page,
       rows_companies: rows,
     });
-    // });
 
   } catch (e) {
     if (connection) {

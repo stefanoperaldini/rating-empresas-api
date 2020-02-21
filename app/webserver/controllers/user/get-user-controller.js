@@ -2,7 +2,7 @@
 
 const mysqlPool = require('../../../database/mysql-pool');
 
-async function getUser(req, res, next) {
+async function getUser(req, res) {
     const { userId } = req.claims;
 
     let connection;

@@ -15,7 +15,7 @@ async function validate(payload) {
   Joi.assert(payload, schema);
 }
 
-async function getCompany(req, res, next) {
+async function getCompany(req, res) {
   const companyId = req.params.companyId;
   try {
     await validate({ companyId });

@@ -20,7 +20,7 @@ async function validate(payload) {
     Joi.assert(payload, schema);
 }
 
-async function login(req, res, next) {
+async function login(req, res) {
     const accountData = { ...req.body };
     try {
         await validate(accountData);

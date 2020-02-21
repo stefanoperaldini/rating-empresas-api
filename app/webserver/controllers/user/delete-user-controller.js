@@ -2,7 +2,7 @@
 
 const mysqlPool = require('../../../database/mysql-pool');
 
-async function deleteUser(req, res, next) {
+async function deleteUser(req, res) {
     const { userId } = req.claims;
 
     let connection;

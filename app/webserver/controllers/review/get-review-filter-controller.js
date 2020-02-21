@@ -3,7 +3,6 @@
 const Joi = require("@hapi/joi");
 const mysqlPool = require("../../../database/mysql-pool");
 
-
 async function validate(payload) {
   const schema = Joi.object({
     row4page: Joi.number(),
@@ -143,8 +142,6 @@ async function getReviewsFilter(req, res) {
         created_at,
       };
     });
-
-    // numsRows = reviews.length;
 
     return res.send({
       numsRows,

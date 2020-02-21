@@ -2,7 +2,7 @@
 
 const mysqlPool = require('../../../database/mysql-pool');
 
-async function activate(req, res, next) {
+async function activate(req, res) {
     const verification_code = req.params.verification_code;
 
     if (!verification_code) {
@@ -33,7 +33,6 @@ async function activate(req, res, next) {
                 return res.send('Account activated');
             }
         }
-        // algo no fue ok
         connection.release();
         return res.status(404).send('Account activated error');
     } catch (e) {
