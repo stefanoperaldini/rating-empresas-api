@@ -7,7 +7,9 @@ async function validate(payload) {
   const schema = Joi.object({
     row4page: Joi.number(),
     page: Joi.number(),
-    filters: Joi.string().min(2).max(3),
+    filters: Joi.string()
+      .min(2)
+      .max(3),
     sectorId: Joi.string().guid({
       version: ["uuidv4"]
     }),
@@ -26,10 +28,26 @@ async function validate(payload) {
 }
 
 async function getCompanies(req, res) {
-  let { row4page, page, sectorId, positionId, cityId, sortTipe, filters, } = req.query;
+  let {
+    row4page,
+    page,
+    sectorId,
+    positionId,
+    cityId,
+    sortTipe,
+    filters
+  } = req.query;
 
   try {
-    await validate({ row4page, page, sectorId, positionId, cityId, sortTipe, filters });
+    await validate({
+      row4page,
+      page,
+      sectorId,
+      positionId,
+      cityId,
+      sortTipe,
+      filters
+    });
   } catch (e) {
     console.error(e);
     return res.status(400).send("Data are not valid");
@@ -70,21 +88,21 @@ async function getCompanies(req, res) {
       if (sectorId || positionId || cityId) {
         if (sectorId) {
           optWhere = `${optWhere} AND c.sector_id = ?`;
-          queryParams = [...queryParams, sectorId,];
+          queryParams = [...queryParams, sectorId];
         }
 
         if (positionId) {
           optWhere = `${optWhere} AND r.position_id = ?`;
-          queryParams = [...queryParams, positionId,];
+          queryParams = [...queryParams, positionId];
         }
 
         if (cityId) {
           optWhere = `${optWhere} AND r.city_id = ?`;
-          queryParams = [...queryParams, cityId,];
+          queryParams = [...queryParams, cityId];
         }
       }
 
-      queryParams = [...queryParams,];
+      queryParams = [...queryParams];
 
       let sqlQuery = `SELECT COUNT(*) as numsRows FROM (
                         SELECT COUNT(r.id) as n_review
@@ -95,7 +113,7 @@ async function getCompanies(req, res) {
                         ON c.sector_id = s.id
                         LEFT JOIN cities AS ci
                         ON r.city_id = ci.id
-                      ${ optWhere}
+                      ${optWhere}
                       GROUP BY c.id) AS tempCompanies`;
 
       [rows] = await connection.query(sqlQuery, queryParams);
@@ -121,10 +139,10 @@ async function getCompanies(req, res) {
                     avg_growth_opportunities,
                     avg_work_enviroment,
                     avg_personal_life,
-                    avg_salary_valuation
+                    avg_salary_valuation,
                     everage
                   FROM(
-                        SELECT *, (avg_salary_valuation + avg_inhouse_training + avg_growth_opportunities + avg_work_enviroment +  avg_personal_life )/5.0 as everage
+                        SELECT *, (avg_inhouse_training + avg_growth_opportunities + avg_work_enviroment +  avg_personal_life + avg_salary_valuation)/5.0 as everage
                         FROM(
                             SELECT c.id, c.name, c.sector_id, c.sede_id, c.user_id,
                                     COUNT(r.id) as n_review,
@@ -156,7 +174,11 @@ async function getCompanies(req, res) {
                   ${strSort}
                   LIMIT ?,?;`;
 
-      [rows] = await connection.execute(sqlQuery, [...queryParams, offset, row4page]);
+      [rows] = await connection.execute(sqlQuery, [
+        ...queryParams,
+        offset,
+        row4page
+      ]);
     } else {
       let sqlQuery = `SELECT COUNT(*) as numsRows FROM companies`;
       page = 1;
@@ -188,9 +210,8 @@ async function getCompanies(req, res) {
     return res.send({
       numsRows,
       page,
-      rows_companies: rows,
+      rows_companies: rows
     });
-
   } catch (e) {
     if (connection) {
       connection.release();
