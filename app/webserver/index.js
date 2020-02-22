@@ -13,7 +13,7 @@ const {
   userRouter
 } = require("./routes");
 
-initApp(); // inicializo app (creo account admin si no existe)
+initApp(); //application setting (create account admin if no exist)
 
 const app = express();
 app.use(cors());

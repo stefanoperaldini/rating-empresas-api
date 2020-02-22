@@ -7,12 +7,13 @@ async function validate(payload) {
   const schema = Joi.object({
     linkedin: Joi.string()
       .allow("")
-      .uri(),
+      .regex(/^https:\/\/[a-z]{2,3}\.linkedin\.com\/.*$/)
+      .max(255),
   });
   Joi.assert(payload, schema);
 }
 
-async function updateUser(req, res, next) {
+async function updateUser(req, res) {
   const { userId } = req.claims;
 
   const accountData = { ...req.body };

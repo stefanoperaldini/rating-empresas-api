@@ -15,7 +15,7 @@ async function validate(payload) {
   Joi.assert(payload, schema);
 }
 
-async function deleteReview(req, res, next) {
+async function deleteReview(req, res) {
   const { reviewId } = req.params;
 
   try {

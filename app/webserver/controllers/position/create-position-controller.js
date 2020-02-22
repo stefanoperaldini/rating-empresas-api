@@ -15,7 +15,7 @@ async function validateSchema(payload) {
     Joi.assert(payload, schema);
 }
 
-async function createPosition(req, res, next) {
+async function createPosition(req, res) {
     const positionData = { ...req.body };
 
     try {

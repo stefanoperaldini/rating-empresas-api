@@ -2,7 +2,7 @@
 
 const redis = require("redis");
 
-async function logoutUser(req, res, next) {
+async function logoutUser(req, res) {
     const { token } = req.claims;
     try {
         const clientRedis = redis.createClient();

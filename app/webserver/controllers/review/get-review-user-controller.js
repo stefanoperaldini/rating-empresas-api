@@ -7,11 +7,11 @@ async function getReviewUser(req, res) {
   let connection;
   try {
     connection = await mysqlPool.getConnection();
-    //FIXME r.deleted_at,
-    const sqlQuery = `SELECT r.id, r.start_year, r.end_year, r.created_at, 
+    const sqlQuery = `SELECT r.id, r.start_year, r.end_year, r.user_id, r.created_at, 
                         r.salary_valuation, r.inhouse_training, r.growth_opportunities, 
                         r.work_enviroment, r.personal_life, r.comment_title, r.comment, 
-                        p.name, c.name as company_name, ci.name as city_name
+                        p.name, c.name as company_name, ci.name as city_name,
+                        (r.salary_valuation + r.inhouse_training + r.growth_opportunities + r.work_enviroment +  r.personal_life )/5.0 as everage
                       FROM reviews r
                       LEFT JOIN positions p
                         ON r.position_id = p.id
@@ -22,6 +22,7 @@ async function getReviewUser(req, res) {
                       WHERE
                         r.user_id = ?
                         AND r.deleted_at IS NULL
+                      GROUP BY r.id
                       ORDER BY r.created_at DESC;`;
 
     const [rows] = await connection.execute(sqlQuery, [userId]);
@@ -36,7 +37,7 @@ async function getReviewUser(req, res) {
 
       return {
         ...review,
-        created_at
+        created_at,
       };
     });
 

@@ -8,20 +8,20 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
 -- Schema mydb
 -- -----------------------------------------------------
 -- -----------------------------------------------------
--- Schema EnterpriseRanking
+-- Schema RatingEmpresas
 -- -----------------------------------------------------
 
 -- -----------------------------------------------------
--- Schema EnterpriseRanking
+-- Schema RatingEmpresas
 -- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `EnterpriseRanking` DEFAULT CHARACTER SET utf8 ;
+CREATE SCHEMA IF NOT EXISTS `RatingEmpresas` DEFAULT CHARACTER SET utf8 ;
 
-USE `EnterpriseRanking` ;
+USE `RatingEmpresas` ;
 
 -- -----------------------------------------------------
--- Table `EnterpriseRanking`.`regions`
+-- Table `RatingEmpresas`.`regions`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `EnterpriseRanking`.`regions` (
+CREATE TABLE IF NOT EXISTS `RatingEmpresas`.`regions` (
   `id` CHAR(2) NOT NULL,
   `name` VARCHAR(30) NOT NULL,
   PRIMARY KEY (`id`))
@@ -29,9 +29,9 @@ ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 
 -- -----------------------------------------------------
--- Table `EnterpriseRanking`.`provinces`
+-- Table `RatingEmpresas`.`provinces`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `EnterpriseRanking`.`provinces` (
+CREATE TABLE IF NOT EXISTS `RatingEmpresas`.`provinces` (
   `id` CHAR(2) NOT NULL,
   `name` VARCHAR(30) NOT NULL,
   PRIMARY KEY (`id`))
@@ -39,9 +39,9 @@ ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 
 -- -----------------------------------------------------
--- Table `EnterpriseRanking`.`cities`
+-- Table `RatingEmpresas`.`cities`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `EnterpriseRanking`.`cities` (
+CREATE TABLE IF NOT EXISTS `RatingEmpresas`.`cities` (
   `id` CHAR(36) NOT NULL,
   `name` VARCHAR(60) NOT NULL,
   `region_id` CHAR(2) NOT NULL,
@@ -51,21 +51,21 @@ CREATE TABLE IF NOT EXISTS `EnterpriseRanking`.`cities` (
   INDEX `cities_fk_province_id_provinces_id_idx` (`province_id` ASC),
   CONSTRAINT `fk_cities_region_id_region_id`
     FOREIGN KEY (`region_id`)
-    REFERENCES `EnterpriseRanking`.`regions` (`id`)
+    REFERENCES `RatingEmpresas`.`regions` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_cities_province_id_province_id`
     FOREIGN KEY (`province_id`)
-    REFERENCES `EnterpriseRanking`.`provinces` (`id`)
+    REFERENCES `RatingEmpresas`.`provinces` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 
 -- -----------------------------------------------------
--- Table `EnterpriseRanking`.`sectors`
+-- Table `RatingEmpresas`.`sectors`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `EnterpriseRanking`.`sectors` (
+CREATE TABLE IF NOT EXISTS `RatingEmpresas`.`sectors` (
   `id` CHAR(36) NOT NULL,
   `sector` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`id`),
@@ -74,9 +74,9 @@ ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 
 -- -----------------------------------------------------
--- Table `EnterpriseRanking`.`companies`
+-- Table `RatingEmpresas`.`companies`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `EnterpriseRanking`.`companies` (
+CREATE TABLE IF NOT EXISTS `RatingEmpresas`.`companies` (
   `id` CHAR(36) NOT NULL,
   `name` VARCHAR(60) NOT NULL,
   `description` VARCHAR(1000) NULL,
@@ -96,46 +96,46 @@ CREATE TABLE IF NOT EXISTS `EnterpriseRanking`.`companies` (
   UNIQUE INDEX `name_UNIQUE` (`name` ASC),
   CONSTRAINT `fk_companies_sector_id_sector_id`
     FOREIGN KEY (`sector_id`)
-    REFERENCES `EnterpriseRanking`.`sectors` (`id`)
+    REFERENCES `RatingEmpresas`.`sectors` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_companies_sede_id_city_id`
     FOREIGN KEY (`sede_id`)
-    REFERENCES `EnterpriseRanking`.`cities` (`id`)
+    REFERENCES `RatingEmpresas`.`cities` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_companies_user_id_user_id`
     FOREIGN KEY (`user_id`)
-    REFERENCES `EnterpriseRanking`.`users` (`id`)
+    REFERENCES `RatingEmpresas`.`users` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- -----------------------------------------------------
--- Table `EnterpriseRanking`.`companies_cities`
+-- Table `RatingEmpresas`.`companies_cities`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `EnterpriseRanking`.`companies_cities` (
+CREATE TABLE IF NOT EXISTS `RatingEmpresas`.`companies_cities` (
   `city_id` CHAR(36) NOT NULL,
   `company_id` VARCHAR(36) NOT NULL,
   PRIMARY KEY (`city_id`, `company_id`),
   INDEX `companies_cities_fk_company_id_idx` (`company_id` ASC),
   CONSTRAINT `fk_companies_cities_city_id_city_id`
     FOREIGN KEY (`city_id`)
-    REFERENCES `EnterpriseRanking`.`cities` (`id`)
+    REFERENCES `RatingEmpresas`.`cities` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_companies_cities_company_id_company_id`
     FOREIGN KEY (`company_id`)
-    REFERENCES `EnterpriseRanking`.`companies` (`id`)
+    REFERENCES `RatingEmpresas`.`companies` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 
 -- -----------------------------------------------------
--- Table `EnterpriseRanking`.`users_activation`
+-- Table `RatingEmpresas`.`users_activation`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `EnterpriseRanking`.`users_activation` (
+CREATE TABLE IF NOT EXISTS `RatingEmpresas`.`users_activation` (
   `id` CHAR(36) NOT NULL,
   `verification_code` CHAR(36) NOT NULL,
   `created_at` DATETIME NOT NULL,
@@ -143,16 +143,16 @@ CREATE TABLE IF NOT EXISTS `EnterpriseRanking`.`users_activation` (
   PRIMARY KEY (`id`),
     CONSTRAINT `fk_user_activation_id_user_id`
     FOREIGN KEY (`id`)
-    REFERENCES `EnterpriseRanking`.`users` (`id`)
+    REFERENCES `RatingEmpresas`.`users` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION )
 ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 
 -- -----------------------------------------------------
--- Table `EnterpriseRanking`.`users`
+-- Table `RatingEmpresas`.`users`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `EnterpriseRanking`.`users` (
+CREATE TABLE IF NOT EXISTS `RatingEmpresas`.`users` (
   `id` CHAR(36) NOT NULL,
   `name` VARCHAR(45) NOT NULL,
   `email` VARCHAR(45) NOT NULL,
@@ -168,9 +168,9 @@ CREATE TABLE IF NOT EXISTS `EnterpriseRanking`.`users` (
 ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- -----------------------------------------------------
--- Table `EnterpriseRanking`.`positions`
+-- Table `RatingEmpresas`.`positions`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `EnterpriseRanking`.`positions` (
+CREATE TABLE IF NOT EXISTS `RatingEmpresas`.`positions` (
   `id` CHAR(36) NOT NULL,
   `name` VARCHAR(60) NOT NULL,
   PRIMARY KEY (`id`),
@@ -179,9 +179,9 @@ ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 
 -- -----------------------------------------------------
--- Table `EnterpriseRanking`.`reviews`
+-- Table `RatingEmpresas`.`reviews`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `EnterpriseRanking`.`reviews` (
+CREATE TABLE IF NOT EXISTS `RatingEmpresas`.`reviews` (
   `id` CHAR(36) NOT NULL,
   `user_id` VARCHAR(36) NOT NULL,
   `position_id` VARCHAR(36) NOT NULL,
@@ -206,22 +206,22 @@ CREATE TABLE IF NOT EXISTS `EnterpriseRanking`.`reviews` (
   INDEX `fk_reviews_company_id_company_id_idx` (`company_id` ASC),
   CONSTRAINT `fk_reviews_user_id_user_id`
     FOREIGN KEY (`user_id`)
-    REFERENCES `EnterpriseRanking`.`users` (`id`)
+    REFERENCES `RatingEmpresas`.`users` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_reviews_position_id_position_id`
     FOREIGN KEY (`position_id`)
-    REFERENCES `EnterpriseRanking`.`positions` (`id`)
+    REFERENCES `RatingEmpresas`.`positions` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_reviews_city_id_city_id`
     FOREIGN KEY (`city_id`)
-    REFERENCES `EnterpriseRanking`.`companies_cities` (`city_id`)
+    REFERENCES `RatingEmpresas`.`companies_cities` (`city_id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_reviews_company_id_company_id`
     FOREIGN KEY (`company_id`)
-    REFERENCES `EnterpriseRanking`.`companies_cities` (`company_id`)
+    REFERENCES `RatingEmpresas`.`companies_cities` (`company_id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;

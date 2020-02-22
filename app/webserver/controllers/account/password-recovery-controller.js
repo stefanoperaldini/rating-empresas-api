@@ -1,11 +1,11 @@
 'use strict';
 
 const bcrypt = require("bcrypt");
-const mysqlPool = require('../../../database/mysql-pool');
 const uuidV4 = require("uuid/v4");
+const mysqlPool = require('../../../database/mysql-pool');
 const { sendEmailPassword, validateEmail } = require("../utility");
 
-async function passwordRecovery(req, res, next) {
+async function passwordRecovery(req, res) {
 
     const accountData = { ...req.body };
 

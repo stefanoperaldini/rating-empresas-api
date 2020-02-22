@@ -19,11 +19,18 @@ async function validateSchema(payload) {
       .required(),
     url_web: Joi.string()
       .allow("")
-      .uri(),
+      .regex(/^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([-.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/)
+      .max(255),
+    url_logo: Joi.string()
+      .allow("")
+      .uri()
+      .max(255),
     linkedin: Joi.string()
       .allow("")
-      .uri(),
+      .regex(/^https:\/\/[a-z]{2,3}\.linkedin\.com\/.*$/)
+      .max(255),
     address: Joi.string()
+      .allow("")
       .min(10)
       .max(60),
     sede_id: Joi.string().guid({
@@ -44,7 +51,7 @@ async function validateSchema(payload) {
   Joi.assert(payload, schema);
 }
 
-async function updateCompany(req, res, next) {
+async function updateCompany(req, res) {
   const { companyId } = req.params;
   const { userId } = req.claims;
   const companyData = {
@@ -56,7 +63,6 @@ async function updateCompany(req, res, next) {
   try {
     await validateSchema(companyData);
   } catch (e) {
-    console.log(companyData);
     console.error(e);
     return res.status(400).send("Data are not valid");
   }
@@ -78,7 +84,8 @@ async function updateCompany(req, res, next) {
         address = ?,
         sede_id = ?,
         user_id = ?,
-        updated_at = ?
+        updated_at = ?,
+        url_logo = ?
           WHERE id = ?`;
 
     const [updateStatus] = await connection.query(sqlUpdateCompany, [
@@ -91,7 +98,8 @@ async function updateCompany(req, res, next) {
       companyData.sede_id,
       userId,
       now,
-      companyId,
+      companyData.url_logo,
+      companyId
     ]);
     connection.release();
 

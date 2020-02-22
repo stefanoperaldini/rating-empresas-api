@@ -17,7 +17,7 @@ async function validate(payload) {
   Joi.assert(payload, schema);
 }
 
-async function changePassword(req, res, next) {
+async function changePassword(req, res) {
   const { userId } = req.claims;
   const accountData = { ...req.body };
 
@@ -53,6 +53,7 @@ async function changePassword(req, res, next) {
       accountData.oldPassword,
       user.password
     );
+
     if (!isPasswordOk) {
       return res.status(401).send("Old password not correct");
     }

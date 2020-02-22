@@ -22,11 +22,18 @@ async function validate(payload) {
       .required(),
     url_web: Joi.string()
       .allow("")
-      .uri(),
+      .regex(/^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([-.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/)
+      .max(255),
+    url_logo: Joi.string()
+      .allow("")
+      .uri()
+      .max(255),
     linkedin: Joi.string()
       .allow("")
-      .uri(),
+      .regex(/^https:\/\/[a-z]{2,3}\.linkedin\.com\/.*$/)
+      .max(255),
     address: Joi.string()
+      .allow("")
       .min(10)
       .max(60),
     sede_id: Joi.string()
@@ -39,7 +46,7 @@ async function validate(payload) {
   Joi.assert(payload, schema);
 }
 
-async function createCompany(req, res, next) {
+async function createCompany(req, res) {
   const companyData = { ...req.body };
   const { userId } = req.claims;
 
@@ -61,7 +68,8 @@ async function createCompany(req, res, next) {
     url_web,
     linkedin,
     address,
-    sede_id
+    sede_id,
+    url_logo
   } = companyData;
 
   const companyId = uuidV4();
@@ -74,6 +82,7 @@ async function createCompany(req, res, next) {
     linkedin,
     address,
     sede_id,
+    url_logo,
     user_id: userId,
     created_at: now
   };
