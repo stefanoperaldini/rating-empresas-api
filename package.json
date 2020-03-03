@@ -20,6 +20,7 @@
   "dependencies": {
     "@hapi/joi": "^16.1.8",
     "@sendgrid/mail": "^6.4.0",
+    "async-redis": "^1.1.7",
     "bcrypt": "^3.0.7",
     "cloudinary": "^1.18.1",
     "cors": "^2.8.5",
