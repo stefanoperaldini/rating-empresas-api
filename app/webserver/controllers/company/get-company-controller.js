@@ -38,7 +38,7 @@ async function getCompany(req, res) {
                               avg_salary_valuation,
                               everage
                             FROM(
-                              SELECT *, (avg_salary_valuation + avg_inhouse_training + avg_growth_opportunities + avg_work_enviroment +  avg_personal_life )/5.0 as everage
+                              SELECT *, ROUND(((avg_salary_valuation + avg_inhouse_training + avg_growth_opportunities + avg_work_enviroment +  avg_personal_life )/5.0),1) as everage
                               FROM(
                                     SELECT c.id, c.name, c.sector_id, c.sede_id, c.user_id,
                                     COUNT(r.id) as n_review,
@@ -75,7 +75,6 @@ async function getCompany(req, res) {
     }
 
     return res.send(results[0]);
-
   } catch (e) {
     console.error(e);
     return res.status(500).send();

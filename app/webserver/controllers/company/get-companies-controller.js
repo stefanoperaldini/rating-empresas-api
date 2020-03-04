@@ -1,6 +1,7 @@
 "use strict";
 
 const Joi = require("@hapi/joi");
+const asyncRedis = require("async-redis");
 const mysqlPool = require("../../../database/mysql-pool");
 
 async function validate(payload) {
@@ -59,6 +60,14 @@ async function getCompanies(req, res) {
     connection = await mysqlPool.getConnection();
     let numsRows = 0;
     let rows = [];
+    
+    // Manage query REDIS 
+    const clientRedis = asyncRedis.createClient();
+
+    clientRedis.on("error", function (err) {
+      console.error("REDIS error " + err);
+    });
+
     if (filters === undefined || filters === "yes") {
       let strSort = "ORDER BY everage DESC, c.name ASC";
       switch (sortTipe) {
@@ -142,7 +151,7 @@ async function getCompanies(req, res) {
                     avg_salary_valuation,
                     everage
                   FROM(
-                        SELECT *, (avg_inhouse_training + avg_growth_opportunities + avg_work_enviroment +  avg_personal_life + avg_salary_valuation)/5.0 as everage
+                        SELECT *, ROUND(((avg_inhouse_training + avg_growth_opportunities + avg_work_enviroment +  avg_personal_life + avg_salary_valuation)/5.0),1) as everage
                         FROM(
                             SELECT c.id, c.name, c.sector_id, c.sede_id, c.user_id,
                                     COUNT(r.id) as n_review,
@@ -173,12 +182,30 @@ async function getCompanies(req, res) {
                   ON u.id = res_companies.user_id
                   ${strSort}
                   LIMIT ?,?;`;
+      const keyRedis = `query:${optWhere}-${strSort}-${queryParams}-${offset}-${row4page}`;
+      try{
+        const valueKeyRedis = await clientRedis.get(keyRedis);
+        if (valueKeyRedis){
+          connection.release();
+          return res.send({
+            numsRows,
+            page,
+            rows_companies: JSON.parse(valueKeyRedis),
+          });
+        };
+      }catch(e){
+        console.error("REDIS", e);
+      }
+      
+      [rows] = await connection.execute(sqlQuery, [...queryParams, offset, row4page]);
 
-      [rows] = await connection.execute(sqlQuery, [
-        ...queryParams,
-        offset,
-        row4page
-      ]);
+      if (rows.length !== 0) {
+        try {
+          await clientRedis.set(keyRedis, JSON.stringify(rows), 'EX', process.env.REDIS_TTL_QUERY);
+        } catch (e) {
+          console.error("REDIS", e);
+        }
+      }
     } else {
       let sqlQuery = `SELECT COUNT(*) as numsRows FROM companies`;
       page = 1;
@@ -198,9 +225,9 @@ async function getCompanies(req, res) {
                   INNER JOIN users AS u 
                   ON u.id = c.user_id
                   ORDER BY name`;
+                  
       [rows] = await connection.execute(sqlQuery);
     }
-
     connection.release();
 
     if (rows.length === 0) {
